@@ -24,6 +24,7 @@ import { SpringSecurityAutenticacionComponent } from './components/componentes-s
 import { SpringSecurityFiltrosSeguridadComponent } from './components/componentes-spring/spring-security-components/spring-security-filtros-seguridad/spring-security-filtros-seguridad.component';
 import { SpringSecurityAutorizacionComponent } from './components/componentes-spring/spring-security-components/spring-security-autorizacion/spring-security-autorizacion.component';
 import { SpringSecurityCorsComponent } from './components/componentes-spring/spring-security-components/spring-security-cors/spring-security-cors.component';
+import { MsvcsComoEmpezarComponent } from './components/componentes-msvcs/msvcs-como-empezar/msvcs-como-empezar.component';
 
 export const routes: Routes = [
     {path:"", redirectTo: "home", pathMatch: 'full'},
@@ -57,4 +58,6 @@ export const routes: Routes = [
     {path: "aws/crear-cuenta", component: AwsCrearCuentaComponent},
     {path: "aws/servicio-s3/como-empezar", component: AwsServicioS3Component},
     {path: "aws/servicio-s3/CRUD-usando-S3", component: S3CreacionProyectoComponent},
+
+    {path: "microservicios/como-empezar", component: MsvcsComoEmpezarComponent},
 ];
