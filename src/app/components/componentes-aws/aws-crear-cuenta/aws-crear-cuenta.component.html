@@ -1,0 +1,37 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/aws/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li class="active"><a routerLink="/aws/crear-cuenta" routerLinkActive="active">Crear cuenta y capa gratuita</a></li>
+                <li><a routerLink="/aws/servicio-s3/como-empezar" routerLinkActive="active">Servicio de S3</a></li>
+            </ul> 
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Crear cuenta y capa gratuita</h1>  
+            </div>
+            <p class="texto">Antes de empezar a realizar proyectos os deberéis <span class="text-aws"> crear una cuenta de AWS</span> aquí: <a href="https://portal.aws.amazon.com/billing/signup#/start/email" target="_blank" class="enlace-apartado">https://portal.aws.amazon.com/billing/signup#/start/email</a></p>
+            <div class="image-container">
+                <img src="/assets/tecns/aws/como-empezar/registrarse-aws.png" alt="docker-desktop">
+            </div> 
+            <p class="texto">Al crear la cuenta tendréis que <span class="text-aws">pagar 1€ (lo devuelven) y poner una tarjeta de crédito,</span> ya que si os pasáis de la capa gratuita de ahí os lo van a cobrar, sino no tendréis ningún problema. Aquí podéis ver los <span class="text-aws">servicios gratuitos</span> de AWS → <a href="https://aws.amazon.com/es/free/?gclid=CjwKCAjwtqmwBhBVEiwAL-WAYUOiR1qDM6sRf2pszEy68FuafPm1gHeB_FJ5-cB1URB1e2CbsJqM8hoCSdwQAvD_BwE&trk=349e66be-cf8d-4106-ae2c-54262fc45524&sc_channel=ps&ef_id=CjwKCAjwtqmwBhBVEiwAL-WAYUOiR1qDM6sRf2pszEy68FuafPm1gHeB_FJ5-cB1URB1e2CbsJqM8hoCSdwQAvD_BwE:G:s&s_kwcid=AL!4422!3!455709741750!e!!g!!aws%20sign%20up!10817378576!108173614482&all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all" target="_blank" class="enlace-apartado">Servicios gratuitos</a> .</p>
+            <p class="text-aws">En la capa gratuita hay 3 tipos de servicios:</p>
+            <div class="image-container other-image-container">
+                <img src="/assets/tecns/aws/crear-cuenta/tipos-ofertas.png" alt="docker-desktop">
+            </div>
+            <p class="text-aws">Cada servicio tiene su capacidad gratuita especificada:</p> 
+            <div class="image-container other-image-container">
+                <img src="/assets/tecns/aws/crear-cuenta/capas-gratuitas.png" alt="docker-desktop">
+            </div> 
+            <ul class="list-benefits">
+                <li><span class="text-aws">● ADVERTENCIA PARA PRODUCCIÓN →</span><span class="text-aws"> En caso de subir a producción</span> aplicaciones con este tipo de servicios, asegurarse de la seguridad de esta, ya que ha habido casos de ataques DDoS(simula cantidades masivas de usuarios que entran a la vez) y hay gente que ha tenido que pagar muchísimo dinero.</li>
+                <li><span class="text-aws">● ADVERTENCIA CAPA GRATUITA →</span> Estar pendiente al correo ya que te avisa de cuando te queda poco para terminar con la capa gratuita y estar atento en: <span class="text-aws">Administración de facturación y costos → Facturas</span></li>
+            </ul>
+            <p class="text"><span class="text-aws">Además hay algunos servicios que cobran por peticiones. En el caso de S3, tiene 20k peticiones gratis</span> y a <span class="text-aws">partir de ahí cobra 0.0042 por 10k de peticiones.</span> En este caso hay 89k de peticiones que son 0.004 USD, pueden parecer muchas peticiones a simple vista pero en entornos de prueba con mucho uso se hacen muy rápido. </p>
+            <div class="image-container other-image-container">
+                <img src="/assets/tecns/aws/crear-cuenta/S3-factura.png" alt="docker-desktop">
+            </div> 
+        </div>
+    </div>
+</div>

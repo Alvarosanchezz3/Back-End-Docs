@@ -1,0 +1,189 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/spring/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li><a routerLink="/spring/spring-web/como-empezar" routerLinkActive="active">Spring Web</a></li>
+                <li class="active">
+                    <a routerLink="/spring/spring-security" routerLinkActive="active">Spring Security</a>
+                    <div class="submenu-container">
+                        <hr>
+                        <ul class="submenu">
+                            <li><a routerLink="/spring/spring-security/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                            <li><a routerLink="/spring/spring-security/proyecto-base" routerLinkActive="active">Proyecto base a darle seguridad</a></li>
+                            <li><a routerLink="/spring/spring-security/componentes-clave" routerLinkActive="active">Componentes clave de Spring Security</a></li>
+                            <li><a routerLink="/spring/spring-security/autenticación" routerLinkActive="active">Creando arquitectura de autenticación con JWT</a></li>
+                            <li><a routerLink="/spring/spring-security/filtros-de-seguridad" routerLinkActive="active">Filtros de seguridad: JwtAuthenticationFilter</a></li>
+                            <li class="active"><a routerLink="/spring/spring-security/autorización" routerLinkActive="active">Creando arquitectura de autorización</a></li>
+                            <li><a routerLink="/spring/spring-security/cors" routerLinkActive="active">Cross-Origin Resource Sharing (CORS)</a></li>
+                        </ul>    
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Arquitectura de autorización</h1>
+                <a href="https://github.com/Alvarosanchezz3/Spring-Security" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 24 24">
+                            <path fill="#ffffff" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2" />
+                    </svg>
+                </a>
+            </div>
+            <p class="texto">Ahora necesitamos implementar la <strong>AUTORIZACIÓN</strong> para controlar el acceso a los endpoints protegidos. Esto se puede hacer de 3 maneras diferentes: <br><br><strong>IMPORTANTE</strong>: En las explicaciones solo se hacen con los endpoints de productos, para que la explicación sea más breve (es igual con las categorias).</p>
+            <h3>1. Autorización por permisos</h3>
+            <p class="texto">Para crear una autorización a través de<strong> los permisos de los usuarios</strong>, debemos ir a la clase <span class="yellow">HttpSecurityConfig</span> y crear un método en el que añadiremos manualmente las rutas protegidas especificando en el <span class="brown">authRequestConfig</span> el tipo de método y la ruta usando <span class="blue">requestMatchers</span>() y los permisos que necesita para acceder a ella usando <span class="blue">hasAuthority</span>().</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="purple">private static void</span> <span class="blue">buildRequestMatchers1</span> (<span class="yellow">AuthorizeHttpRequestsConfigurer</span>{{"{<"}}<span class="yellow">HttpSecurity</span>{{">"}}.
+                            <span>              <span class="yellow">AuthorizationManagerRequestMatcherRegistry</span> <span class="brown">authRequestConfig</span>) {{"{"}}</span></span>
+                            
+                            <br><span>  <span class="comment">// AUTORIZACIÓN de los endpoints protegidos de productos por permisos</span></span>
+                            <span>  <span class="brown">authRequestConfig</span>.<span class="blue">requestMatchers</span>(<span class="yellow">HttpMethod</span>.<span class="brown">GET</span>, <span class="green">"/products"</span>)</span>
+                            <span>              .<span class="blue">hasAuthority</span>(<span class="yellow">RolePermission</span>.<span class="brown">READ_ALL_PRODUCTS</span>.<span class="blue">name</span>());</span>
+
+                            <br><span>  <span class="brown">authRequestConfig</span>.<span class="blue">requestMatchers</span>(<span class="yellow">HttpMethod</span>.<span class="brown">GET</span>, <span class="green">"/products/{{"{"}}productId{{"}"}}"</span>)</span>
+                            <span>              .<span class="blue">hasAuthority</span>(<span class="yellow">RolePermission</span>.<span class="brown">READ_ONE_PRODUCT</span>.<span class="blue">name</span>());</span>
+
+                            <br><span>  <span class="brown">authRequestConfig</span>.<span class="blue">requestMatchers</span>(<span class="yellow">HttpMethod</span>.<span class="brown">POST</span>, <span class="green">"/products"</span>)</span>
+                            <span>              .<span class="blue">hasAuthority</span>(<span class="yellow">RolePermission</span>.<span class="brown">CREATE_ONE_PRODUCT</span>.<span class="blue">name</span>());</span>
+
+                            <br><span>  <span class="brown">authRequestConfig</span>.<span class="blue">requestMatchers</span>(<span class="yellow">HttpMethod</span>.<span class="brown">PUT</span>, <span class="green">"/products/{{"{"}}productId{{"}"}}"</span>)</span>
+                            <span>              .<span class="blue">hasAuthority</span>(<span class="yellow">RolePermission</span>.<span class="brown">UPDATE_ONE_PRODUCT</span>.<span class="blue">name</span>(),);</span>
+
+                            <br><span>  <span class="brown">authRequestConfig</span>.<span class="blue">requestMatchers</span>(<span class="yellow">HttpMethod</span>.<span class="brown">PUT</span>, <span class="green">"/products/{{"{"}}productId{{"}"}}/disabled"</span>)</span>
+                            <span>              .<span class="blue">hasAuthority</span>(<span class="yellow">RolePermission</span>.<span class="brown">DISABLE_ONE_PRODUCT</span>.<span class="blue">name</span>());</span>
+
+                            <br><span>  <span class="brown">authRequestConfig</span>.<span class="blue">requestMatchers</span>(<span class="yellow">HttpMethod</span>.<span class="brown">PUT</span>, <span class="green">"/products/{{"{"}}productId{{"}"}}/enabled"</span>)</span>
+                            <span>              .<span class="blue">hasAuthority</span>(<span class="yellow">RolePermission</span>.<span class="brown">ENABLE_ONE_PRODUCT</span>.<span class="blue">name</span>());</span>
+                        
+                            <br><span>  <span class="comment">// AUTORIZACIÓN del endpoint protegido para leer tu perfil</span></span>
+                            <span>  <span class="brown">authRequestConfig</span>.<span class="blue">requestMatchers</span>(<span class="yellow">HttpMethod</span>.<span class="brown">GET</span>, <span class="green">"/auth/profile"</span>)</span>
+                            <span>              .<span class="blue">hasAnyRole</span>(<span class="yellow">RolePermission</span>.<span class="brown">READ_MY_PROFILE</span>.<span class="blue">name</span>());</span>
+                            <span>{{"}"}}</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+
+            <p class="texto">Después de esto vamos a la <span class="yellow">SecurityFilterChain</span> y añadimos la autorización usando este método:</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">SecurityFilterChain</span> filterChain = <span class="brown">http</span></span>
+                            <span>  .<span class="blue">authorizeHttpRequests</span>(<span class="brown">authRequestConfig</span> -> {{"{"}}<span class="blue">buildRequestMatchers1</span>(<span class="brown">authRequestConfig</span>);{{"}"}}</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+
+            <h3>2. Autorización por roles</h3>
+            <p class="texto">La autorización por roles se implementa de una manera muy similar a la de permisos, simplemente debemos <strong>cambiar </strong><span class="blue">hasAuthority</span>() por <span class="blue">hasAnyRole</span>() , <span class="yellow">RolePermission</span> por <span class="yellow">Role</span> y los permisos por los roles. <strong>En casos en los que tengamos pocos roles y muchos permisos es aconsejable utilizar esta forma</strong></p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="purple">private static void</span> <span class="blue">buildRequestMatchers2</span> (<span class="yellow">AuthorizeHttpRequestsConfigurer</span>{{"{<"}}<span class="yellow">HttpSecurity</span>{{">"}}.
+                            <span>              <span class="yellow">AuthorizationManagerRequestMatcherRegistry</span> <span class="brown">authRequestConfig</span>) {{"{"}}</span></span>
+                            
+                            <br><span>  <span class="comment">// AUTORIZACIÓN de los endpoints protegidos de productos por roles</span></span>
+                            <span>  <span class="brown">authRequestConfig</span>.<span class="blue">requestMatchers</span>(<span class="yellow">HttpMethod</span>.<span class="brown">GET</span>, <span class="green">"/products"</span>)</span>
+                            <span>              .<span class="blue">hasAnyRole</span>(<span class="yellow">Role</span>.<span class="brown">ADMINISTRATOR</span>.<span class="blue">name</span>(), <span class="yellow">Role</span>.<span class="brown">ASSISTANT_ADMINISTRATOR</span>.<span class="blue">name</span>());</span>
+
+                            <br><span>  <span class="brown">authRequestConfig</span>.<span class="blue">requestMatchers</span>(<span class="yellow">HttpMethod</span>.<span class="brown">GET</span>, <span class="green">"/products/{{"{"}}productId{{"}"}}"</span>)</span>
+                            <span>              .<span class="blue">hasAnyRole</span>(<span class="yellow">Role</span>.<span class="brown">ADMINISTRATOR</span>.<span class="blue">name</span>(), <span class="yellow">Role</span>.<span class="brown">ASSISTANT_ADMINISTRATOR</span>.<span class="blue">name</span>());</span>
+
+                            <br><span>  <span class="brown">authRequestConfig</span>.<span class="blue">requestMatchers</span>(<span class="yellow">HttpMethod</span>.<span class="brown">POST</span>, <span class="green">"/products"</span>)</span>
+                            <span>              .<span class="blue">hasAnyRole</span>(<span class="yellow">Role</span>.<span class="brown">ADMINISTRATOR</span>.<span class="blue">name</span>());</span>
+
+                            <br><span>  <span class="brown">authRequestConfig</span>.<span class="blue">requestMatchers</span>(<span class="yellow">HttpMethod</span>.<span class="brown">PUT</span>, <span class="green">"/products/{{"{"}}productId{{"}"}}"</span>)</span>
+                            <span>              .<span class="blue">hasAnyRole</span>(<span class="yellow">Role</span>.<span class="brown">ADMINISTRATOR</span>.<span class="blue">name</span>(), <span class="yellow">Role</span>.<span class="brown">ASSISTANT_ADMINISTRATOR</span>.<span class="blue">name</span>());</span>
+
+                            <br><span>  <span class="brown">authRequestConfig</span>.<span class="blue">requestMatchers</span>(<span class="yellow">HttpMethod</span>.<span class="brown">PUT</span>, <span class="green">"/products/{{"{"}}productId{{"}"}}/disabled"</span>)</span>
+                            <span>              .<span class="blue">hasAnyRole</span>(<span class="yellow">Role</span>.<span class="brown">ADMINISTRATOR</span>.<span class="blue">name</span>());</span>
+
+                            <br><span>  <span class="brown">authRequestConfig</span>.<span class="blue">requestMatchers</span>(<span class="yellow">HttpMethod</span>.<span class="brown">PUT</span>, <span class="green">"/products/{{"{"}}productId{{"}"}}/enabled"</span>)</span>
+                            <span>              .<span class="blue">hasAnyRole</span>(<span class="yellow">Role</span>.<span class="brown">ADMINISTRATOR</span>.<span class="blue">name</span>());</span>
+                        
+                            <br><span>  <span class="comment">// AUTORIZACIÓN del endpoint protegido para leer tu perfil</span></span>
+                            <span>  <span class="brown">authRequestConfig</span>.<span class="blue">requestMatchers</span>(<span class="yellow">HttpMethod</span>.<span class="brown">GET</span>, <span class="green">"/auth/profile"</span>)</span>
+                            <span>              .<span class="blue">hasAnyRole</span>(<span class="yellow">Role</span>.<span class="brown">ADMINISTRATOR</span>.<span class="blue">name</span>(), <span class="yellow">Role</span>.<span class="brown">ASSISTANT_ADMINISTRATOR</span>.<span class="blue">name</span>());</span>
+                            <span>                      <span class="yellow">Role</span>.<span class="brown">CUSTOMER</span>.<span class="blue">name</span>());</span>
+                            <span>{{"}"}}</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+
+            <p class="texto">Después de esto vamos a la <span class="yellow">SecurityFilterChain</span> y añadimos la autorización usando este método:</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">SecurityFilterChain</span> filterChain = <span class="brown">http</span></span>
+                            <span>  .<span class="blue">authorizeHttpRequests</span>(<span class="brown">authRequestConfig</span> -> {{"{"}}<span class="blue">buildRequestMatchers2</span>(<span class="brown">authRequestConfig</span>);{{"}"}}</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+
+            <h3>2. Autorización por métodos</h3>
+            <p class="texto">Primero de todo tenemos que <strong>habilitar</strong> en nuestra clase de config la <strong>autorización por anotaciones en métodos</strong>, eso se hace así:</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;EnableMethodSecurity</span>(<span class="brown">prePostEnabled</span> = <span class="purple">true</span>)</span>
+                            <span><span class="purple">public class</span> <span class="yellow">HttpSecurityConfig</span> {{"{"}}</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p class="texto">Ahora debemos <strong>quitar la config, ya sea por roles o por permisos</strong> que tengamos de nuestra <strong>filterChain</strong>, <strong>comentandola o quitando la línea</strong>:</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">SecurityFilterChain</span> filterChain = <span class="brown">http</span></span>
+                            <span>  .<span class="blue">csrf</span>(<span class="yellow">Customizer</span>, <span class="blue">withDefaults</span>())</span>
+                            <span>  .<span class="blue">sessionManagement</span>(<span class="brown">sessionManConfig</span> -> <span class="brown">sessionManConfig</span>.<span class="blue">sessionCreationPolicy</span>(</span>
+                            <span>      <span class="yellow">SessionCreationPolicy</span>.<span class="brown">STATELESS</span>))</span>
+                            <span>  .<span class="blue">authenticationProvider</span>(<span class="red">daoAuthProvider</span>)</span>
+                            <span>  .<span class="blue">addFilterBefore</span>(<span class="red">jwtAuthenticationFilter</span>, <span class="yellow">UsernamePasswordAuthenticationFilter</span>.<span class="purple">class</span>)</span>
+                            <span>  <span class="comment">//.authorizeHttpRequests( authRequestConfig -> {{"{"}}buildRequestMatchers2(authRequestConfig);{{"}"}})</span></span>
+                            <span>  .<span class="blue">build</span>();</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p class="texto">Ahora ya podemos empezar, es muy sencillo, iremos a los controladores y encima de los métodos pondremos la anotación <span class="yellow">&#64;PreAuthorize</span>() usando los métodos de <strong>roles</strong> (<span class="blue">hasAnyRole</span>()) o <strong>permisos</strong> (<span class="blue">hasAuthority</span>()):
+                <br><br><strong>IMPORTANTE</strong>: Ponerlo en todos los métodos en función de los roles o permisos que necesite.
+            </p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;PreAuthorize</span>(<span class="green">"hasAuthority('READ_ALL_PRODUCTS')"</span>)</span>
+                            <span><span class="yellow">&#64;GetMapping</span></span>
+                            <span><span class="purple">public</span> <span class="yellow">ResponseEntity</span>{{"<"}}<span class="yellow">Page</span>{{"<"}}<span class="yellow">Product</span>{{">"}}{{">"}} <span class="blue">findAll</span>(<span class="yellow">Pageable</span> <span class="brown">pageable</span>) {{"{"}}</span>
+                            <span>{{"}"}}</span>
+                        </code>
+                    </pre>
+                </div>
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;PreAuthorize</span>(<span class="green">"hasAnyRole('ADMINISTRATOR', 'ASSISTANT_ADMINISTRATOR')"</span>)</span>
+                            <span><span class="yellow">&#64;GetMapping</span></span>
+                            <span><span class="purple">public</span> <span class="yellow">ResponseEntity</span>{{"<"}}<span class="yellow">Page</span>{{"<"}}<span class="yellow">Product</span>{{">"}}{{">"}} <span class="blue">findAll</span>(<span class="yellow">Pageable</span> <span class="brown">pageable</span>) {{"{"}}</span>
+                            <span>{{"}"}}</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

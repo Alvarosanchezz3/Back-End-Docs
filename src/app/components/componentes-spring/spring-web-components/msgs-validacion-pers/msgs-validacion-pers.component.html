@@ -1,0 +1,88 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/spring/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li class="active">
+                    <a routerLink="/spring/spring-web" routerLinkActive="active">Spring Web</a>
+                    <div class="submenu-container">
+                        <hr>
+                        <ul class="submenu">
+                            <li><a routerLink="/spring/spring-web/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                            <li><a routerLink="/spring/spring-web/api-rest-básica" routerLinkActive="active">API REST Básica</a></li>
+                            <li><a routerLink="/spring/spring-web/validación-java-bean-validation" routerLinkActive="active">Validación usando Java Bean Validation</a></li>
+                            <li class="active"><a routerLink="/spring/spring-web/mensajes-validación-personalizados" routerLinkActive="active">Mensajes de validaciones personalizados</a></li>
+                            <li><a routerLink="/spring/spring-web/validación-personalizada" routerLinkActive="active">Validación personalizada</a></li>
+                            <li><a routerLink="/spring/spring-web/anotaciones-personalizadas" routerLinkActive="active">Anotaciones personalizadas</a></li>
+                        </ul>    
+                    </div>
+                </li>
+                <li><a routerLink="/spring/spring-security/como-empezar" routerLinkActive="active">Spring Security</a></li>
+            </ul>
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Mensajes de validación personalizadas</h1>
+            </div>
+            <p class="texto">Vamos a crear un archivo donde pondremos los mensajes de error de las anotaciones que pusimos anteriormente en el apartado <a routerLink="/spring/spring-web/validación-java-bean-validation" target="_blank" class="enlace-apartado">Validación usando Java Bean Validation</a> que debe llamarse: <strong>“message.properties”.</strong> En él deberemos ponerlo de esta manera: </p>
+            <div class="explicacion-codigo1">
+                <p class="texto"><strong>Nombre de la anotación  .  clase donde está . atributo = texto</strong></p>
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="brown">Email.person.email</span>=<span class="green">El email debe tener un &#64; para ser correcto</span></span>
+                            <span><span class="brown">NotEmpty.person.firstName</span>=<span class="green">El campo 'firstName' no puede estar vacío</span></span>
+                            <span><span class="brown">NotEmpty.person.lastName</span>=<span class="green">El campo 'lastName' no puede estar vacío</span></span>
+                            <span><span class="brown">Size.person.firstName</span>=<span class="green"> El campo 'firstName' debe tener entre 3 y 10 caracteres</span></span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p class="texto">Además tendremos que configurar Spring para que detecte este archivo, una manera para ello es crear una <span class="purple">clase</span> (recomendado crearla en un paquete aparte para mejor organización) de esta manera:</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;Configuration</span></span>
+                            <span><span class="yellow">&#64;PropertySource</span>(<span class="green">"classpath:messages.properties"</span>)</span>
+                            <span><span class="purple">public class</span> AppConfig {{"{"}}</span>
+                            <span>{{"}"}}</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p class="texto">Es muy importante utilizar las anotaciones <span class="yellow">&#64;Configuration</span> para determinar que es una clase de configuración y <span class="yellow">&#64;PropertySource</span> para indicar la ubicación del archivo de los mensajes personalizados.</p>
+            <p class="texto"><strong>Por último tienes que indicar en los atributos de la clase entity de donde sacan el mensaje de esta forma: </strong></p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;Entity</span></span>
+                            <span class="yellow">&#64;Data</span>
+                            <span class="yellow">&#64;NoArgsConstructor</span>
+                            <span class="yellow">&#64;AllArgsConstructor</span>
+                            <span><span class="purple">public class</span> <span class="yellow">Person</span> {{"{"}}</span>
+                        
+                            <br><span>  <span class="yellow">&#64;Id</span></span>
+                            <span>  <span class="yellow">&#64;GeneratedValue</span>(<span class="brown">strategy</span> = <span class="yellow">GenerationType</span>.<span class="brown">IDENTITY)</span></span>
+                            <span>  <span class="purple">private</span> <span class="yellow"> Long</span><span class="red"> id;</span></span>
+                        
+                            <br><span>  <span class="yellow">&#64;NotEmpty</span>(<span class="brown">message</span> = <span class="green">"{{"{"}}NotEmpty.person.firstName{{"}"}}"</span>)</span>
+                            <span>  <span class="yellow">&#64;Size</span>(<span class="brown">min</span> = <span class="brown">3</span>, <span class="brown">max</span> = <span class="brown">10</span>, <span class="brown">message</span> = <span class="green">"{{"{"}}Size.person.firstName{{"}"}}"</span>))</span>
+                            <span>  <span class="yellow">&#64;Column</span>(<span class="brown">name</span> = <span class="green">"first_name"</span>)</span>
+                            <span>  <span class="purple">private</span><span class="yellow"> String</span><span class="red"> firstName;</span></span>
+                        
+                            <br><span>  <span class="yellow">&#64;NotEmpty</span>(<span class="brown">message</span> = <span class="green">"{{"{"}}NotEmpty.person.lastName{{"}"}}"</span>)</span>
+                            <span>  <span class="yellow">&#64;Column</span>(<span class="brown">name</span> = <span class="green">"last_name"</span>)</span>
+                            <span>  <span class="purple">private</span><span class="yellow"> String</span><span class="red"> lastName;</span></span>
+                            
+                            <br><span>  <span class="yellow">&#64;NotEmpty</span></span>
+                            <span>  <span class="yellow">&#64;Email</span>(<span class="brown">message</span> = <span class="green">"{{"{"}}Email.person.email{{"}"}}"</span>)</span>
+                            <span>  <span class="purple">private</span><span class="yellow"> String</span><span class="red"> email;</span></span>{{"}"}}</code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

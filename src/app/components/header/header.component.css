@@ -1,0 +1,130 @@
+header {
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 10%;
+    background-color: #fff;
+    transition: all .50s ease;
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 10%;
+    background-color: #fff;
+    transition: all .50s ease;
+    border-bottom: 2px solid rgb(229, 229, 229);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo img {
+    width: 50px;
+    margin-right: 10px;
+    color: rgb(62, 56, 56);
+}
+
+.logo span {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: rgb(62, 56, 56);
+}
+
+.navbar {
+    display: flex;
+}
+
+.navbar a {
+    color: rgb(62, 56, 56);
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0px 30px;
+    transition: all .50s ease;
+    cursor: pointer;
+}
+
+.navbar a:hover {
+    color: rgba(155, 151, 151, 0.887);
+}
+
+.navbar a.active {
+    color: rgb(155, 151, 151);
+}
+
+.arrow {
+    display: none;
+    transition: transform 0.3s ease;
+    color: rgb(103, 103, 103);
+    margin-left: 10px;
+  }
+  
+  .arrow.open {
+    transform: rotate(90deg);
+  }
+  
+  /* Ocultar submenú en pantallas grandes */
+  .submenu {
+    display: none;
+  }
+
+.main {
+    display: flex;
+    align-items: center;
+}
+
+.main a {
+    margin-right: 25px;
+    color: rgb(62, 56, 56);
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all .50s ease;
+    cursor: pointer;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+}
+
+.user i {
+    font-size: 40px;
+    margin-right: 7px;
+}
+
+.user-image-container {
+    width: 50px; 
+    height: 50px; 
+    display: flex;
+    margin-right: 10px; 
+}
+  
+.user-image {
+    width: 100%;  
+    object-fit: cover; 
+    border-radius: 50%; 
+}
+
+.main a:hover {
+    color: rgb(155, 151, 151);
+}
+
+#menu-icon {
+    font-size: 35px;
+    color: rgb(62, 56, 56);
+    cursor: pointer;
+    z-index: 10001;
+    display: none;
+}

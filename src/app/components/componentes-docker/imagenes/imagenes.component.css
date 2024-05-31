@@ -1,0 +1,32 @@
+.code-container {
+    margin: 5% 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: transparent;
+    margin: 30px 0;
+}
+
+.code-container pre{
+    font-size: 15px;
+    background-color: #31343a;
+    border-radius: 10px;
+  }
+
+  .code-container pre code{
+    padding: 0 20px;
+    text-align: left;
+  }
+
+  .code-container code {
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    color: rgb(224, 224, 224);
+    padding: 0 20px;
+  }
+
+
+.image-container {
+    margin: 20px 0;
+}

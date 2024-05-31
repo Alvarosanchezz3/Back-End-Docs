@@ -1,0 +1,41 @@
+.index {
+    width: 26%;
+}
+
+.submenu-container hr {
+    border-color: #aaaaaa;
+    margin: 0;
+  }
+
+  .list-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .list-benefits li ul {
+    margin-left: 15px;
+  }
+
+.list-img {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+.list-img img {
+    width: 35%;
+}
+
+.list-img2 {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+.list-img2 img {
+    width: 70%;
+}

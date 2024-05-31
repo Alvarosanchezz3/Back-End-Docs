@@ -1,0 +1,28 @@
+@media (max-width: 1500px) {
+    .list-img {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .list-img img{
+        width: 50%;
+    }
+
+    .list-img2 img{
+        width: 90%;
+    }
+}
+
+@media (max-width: 650px) {
+    .list-img img{
+        width: 70%;
+    }
+
+    .list-img2 img{
+        width: 100%;
+    }
+}

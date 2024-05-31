@@ -1,0 +1,45 @@
+.title-aws {
+    color: #ff9900;
+}
+
+.text-blue-aws {
+    color: #252f3e;
+    font-weight: bolder;
+}
+
+.text-yellow-aws {
+    color: #ff9900;
+    font-weight: bolder;
+}
+
+.list-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.image-container {
+    margin: 20px 0;
+}
+
+.image-container img {
+    width: 25%;
+}
+
+.other-image-container img{
+    width: 30%;
+}
+
+.other-image-container1 img{
+    width: 65%;
+}
+
+.doc hr{
+    position: relative;
+    margin-left: 270px;
+}
+  
+.submenu-container hr {
+    border-color: #aaaaaa;
+    margin: 0;
+}

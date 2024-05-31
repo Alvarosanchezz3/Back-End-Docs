@@ -1,0 +1,64 @@
+@media (max-width: 1200px) {
+    .code-container pre {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .code-container pre {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 1070px) {
+    .code-container pre {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 820px) {
+    .title h1 {
+        font-size: 28px;
+    }
+    
+    .explicacion-codigo1 {
+        flex-direction: column;
+    }
+
+    .code-container pre {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 720px) {
+    .title h1 {
+        font-size: 24px;
+    }
+    
+    .code-container pre {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 670px) {
+    .title h1 {
+        font-size: 20px;
+    }
+    
+    .code-container pre {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 560px) {
+    .exp-cod1 .code-container pre {
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 520px) {
+    .exp-cod1 .code-container pre {
+        font-size: 7px;
+    }
+}
+

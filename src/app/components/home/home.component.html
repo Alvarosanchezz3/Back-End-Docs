@@ -1,0 +1,54 @@
+<div class="content">
+    <div class="banner">
+        <div class="extra-container">
+            <div class="extra-left">
+                <div class="relative">
+                    <div class="quarter-circle1"></div>
+                    <div class="quarter-circle2"></div>
+                    <div class="semicircle"></div>
+                </div>
+            </div>
+            <div class="extra-right">
+                <div>
+                    <div class="quarter-circle1"></div>
+                    <div class="quarter-circle2"></div>
+                    <div class="square"></div>
+                </div>
+            </div>
+        </div>
+        <div class="banner-title">
+            <h1>Aprende Back-End con Java <span class="typing-animation">de manera {{ palabraVisible }}</span></h1>    
+        </div>         
+    </div>
+    <div class="tecns">
+        <h1>Stack de tecnologías</h1>
+        <div class="tecns-container">
+            <div class="tecn" (click)="navigate('spring/como-empezar')">
+                <img src="./assets/tecns/spring/spring-logo.png" alt="icon" class="icon">
+                <h2>Spring</h2>
+                <p>Framework para crear aplicaciones en Java robustas, escalables y mantenibles con facilidad.</p>
+            </div>
+            <div class="tecn" (click)="navigate('docker/como-empezar')">       
+                <img src="./assets/tecns/docker/docker.png" alt="icon" class="icon">
+                <h2>Docker</h2>
+                <p>Plataforma creada para desarrollar, enviar y ejecutar aplicaciones dentro de contenedores.</p>
+            </div>
+            <div class="tecn" (click)="navigate('aws/como-empezar')">       
+                <img src="./assets/tecns/aws/aws-logo.png" alt="icon" class="icon">
+                <h2>AWS</h2>
+                <p>Servicios en la nube que ofrecen almacenamiento, cómputo, bases de datos escalables...</p>
+            </div>
+            <div class="tecn">       
+                <img src="https://spring.io/img/icons/microservices.svg" alt="icon" class="icon">
+                <h2>Microservicios</h2>
+                <p>Arquitectura que permite desarrollar aplicaciones como una conjunto de servicios pequeños.</p>
+            </div>
+            <div class="tecn">       
+                <img src="./assets/tecns/kafka/kafka.png" alt="icon" class="icon">
+                <h2>Apache Kakfa</h2>
+                <p>Plataforma para el manejo de flujos de datos en tiempo real, escalable y de alto rendimiento.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,60 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li class="active"><a routerLink="/spring/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li><a routerLink="/spring/spring-web/como-empezar" routerLinkActive="active">Spring Web</a></li>
+                <li><a routerLink="/spring/spring-security/como-empezar" routerLinkActive="active">Spring Security</a></li>
+            </ul> 
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Spring</h1>
+                <img src="/assets/tecns/spring/spring.png" alt="logo-docker">     
+            </div>
+            <p class="texto">Spring Framework es un conjunto de herramientas para desarrollar aplicaciones Java empresariales. Ofrece características como Inversión de Control, Inyección de Dependencias, Aspect-Oriented Programming y módulos para diferentes capas de la aplicación. Facilita la gestión de transacciones y promueve la modularidad y la reutilización del código. Es muy utilizado en la industria debido a su robustez y facilidad de uso.</p>
+            <h3>1. Crear proyecto Spring</h3>
+            <p class="texto">Se puede crear yendo a <a href="https://start.spring.io/" target="_blank" class="enlace-apartado">https://start.spring.io/</a> o mediante el uso de plugins dentro de tu IDE. Una vez allí, deberás elegir:</p>
+            <ul class="list-benefits">
+                <li><strong>1. Herramienta de gestión de proyectos:</strong> Usaremos Maven</li>
+                <li><strong>2. Versión de Spring:</strong> Preferiblemente que no sea (SNAPSHOT o M1)</li>
+                <li><strong>3. Información del proyecto:</strong> 
+                    <ul>
+                        <li><strong>- Group:</strong> com.nombre_empresa</li>
+                        <li><strong>- Artifact:</strong> identificador-proyecto</li>
+                        <li><strong>- Name:</strong> Nombre Descriptivo del Proyecto</li>
+                        <li><strong>- Description:</strong> Descripción del Proyecto</li>
+                        <li><strong>- Package name:</strong> Nombre del paquete principal</li>
+                        <li><strong>- Packaging:</strong> JAR</li>
+                        <li><strong>- Versión de Java:</strong> Depende mucho del proyecto, pero preferiblemente la más nueva</li>
+                        <li><strong>- Dependencias:</strong> Debes escogerlas en función del proyecto que vas a realizar. Una vez creado el proyecto, puedes añadir o quitar dependencias en el archivo pom.xml</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="image-container">
+                <img src="/assets/tecns/spring/como-empezar/spring.initializr.png" alt="docker-desktop">
+            </div> 
+            <h3>2. Arquitectura multicapa</h3>
+            <p class="texto">La <strong>arquitectura multicapa</strong> o también conocida como <strong>arquitectura MVC (Modelo-Vista-Controlador)</strong> se organiza en capas para una mejor <strong>separación de responsabilidades y modularidad del código.</strong> Aquí está una descripción rápida de cada capa:</p>
+            <ul class="list-benefits">
+                <li><strong>a) Capa de Entidad (Entity):</strong> Esta capa define las clases que representan objetos (usuarios, pedidos…). Estas clases suelen ser simples POJOs (Plain Old Java Objects) que contienen los campos y métodos necesarios para describir los datos.</li>
+                <li><strong>b) Capa de Repositorio (Repository):</strong> La capa de repositorio es responsable de interactuar con la base de datos. Aquí se encuentran las operaciones de persistencia como guardar, recuperar, actualizar y eliminar datos.</li>
+                <li><strong>c) Capa de Servicio (Service):</strong> La capa de servicio contiene la lógica de negocio de la aplicación. Aquí se implementan los casos de uso de la aplicación, coordinando las operaciones entre la capa de controladores y la capa de repositorio.</li>
+                <li><strong>d) Capa de Controlador (Controller):</strong> La capa de controlador maneja las solicitudes HTTP y actúa como un intermediario entre las solicitudes del cliente y la lógica de negocio de la aplicación. Los controladores reciben las solicitudes, invocan los métodos apropiados en los </li>
+            </ul>
+            <div class="image-container">
+                <img src="/assets/tecns/spring/como-empezar/estructura-proyecto-spring.png" alt="docker-desktop">
+            </div>
+            <h3>3. Personalizar banner Spring</h3>
+            <p class="texto">Al ejecutar una aplicación Spring vemos un banner que dice “Spring>>>”, este banner se puede personalizar y es muy fácil, debemos crear un archivo llamado banner.txt en la raíz de la carpeta resources y ahí poner lo que queramos que aparezca.</p>
+            <p class="texto">Un recurso muy utilizado para esto es --> <a href="https://devops.datenkollektiv.de/banner.txt/index.html" target="_blank" class="enlace-apartado">Spring Boot banner.txt generator</a></p>
+            <div class="image-container">
+                <img src="/assets/tecns/spring/como-empezar/banner-generator.png" alt="docker-desktop">
+            </div>
+            <p class="texto">Esto puede parecer una tontería, pero cuando tenemos varias apps de Spring ejecutándose a la vez nos sirve para diferenciar las terminales de cada uno de manera más eficaz y rápida, que en caso de el uso de microservicios puede ser bastante útil. Ejemplo:</p>
+            <div class="image-container">
+                <img src="/assets/tecns/spring/como-empezar/banner-personalizado.png" alt="docker-desktop">
+            </div>
+        </div>
+    </div>
+</div>

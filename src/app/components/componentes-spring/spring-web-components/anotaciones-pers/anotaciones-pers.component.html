@@ -1,0 +1,84 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/spring/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li class="active">
+                    <a routerLink="/spring/spring-web" routerLinkActive="active">Spring Web</a>
+                    <div class="submenu-container">
+                        <hr>
+                        <ul class="submenu">
+                            <li><a routerLink="/spring/spring-web/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                            <li><a routerLink="/spring/spring-web/api-rest-básica" routerLinkActive="active">API REST Básica</a></li>
+                            <li><a routerLink="/spring/spring-web/validación-java-bean-validation" routerLinkActive="active">Validación usando Java Bean Validation</a></li>
+                            <li><a routerLink="/spring/spring-web/mensajes-validación-personalizados" routerLinkActive="active">Mensajes de validaciones personalizados</a></li>
+                            <li><a routerLink="/spring/spring-web/validación-personalizada" routerLinkActive="active">Validación personalizada</a></li>
+                            <li class="active"><a routerLink="/spring/spring-web/anotaciones-personalizadas" routerLinkActive="active">Anotaciones personalizadas</a></li>
+                        </ul>    
+                    </div>
+                </li>
+                <li><a routerLink="/spring/spring-security/como-empezar" routerLinkActive="active">Spring Security</a></li>
+            </ul>
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Anotaciones personalizadas</h1>
+            </div>
+            <p class="texto">En un package nuevo para anotaciones creamos una <span class="purple">interfaz</span> poniendo un <strong>&#64;</strong> delante, esta es la forma para que Spring detecte que estamos creando una <strong>anotación</strong>.</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;Constraint</span>(<span class="brown">validatedBy</span> = <span class="yellow">RequiredValidation</span>.<span class="purple">class</span>)</span>
+                            <span><span class="yellow">&#64;Retention</span>(<span class="yellow">RetentionPolicy</span>.<span class="brown">RUNTIME</span>)</span>
+                            <span><span class="yellow">&#64;Target</span>({{"{"}}<span class="yellow">ElementType</span>.<span class="brown">FIELD</span>, <span class="yellow">ElementType</span>.<span class="brown">METHOD</span>{{"}"}})</span>
+                            <span><span class="purple">public</span> &#64;<span class="purple">interface</span> <span class="yellow">IsRequired</span> {{"{"}}</span>
+                            <span>  <span class="yellow">String</span> <span class="blue">message</span>() <span class="purple">default</span> <span class="green">"es requerido usando una anotación persn"</span>;</span>
+                            <br><span>  <span class="yellow">Class</span><?>[] <span class="blue">groups</span>() <span class="purple">default</span> {{"{"}} {{"}"}};</span>
+                            <br><span>  <span class="yellow">Class</span><? <span class="purple">extends</span> <span class="yellow">Payload</span>>[] <span class="blue">payload</span>() <span class="purple">default</span> {{"{"}} {{"}"}};</span>
+                            <span>{{"}"}}</span>
+                        </code>
+                    </pre>
+                </div>
+                <ul class="list">
+                    <li>
+                        <p><strong>-</strong><span></span><span class="yellow"> &#64;Constraint</span>(<span class="brown">validatedBy</span> = <span class="yellow">RequiredValidation</span>.<span class="purple">class</span>) → Indica que la clase RequiredValidation se utilizará para validar objetos anotados con &#64;IsRequired</p>
+                    </li>
+                    <li>
+                        <p><strong>-</strong><span class="yellow"> &#64;Retention</span>(<span class="yellow">RetentionPolicy</span>.<span class="brown">RUNTIME</span>) → Indica que la anotación estará disponible en tiempo de ejecución</p>
+                    </li>
+                    <li>
+                        <p><strong>-</strong><span class="yellow"> &#64;Target</span>({{"{"}}<span class="yellow">ElementType</span>.<span class="brown">FIELD</span>, <span class="yellow">ElementType</span>.<span class="brown">METHOD</span>{{"}"}}) → Indica que &#64;IsRequired puede ser aplicada a campos (FIELD) y métodos (METHOD)</p>
+                    </li>
+                </ul>
+            </div>
+            <p class="texto">Ahora creamos la clase <span class="yellow">RequiredValidation</span> que <span class="purple">implemente</span> <span class="yellow">ConstraintValidator</span>{{"<"}}<span class="yellow">IsRequired</span>, <span class="yellow">String</span>{{">"}} → <strong>{{"<"}}Anotación, tipo de dato a validar{{">"}}</strong> e implementa el método del <span class="yellow">ConstraintValidator</span> con la lógica:</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="purple">public class</span> <span class="yellow">RequiredValidation</span> <span class="purple">implements</span> <span class="yellow">ConstraintValidator</span>{{"<"}}<span class="yellow">IsRequired</span>, <span class="yellow">String</span>{{">"}} {{"{"}}</span>
+
+                            <br><span>  <span class="yellow">&#64;Override</span></span>
+                            <span>  <span class="purple">public boolean</span> <span class="blue">isValid</span>(<span class="yellow">String</span> <span class="brown">value</span>, <span class="yellow">ConstraintValidatorContext</span> <span class="brown">context</span>) {{"{"}}</span>
+                            <span>    <span class="purple">return</span> <span class="yellow">StringUtils</span>.<span class="blue">hasText</span>(<span class="brown">value</span>);</span>
+                            <span>  {{"}"}}</span>
+                            <span>{{"}"}}</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p class="texto">Añade la anotación en el atributo a validar de tu Entity:</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;IsRequired</span></span>
+                            <span><span class="purple">private</span> <span class="yellow">String</span> <span class="red">firstName</span></span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

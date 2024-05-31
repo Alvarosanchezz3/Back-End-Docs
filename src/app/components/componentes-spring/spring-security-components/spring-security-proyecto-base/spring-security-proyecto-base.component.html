@@ -1,0 +1,286 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/spring/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li><a routerLink="/spring/spring-web/como-empezar" routerLinkActive="active">Spring Web</a></li>
+                <li class="active">
+                    <a routerLink="/spring/spring-security" routerLinkActive="active">Spring Security</a>
+                    <div class="submenu-container">
+                        <hr>
+                        <ul class="submenu">
+                            <li><a routerLink="/spring/spring-security/como-empezar" routerLinkActive="active">Como
+                                    empezar</a></li>
+                            <li class="active"><a routerLink="/spring/spring-security/proyecto-base"
+                                    routerLinkActive="active">Proyecto base a darle seguridad</a></li>
+                            <li><a routerLink="/spring/spring-security/componentes-clave" routerLinkActive="active">Componentes clave de
+                                    Spring Security</a></li>
+                            <li><a routerLink="/spring/spring-security/filtros-de-seguridad" routerLinkActive="active">Creando arquitectura
+                                    de autenticación con JWT</a></li>
+                            <li><a routerLink="/spring/spring-security/filtros-de-seguridad" routerLinkActive="active">Filtros de seguridad:
+                                    JwtAuthenticationFilter</a></li>
+                            <li><a routerLink="/spring/spring-security/autorización" routerLinkActive="active">Creando arquitectura
+                                    de autorización</a></li>
+                            <li><a routerLink="/spring/spring-security/cors" routerLinkActive="active">Cross-Origin Resource
+                                    Sharing (CORS)</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Proyecto base para dar seguridad</h1>
+                <div class="icons-container">
+                    <a href="https://github.com/Alvarosanchezz3/SpringSecurity_Base" target="_blank"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 24 24">
+                            <path fill="#ffffff"
+                                d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2" />
+                        </svg></a>
+                </div>
+            </div>
+            <p class="texto">A continuación se va a explicar el <strong>proyecto base</strong> para implementarle
+                seguridad usando los
+                métodos y las carácterísticas más importantes del ecosistema de Spring Security</p>
+            <p class="texto">Estos son los <span class="yellow">Entities</span> del proyecto <span
+                    class="yellow">Productos</span> y sus <span class="yellow">Categorías</span> con sus atributos
+                normales y
+                uno creado que es una <span class="purple">enumeración</span> de estados para <strong>activar</strong> y
+                <strong>desactivar</strong> los productos/categorías.<br><br>
+
+                <span class="yellow">&#64;Enumerated</span>(<span class="yellow">EnumType</span>.<span
+                    class="brown">STRING</span>) → Las enumeraciones por defecto tienen valores numéricos (0 y 1), con
+                esta anotación conseguimos quedarnos solo con los textos/cadenas (ENABLED, DISABLED).<br><br>
+
+                Además en <strong>Product</strong> hay un atributo más, que es una clave foránea de la entidad
+                Categoría, esto se
+                consigue con la anotación <span class="yellow">&#64;JoinColum</span>(<span class="brown">name</span> =
+                <span class="green">“category_id”</span>)
+                La anotación <span class="yellow">&#64;ManytoOne</span> es equivalente en BDD a → <strong>Relación
+                    Muchos a Uno (N:1)</strong> → Muchos productos en
+                una categoría
+            </p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;Entity</span></span>
+                            <span class="yellow">&#64;Data</span>
+                            <span class="yellow">&#64;NoArgsConstructor</span>
+                            <span class="yellow">&#64;AllArgsConstructor</span>
+                            <span><span class="purple">public class</span> <span class="yellow">Category</span> {{"{"}}</span>
+                        
+                            <br><span>  <span class="yellow">&#64;Id</span></span>
+                            <span>  <span class="yellow">&#64;GeneratedValue</span>(<span class="brown">strategy</span> = <span class="yellow">GenerationType</span>.<span class="brown">IDENTITY)</span></span>
+                            <span>  <span class="purple">private</span> <span class="yellow"> Long</span><span class="red"> id</span>;</span>
+                        
+                            <br><span>  <span class="purple">private</span><span class="yellow"> String</span><span class="red"> name</span>;</span>
+                        
+                            <br><span>  <span class="yellow">&#64;Enumerated</span>(<span class="yellow">EnumType</span>.<span class="brown">STRING</span>)</span>
+                            <span>  <span class="purple">private</span><span class="yellow"> CategoryStatus</span><span class="red"> status</span>;</span>
+                        
+                            <br><span>  <span class="purple">public enum</span><span class="yellow"> CategoryStatus</span> {{"{"}}</span>
+                            <span>    <span class="brown">ENABLED</span>, <span class="brown">DISABLED</span></span>
+                            <span>  {{"}"}}</span>{{"}"}}</code>
+                    </pre>
+                </div>
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;Entity</span></span>
+                            <span class="yellow">&#64;Data</span>
+                            <span class="yellow">&#64;NoArgsConstructor</span>
+                            <span class="yellow">&#64;AllArgsConstructor</span>
+                            <span><span class="purple">public class</span> <span class="yellow">Product</span> {{"{"}}</span>
+                        
+                            <br><span>  <span class="yellow">&#64;Id</span></span>
+                            <span>  <span class="yellow">&#64;GeneratedValue</span>(<span class="brown">strategy</span> = <span class="yellow">GenerationType</span>.<span class="brown">IDENTITY)</span></span>
+                            <span>  <span class="purple">private</span> <span class="yellow"> Long</span><span class="red"> id</span>;</span>
+                        
+                            <br><span>  <span class="purple">private</span><span class="yellow"> String</span><span class="red"> name</span>;</span>
+                        
+                            <br><span>  <span class="purple">private</span><span class="yellow"> BigDecimal</span><span class="red"> price</span>;</span>
+
+                            <br><span>  <span class="yellow">&#64;Enumerated</span>(<span class="yellow">EnumType</span>.<span class="brown">STRING</span>)</span>
+                            <span>  <span class="purple">private</span><span class="yellow"> CategoryStatus</span><span class="red"> status</span>;</span>
+                        
+                            <br><span>  <span class="purple">public enum</span><span class="yellow"> CategoryStatus</span> {{"{"}}</span>
+                            <span>    <span class="brown">ENABLED</span>, <span class="brown">DISABLED</span></span>
+                            <span>  {{"}"}}</span>
+
+                            <br><span>  <span class="yellow">&#64;ManyToOne</span></span>
+                            <span>  <span class="yellow">&#64;JoinColumn</span>(<span class="brown">name</span> = <span class="green">"category_id"</span>)</span>
+                            <span>  <span class="purple">private</span> <span class="yellow">Category</span> <span class="red">category</span></span>{{"}"}}</code>
+                    </pre>
+                </div>
+            </div>
+            <p class="texto">Luego los <strong>repositories</strong> como en la <a
+                    routerLink="/spring/spring-web/api-rest-básica" target="_blank" class="enlace-apartado">Api Rest
+                    básica</a> , y los <strong>services</strong> de cada uno tienen las mismas funcionalidades que
+                siempre pero con algunos matices diferentes: <br><br>
+
+                El método de <span class="blue">findAll</span> () muestra todos los registros de la tabla, en casos de
+                gran cantidad de registros
+                es recomendable devolver páginas de ellos y no todos de golpe, usando la <span
+                    class="purple">interfaz</span><span class="yellow"> Pageable</span> puedes
+                realizar llamadas dándole la página y el tamaño de cada una así →
+                <strong>/api/products?page=1&size=5</strong>
+            </p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;Override</span></span>
+                            <span><span class="purple">public</span> <span class="yellow">Page</span>{{"<"}}<span class="yellow">Product</span>{{">"}} <span class="blue">findAll</span>(<span class="yellow">Pageable</span> <span class="brown">pageable</span>) {{"{"}} </span>
+                            <span>  <span class="purple">return</span> <span class="red">productRepository</span>.<span class="blue">findAll</span>(<span class="brown">pageable</span>);</span>
+                            <span>{{"}"}}</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p class="texto">El método <span class="blue">create</span>() crea un Product y una Category. Asigna el ID
+                de la categoría al producto para <strong>rellenar la clave foránea.</strong> El parámetro <span
+                    class="yellow">saveProduct</span> es un <strong>DTO</strong>, un objeto que encapsula datos para su
+                transferencia entre partes de un sistema.</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;Override</span></span>
+                            <span><span class="purple">public </span> <span class="yellow">Product</span> <span class="blue">create</span>(<span class="yellow">SaveProduct</span> <span class="brown">saveProduct</span>) {{"{"}}</span>
+                        
+                            <span>  <span class="yellow">Product</span> product = <span class="purple">new</span> <span class="yellow">Product</span>();</span>
+                            <span>    product.<span class="blue">setName</span>(<span class="brown">saveProduct</span>.<span class="blue">getName</span>());</span>
+                            <span>    product.<span class="blue">setPrice</span>(<span class="brown">saveProduct</span>.<span class="blue">getPrice</span>());</span>
+                            <span>    product.<span class="blue">setStatus</span>(<span class="yellow">Product</span>.<span class="yellow">ProductStatus</span>.<span class="brown">ENABLED</span>);</span>
+
+                            <br><span>  <span class="yellow">Category</span> category = <span class="purple">new</span> <span class="yellow">Category</span>();</span>
+                            <span>    category.<span class="blue">setId</span>(<span class="brown">saveProduct</span>.<span class="blue">getCategoryId</span>());</span>
+                            <span>    product.<span class="blue">setCategory</span>(category);</span>
+
+                            <br><span>    <span class="purple">return</span> <span class="red">productRepository</span>.<span class="blue">save</span>(product);</span>
+                            <span>{{"}"}}</span>
+                        </code>
+                    </pre>
+                </div>
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;Data</span></span>
+                            <span><span class="purple">public class</span> <span class="yellow">SaveProduct</span> <span class="purple">implements</span> <span class="yellow">Serializable</span> {{"{"}}</span>
+                        
+                            <br><span>  <span class="yellow">&#64;NotBlank</span>(<span class="brown">message</span> = <span class="green">"El campo name es requerido"</span>)</span>
+                            <span>  <span class="purple">private</span> <span class="yellow"> String</span><span class="red"> name</span>;</span>
+                        
+                            <br><span>  <span class="yellow">&#64;DecimalMin</span>(<span class="brown">value</span> = <span class="green">"0.01"</span>,</span>
+                            <span>      <span class="brown">message</span> = <span class="green">"El campo precio debe de ser mayor de 0"</span> </span>
+                            <span>  <span class="purple">private</span> <span class="yellow"> BigDecimal</span><span class="red"> price</span>;</span>
+
+                            <br><span>  <span class="yellow">&#64;DecimalMin</span>(<span class="brown">value</span> = <span class="brown">1</span>,</span>
+                            <span>      <span class="brown">message</span> = <span class="green">"El campo categoryId debe ser mayor de 0"</span> </span>
+                            <span>  <span class="purple">private</span> <span class="yellow"> Long</span><span class="red"> categoryId</span>;</span>
+
+                            <span>{{"}"}}</span></code>
+                    </pre>
+                </div>
+            </div>
+            <p class="texto">También el método <span class="blue">updateOneById</span>() en este caso es diferente ya
+                que cuando buscamos el producto por el id para luego actualizarlo, añadimos una <strong>excepción
+                    personalizada</strong><span class="yellow"> ObjectNotFoundException</span> para cuando ponemos un id
+                inexistente</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="purple">public class</span> <span class="yellow">ObjectNotFoundException</span> <span class="purple">extends</span> <span class="yellow">RuntimeException</span> {{"{"}}</span>
+                            <span>  <span class="purple">public</span> <span class="blue">ObjectNotFoundException</span>() {{"{"}}{{"}"}}</span>
+                            <br><span>  <span class="purple">public</span> <span class="blue">ObjectNotFoundException</span>(<span class="yellow">String</span> <span class="brown">message</span>) {{"{"}} <span class="purple">super</span>(<span class="brown">message</span>); {{"}"}}</span>
+                            <br><span>  <span class="purple">public</span> <span class="blue">ObjectNotFoundException</span>(<span class="yellow">String</span> <span class="brown">message</span>, <span class="yellow">Throwable</span> <span class="brown">cause</span>) {{"{"}} </span>
+                            <span>                                                                   <span class="purple">super</span>(<span class="brown">message</span>, <span class="brown">cause</span>);</span>
+                            <span>  {{"}"}}</span>
+                            <span>{{"}"}}</span></code>
+                    </pre>
+                </div>
+            </div>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">Product</span> productFromDb = <span class="red">productRepository</span>.<span class="blue">findById</span>(<span class="brown">productId</span>).<span class="blue">orElseThrow</span>(</span>
+                            <span>    () -> <span class="purple">new</span> <span class="yellow">ObjectNotFoundException</span>(<span class="green">"Product not found with id "</span> + <span class="brown">productId</span>));</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p class="texto">En este caso no tenemos para <strong>borrar</strong> Productos sino para <strong>cambiar el
+                    estado de ENABLED a DISABLED y viceversa.</strong> Tenemos los métodos <span
+                    class="blue">disableOneById</span>() y <span class="blue">enableOneById</span>() que usan la
+                búsqueda de arriba con la excepción y luego cambian el estado del producto así:</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span>productFromDb.<span class="blue">setStatus</span>(<span class="yellow">Product</span>.<span class="yellow">ProductStatus</span>.<span class="brown">ENABLED</span>);</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span>productFromDb.<span class="blue">setStatus</span>(<span class="yellow">Product</span>.<span class="yellow">ProductStatus</span>.<span class="brown">DISABLED</span>);</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p class="texto">Por último creamos una <span class="purple">clase</span> una clase <span class="yellow">GlobalExceptionHandler</span> que maneja las excepciones a
+                nivel global nuestra aplicación de Spring. Utiliza la anotación <span class="blue">&#64;RestControllerAdvice</span> para aplicar a
+                todos los controladores:
+            </p>
+            <ul class="list-benefits">
+                <li><strong>-</strong> <span class="blue">handlerGenericException</span>: Este método maneja todas las excepciones genéricas. Crea un objeto ApiError con detalles del error y devuelve una respuesta con estado 500 - <span class="brown">INTERNAL_SERVER_ERROR</span>.</li>
+                <li><strong>-</strong> <span class="blue">handlerMethodArgumentNotValidException</span>: Este método maneja las excepciones que ocurren cuando falla la petición enviada. Devuelve una respuesta con los mensajes de las validaciones con estado 400 - <span class="brown">BAD_REQUEST</span>.</li>
+            </ul>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;RestControllerAdvice</span></span>
+                            <span><span class="purple">public class</span> <span class="yellow">GlobalExceptionHandler</span> {{"{"}}</span>
+                        
+                            <br><span>  <span class="yellow">&#64;ExceptionHandler</span>(<span class="yellow">Exception</span>.<span class="purple">class</span>)</span>
+                            <span>  <span class="purple">public</span> <span class="yellow">ResponseEntity</span><?> <span class="blue">handlerGenericException</span>(<span class="yellow">HttpServletRequest</span> <span class="brown">request</span>, <span class="yellow">Exception</span> <span class="brown">exception</span>) {{"{"}}</span>
+
+                            <br><span>    <span class="yellow">ApiError</span> apiError = <span class="purple">new</span> <span class="yellow">ApiError</span>();</span>
+                            <span>      apiError.<span class="blue">setBackendMessage</span>(<span class="brown">exception</span>.<span class="blue">getLocalizedMessage</span>());</span>
+                            <span>      apiError.<span class="blue">setUrl</span>(<span class="brown">request</span>.<span class="blue">getRequestURL</span>().<span class="blue">toString</span>());</span>
+                            <span>      apiError.<span class="blue">setMethod</span>(<span class="brown">request</span>.<span class="blue">getMethod</span>());</span>
+                            <span>      apiError.<span class="blue">setTimestamp</span>(<span class="yellow">LocalDateTime</span>.<span class="blue">now</span>());</span>
+                            <span>      apiError.<span class="blue">setMessage</span>(<span class="green">"Error interno del servidor"</span>);</span>
+
+                            <br><span>    <span class="purple">return</span> <span class="yellow">ResponseEntity</span>.<span class="blue">status</span>(<span class="yellow">HttpStatus</span>.<span class="brown">INTERNAL_SERVER_ERROR</span>).<span class="blue">body</span>(apiError);</span>
+                            <span>  {{"}"}}</span>
+
+                            <br><span>  <span class="yellow">&#64;ExceptionHandler</span>(<span class="yellow">MethodArgumentNotValidException</span>.<span class="purple">class</span>)</span>
+                            <span>   <span class="purple">public</span> <span class="yellow">ResponseEntity</span><?> <span class="blue">handlerMethodArgumentNotValidException</span>(<span class="yellow">HttpServletRequest</span> <span class="brown">request</span>, </span>
+                            <span>                                                                                                         <span class="yellow">MethodArgumentNotValidException</span> <span class="brown">exception</span>) {{"{"}}</span>
+
+                            <br><span>    <span class="yellow">ApiError</span> apiError = <span class="purple">new</span> <span class="yellow">ApiError</span>();</span>
+                            <span>      apiError.<span class="blue">setBackendMessage</span>(<span class="brown">exception</span>.<span class="blue">getAllErrors</span>().<span class="blue">stream</span>.<span class="blue">map</span>(</span>
+                            <span>            <span class="brown">each</span> -> <span class="brown">each</span>.<span class="blue">getDefaultMessage</span>()).<span class="blue">collect</span>(<span class="yellow">Collectors</span>.<span class="blue">toList</span>()).<span class="blue">toString</span>());</span>
+
+                            <br><span>      apiError.<span class="blue">setUrl</span>(<span class="brown">request</span>.<span class="blue">getRequestURL</span>().<span class="blue">toString</span>());</span>
+                            <span>      apiError.<span class="blue">setMethod</span>(<span class="brown">request</span>.<span class="blue">getMethod</span>());</span>
+                            <span>      apiError.<span class="blue">setTimestamp</span>(<span class="yellow">LocalDateTime</span>.<span class="blue">now</span>());</span>
+                            <span>      apiError.<span class="blue">setMessage</span>(<span class="green">"Error en la petición enviadada"</span>);</span>
+
+                            <br><span>    <span class="purple">return</span> <span class="yellow">ResponseEntity</span>.<span class="blue">status</span>(<span class="yellow">HttpStatus</span>.<span class="brown">BAD_REQUEST</span>).<span class="blue">body</span>(apiError);</span>
+                            <span>  {{"}"}}</span>
+                            <span>{{"}"}}</span></code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

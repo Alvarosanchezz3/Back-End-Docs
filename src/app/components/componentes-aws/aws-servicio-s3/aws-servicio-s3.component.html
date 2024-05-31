@@ -1,0 +1,38 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/aws/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li><a routerLink="/aws/crear-cuenta" routerLinkActive="active">Crear cuenta y capa gratuita</a></li>
+                <li class="active">
+                    <a routerLink="/aws/servicio-s3" routerLinkActive="active">Servicio de S3</a>
+                    <div class="submenu-container">
+                        <hr>
+                        <ul class="submenu">
+                            <li class="active"><a routerLink="/aws/servicio-s3/antes-de-empezar" routerLinkActive="active">Antes de empezar</a></li>
+                            <li><a routerLink="/aws/servicio-s3/CRUD-usando-S3" routerLinkActive="active">Creación del proyecto</a></li>
+                        </ul>    
+                    </div>
+                </li>
+            </ul> 
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Servicio S3</h1>  
+            </div>
+            <p class="texto">Amazon S3 (Simple Storage Service) es el <span class="text-blue-aws"> servicio de almacenamiento de objetos de Amazon Web Services</span> de tipo PaaS (Platform as a Service). Es la solución más común para almacenar datos en la nube de una forma segura, eficiente y escalable.
+                Con este servicio, <span class="text-blue-aws">podemos almacenar información de cualquier tipo,</span> que se tratará como objetos. Por ejemplo,  <span class="text-blue-aws">podemos usar S3 para almacenar</span> fotografías, archivos de texto, código de webs estáticas, logs, backups, vídeos, etc.</p> 
+            <h3>1. Preparación para crear proyecto</h3>
+            <ul class="list-benefits">
+                <li><strong> Antes de empezar con el proyecto debemos ir a nuestra consola de AWS y realizar estos pasos:</strong></li>
+                <li><strong>1) Crear bucket de S3: Buscamos el <span class="text-yellow-aws"> servicio S3</span>  → <span class="text-yellow-aws">buckets</span> → <span class="text-yellow-aws">Crear bucket.</span></strong> Elegimos la región más cercana a nosotros, le ponemos nombre al bucket (es único en el mundo) y le damos a "Crear bucket"</li>
+                <li><strong>2) Crear usuario de acceso: Buscamos el <span class="text-yellow-aws">servicio IAM </span>(Identity and Access Management) → Administración del acceso → Usuarios → <span class="text-yellow-aws">Crear usuario.</span></strong> Elegimos “Adjuntar políticas directamente” y elegimos el permiso “AmazonS3FullAccess”.</li>
+                <li><strong>3) Conseguimos las claves de acceso de usuario:</strong> Nos metemos en el usuario que hemos creado y vamos a: <span class="text-yellow-aws">Credenciales de seguridad</span> → <span class="text-yellow-aws">Crear clave de acceso</span> → <span class="text-yellow-aws">Aplicación fuera de AWS</span> → <span class="text-yellow-aws">Crear clave de acceso</span></li>
+            </ul>
+            <div class="image-container other-image-container1">
+                <img src="/assets/tecns/aws/S3/CRUD/claves-aws.png" alt="estructura-paquetes">
+            </div>
+        </div>
+    </div>
+</div>
+

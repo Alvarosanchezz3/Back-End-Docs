@@ -1,0 +1,41 @@
+@media (max-width: 1520px) {
+    .explicacion-codigo1 {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 770px) {
+    .code-container pre {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 670px) {
+    .title h1 {
+        font-size: 28px;
+    }
+    
+    .code-container pre {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 560px) {
+    .title h1 {
+        font-size: 26px;
+    }
+    
+    .code-container pre {
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 520px) {
+    .title h1 {
+        font-size: 24px;
+    }
+
+    .code-container pre {
+        font-size: 7px;
+    }
+}

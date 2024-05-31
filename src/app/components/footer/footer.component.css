@@ -1,0 +1,105 @@
+/* Estilos generales para el footer */
+.footer {
+  position: relative;
+  width: 100%;
+  height: 400px; /* Ajusta la altura según tus necesidades */
+  overflow: hidden;  /* Color de fondo del footer */
+}
+
+/* Estilos para las olas */
+.wave {
+  position: absolute;
+  bottom: 250px; /* Ajusta para que las olas queden sobre el fondo */
+  left: 0;
+  width: 200%; /* Asegúrate de que la ola cubra todo el ancho */
+  height: 100px; /* Ajusta la altura según la imagen de ola */
+  background: url("/assets/icons/wave.png") repeat-x; /* Imagen de ola */
+  background-size: 1000px 100px; /* Ajusta el tamaño de la ola */
+  animation: waveAnimation 10s linear infinite;
+  opacity: 0.6;
+}
+
+.wave1 {
+  z-index: 3;
+  animation-delay: 0s;
+  opacity: 1;
+}
+
+.wave2 {
+  z-index: 2;
+  animation-delay: 2s;
+  opacity: 0.5;
+}
+
+.wave3 {
+  z-index: 1;
+  animation-delay: 4s;
+  opacity: 0.3;
+}
+
+.wave4 {
+  z-index: 0;
+  animation-delay: 6s;
+  opacity: 0.2;
+}
+
+/* Animación de las olas */
+@keyframes waveAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Estilos para el contenido del footer */
+.footer-content {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 250px;
+  background: #ddb691; 
+  padding: 20px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.footer-content h1 {
+  color: #404040; 
+  font-size: 30px; 
+}
+
+.footer-content p {
+  color: #404040;
+  font-weight: 500;
+  font-size: 17px;
+}
+
+.social-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.social-container li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 5px;
+  background-color: #fff;
+  height: 45px;
+  transition: 0.5s;
+}
+
+.social-container li a svg {
+  width: 35px;
+}
+
+.social-container li a:hover {
+  transform: translateY(-10px);
+}

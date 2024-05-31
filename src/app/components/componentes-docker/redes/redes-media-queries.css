@@ -1,0 +1,5 @@
+@media (max-width: 900px) {
+    .image-container img {
+        width: 50%;
+    }
+}

@@ -1,0 +1,563 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/spring/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li><a routerLink="/spring/spring-web/como-empezar" routerLinkActive="active">Spring Web</a></li>
+                <li class="active">
+                    <a routerLink="/spring/spring-security" routerLinkActive="active">Spring Security</a>
+                    <div class="submenu-container">
+                        <hr>
+                        <ul class="submenu">
+                            <li><a routerLink="/spring/spring-security/como-empezar" routerLinkActive="active">Como
+                                    empezar</a></li>
+                            <li><a routerLink="/spring/spring-security/proyecto-base" routerLinkActive="active">Proyecto
+                                    base a darle seguridad</a></li>
+                            <li><a routerLink="/spring/spring-security/componentes-clave"
+                                    routerLinkActive="active">Componentes clave de
+                                    Spring Security</a></li>
+                            <li class="active"><a routerLink="/spring/spring-security/"
+                                    routerLinkActive="active">Creando arquitectura
+                                    de autenticación con JWT</a></li>
+                            <li><a routerLink="/spring/spring-security/filtros-de-seguridad" routerLinkActive="active">Filtros de seguridad:
+                                    JwtAuthenticationFilter</a></li>
+                            <li><a routerLink="/spring/spring-security/autorización" routerLinkActive="active">Creando arquitectura
+                                    de autorización</a></li>
+                            <li><a routerLink="/spring/spring-security/cors" routerLinkActive="active">Cross-Origin Resource
+                                    Sharing (CORS)</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="info">
+            <div *ngIf="currentInfo === 'info1'">
+                <div class="title">
+                    <h1>Arquitectura de autenticación</h1>
+                    <div class="icons-container">
+                        <a href="https://github.com/Alvarosanchezz3/Spring-Security" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 24 24">
+                                        <path fill="#ffffff" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2" />
+                                </svg>
+                        </a>
+                </div>
+                </div>
+                <p>Diagrama creado en <a href="https://excalidraw.com/" target="_blank"
+                        class="enlace-apartado">Scalidraw</a> sobre la autorización:</p>
+                <div class="image-container">
+                    <img src="./assets/tecns/spring/spring-security/Autenticación.png" alt="diagrama">
+                </div>
+                <p>Para crear esta autenticación necesitamos controladores para crear los endpoints de registro y login de
+                    nuestros usuarios, pero antes de estos tenemos que:</p>
+                <h3>1. Crear 2 dto (Objeto de Transferencia de Datos):</h3>
+                <p><span class="yellow">SaveUser</span> → Representa un usuario que se está registrando
+                    <br><span class="yellow">RegisteredUser</span> → Representa un usuario que se ha registrado exitosamente
+                </p>
+                <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="yellow">&#64;Data</span></span>
+                                <span><span class="purple">public class</span> <span class="yellow">SaveUser</span> <span class="purple">implements</span> <span class="yellow">Serializable</span> {{"{"}}</span>
+
+                                <br><span>  <span class="yellow">&#64;Size</span>(<span class="brown">min</span> = <span class="brown">4</span>)</span>
+                                <span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">name</span>;</span>
+
+                                <br><span>  <span class="yellow">&#64;NotBlank</span></span>
+                                <span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">username</span>;</span>
+
+                                <br><span>  <span class="yellow">&#64;Size</span>(<span class="brown">min</span> = <span class="brown">8</span>)</span>
+                                <span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">password</span>;</span>
+
+                                <span>{{"}"}}</span>
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="yellow">&#64;Data</span></span>
+                                <span><span class="purple">public class</span> <span class="yellow">RegisteredUser</span> <span class="purple">implements</span> <span class="yellow">Serializable</span> {{"{"}}</span>
+
+                                <br><span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">id</span>;</span>
+
+                                <br><span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">username</span>;</span>
+
+                                <br><span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">name</span>;</span>
+
+                                <br><span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">role</span>;</span>
+
+                                <br><span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">jwt</span>;</span>
+
+                                <span>{{"}"}}</span>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <h3>2. Crear la clase UserService:</h3>
+                <p>Este <span class="yellow">UserServiceImpl</span> es el encargado de implementar la lógica del método de
+                    la <span class="purple">interfaz</span> <span class="yellow"> UserService</span> para crear los
+                    clientes, ya que <strong>ni los admins ni los asistentes de admin pueden crearse a ellos mismos el
+                        usuario</strong><span class="green"></span> (Estos en empresas suelen crearse mediante programas
+                    externos o directamente desde Base de datos).</p>
+                <ul class="list">
+                    <li><strong>- </strong><span class="yellow">userRepository</span> → Guardar los clientes en BBDD</li>
+                    <li><strong>- </strong><span class="yellow">PasswordEncoder</span> → Bean que creamos en el
+                        SecurityBeansInjector para encriptar la contraseña del usuario al crearlo en BBDD.</li>
+                </ul>
+                <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="purple">public interface</span> <span class="yellow">UserService</span> {{"{"}}</span>
+                                <span>  <span class="yellow">User</span> <span class="blue">registerOneCustomer</span>(<span class="yellow">SaveUser</span> <span class="brown">newUser</span>);</span>
+                                <span>{{"}"}}</span>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="yellow">&#64;Service</span></span>
+                                <span><span class="purple">public class</span> <span class="yellow">UserServiceImpl</span> <span class="purple">implements</span> <span class="yellow">UserService</span> {{"{"}}</span>
+                                
+                                <br><span>  <span class="yellow">&#64;Autowired</span></span>
+                                <span>  <span class="purple">private</span> <span class="yellow">UserRepository</span> <span class="red">userRepository</span>;</span>
+
+                                <br><span>  <span class="yellow">&#64;Autowired</span></span>
+                                <span>  <span class="purple">private</span> <span class="yellow">PasswordEncoder</span> <span class="red">passwordEncoder</span>;</span>
+
+                                <br><span>  <span class="yellow">&#64;Override</span></span>
+                                <span>  <span class="purple">public</span> User <span class="blue">registerOneCustomer</span>(<span class="yellow">SaveUser</span> <span class="brown">newUser</span>) {{"{"}}</span>
+                                
+                                <br><span>    <span class="yellow">User</span> user = <span class="purple">new</span> <span class="yellow">User</span>();</span>
+                                <span>    user.<span class="blue">setPassword</span>(<span class="red">passwordEncoder</span>.<span class="blue">encode</span>(<span class="brown">newUser</span>.<span class="blue">getPassword</span>()));</span>
+                                <span>    user.<span class="blue">setName</span>(<span class="brown">newUser</span>.<span class="blue">getName</span>());</span>
+                                <span>    user.<span class="blue">setUsername</span>(<span class="brown">newUser</span>.<span class="blue">getUsername</span>());</span>
+                                <span>    user.<span class="blue">setRole</span>(<span class="yellow">Role</span>.<span class="brown">CUSTOMER</span>);</span>
+
+                                <br><span>    <span class="purple">return</span> userRepository.<span class="blue">save</span>(<span class="brown">user</span>);</span>
+                                <span>  {{"}"}}</span>
+                                <span>{{"}"}}</span>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+
+                <h3>3. Crear la clase JwtService:</h3>
+                <p>Para poder asociar un JWT a cada usuario al registrarse necesitamos crear un <span class="yellow">service</span> que <strong>genere los JWT e
+                    implemente los métodos relacionados a ellos</strong>, este será el <span class="yellow">JwtService</span>:
+
+                    <br><br>Antes de nada debemos agregar las últimas dependencias de JJWT (Java Json Web Token) en nuestro archivo pom.xml del proyecto:
+
+                    <br><br><strong>Dependencies JJWT (0.12.5) →</strong> <a href="https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api/0.12.5" target="_blank"
+                    class="enlace-apartado"> API</a> - <a href="https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl/0.12.5" target="_blank"
+                    class="enlace-apartado"> IMPL</a> -  <a href="https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson/0.12.5" target="_blank"
+                    class="enlace-apartado"> EXTENSIONS JACKSON</a>
+                </p>
+                <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="yellow">&#64;Service</span></span>
+                                <span><span class="purple">public class</span> <span class="yellow">JwtService</span> {{"{"}}</span>
+
+                                <br><span>  <span class="yellow">&#64;Value</span>(<span class="green">"${{"{"}}security.jwt.expiration-in-minutes{{"}"}}"</span>)</span>
+                                <span>  <span class="purple">private</span> <span class="yellow">Long</span> <span class="red">EXPIRATION_IN_MINUTES</span>;</span>
+
+                                <br><span>  <span class="yellow">&#64;Value</span>(<span class="green">"${{"{"}}security.jwt.secret-key{{"}"}}"</span>)</span>
+                                <span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">SECRET_KEY</span>;</span>
+                            </code>
+                        </pre>
+                    </div>
+                    <ul class="list">
+                        <li>Ambos <span class="red">atributos</span> almacenan sus datos en el <strong>application.properties</strong>:</li>
+                        <li><strong>- </strong><span class="red">EXPIRATION_IN_MINUTES</span> → Tiempo en minutos que es válido el JWT.</li>
+                        <li><strong>- </strong><span class="red">SECRET_KEY</span> → Clave secreta para firmar los JWT generados</li>    
+                    </ul>
+                </div>
+                <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="brown">security.jwt.expiration-in-minutes</span>=<span class="green">30</span></span>
+                                <span><span class="brown">security.jwt.secret-key</span>=<span class="green">MshmNjI0NTgyZDUyOXQ1MmhzMzAwNzQ0ODMzNGZzNjVnZG</span></span>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <h3><span class="blue">Métodos</span> del <span class="yellow">JwtService</span>:</h3>
+                <p><span class="blue">generateToken</span>() → Método para generar el JWT</p>
+                <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="purple">public</span> <span class="yellow">String</span> <span class="blue">generateToken</span>(<span class="yellow">UserDetails</span> <span class="brown">user</span>, <span class="yellow">Map</span>{{"<"}}<span class="yellow">String</span>, <span class="yellow">Object</span>{{">"}} <span class="brown">extraClaims</span>) {{"{"}}</span>
+                                <span>  <span class="comment">// Fecha actual</span></span>
+                                <span>  <span class="yellow">Date</span> issuedAt = <span class="purple">new</span> <span class="yellow">Date</span>(<span class="yellow">System</span>.<span class="blue">currentTimeMillis</span>());</span>
+
+                                <br><span>  <span class="comment">// Se pasa el tiempo a milisegundos y se le suma al inicial</span></span>
+                                <span>  Date expiration = <span class="purple">new</span> <span class="yellow">Date</span>( (<span class="red">EXPIRATION_IN_MINUTES</span> * <span class="brown">60</span> * <span class="brown">1000</span>) + issuedAt.<span class="blue">getTime</span>());</span>
+
+                                <br><span>  <span class="purple">return</span> <span class="yellow">Jwts</span>.<span class="blue">builder</span>()</span>
+                                <span>    <span class="comment">// Header del JWT</span></span>
+                                <span>    .<span class="blue">header</span>()</span>
+                                <span>      .<span class="blue">type</span>(<span class="green">"JWT"</span>)</span>
+                                <span>      .<span class="blue">and</span>()</span>
+
+                                <br><span>    <span class="comment">// Payload del JWT</span></span>
+                                <span>    .<span class="blue">subject</span>(<span class="brown">user</span>.<span class="blue">getUsername</span>())</span>
+                                <span>    .<span class="blue">issuedAt</span>(issuedAt) <span class="comment">// Fecha de emisión del token</span></span>
+                                <span>    .<span class="blue">expiration</span>(expiration) <span class="comment">// Fecha de expiración del token</span></span>
+                                <span>    .<span class="blue">claims</span>(<span class="brown">extraClaims</span>)</span>
+
+                                <br><span>    <span class="comment">// Firma del JWT y fin del método</span></span>
+                                <span>    .<span class="blue">signWith</span>(<span class="blue">generateKey</span>(), <span class="yellow">Jwts</span>.<span class="yellow">SIG</span>.<span class="brown">HS256</span>)</span>
+                                <span>    .<span class="blue">compact</span>();</span>
+                                <span>{{"}"}}</span>
+
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="purple">private</span> <span class="yellow">SecretKey</span> <span class="blue">generateKey</span>() {{"{"}}</span>
+                                <span>  <span class="purple">byte</span>[] passwordDecoded = <span class="yellow">Decoders</span>.<span class="brown">BASE64</span>.<span class="blue">decode</span>(<span class="red">SECRET_KEY</span>);</span>
+                                <span>  <span class="purple">return</span> <span class="yellow">Keys</span>.<span class="blue">hmacShaKeyFor</span>(passwordDecoded);</span>
+                                <span>{{"}"}}</span>
+                            </code>
+                        </pre>
+                    </div>
+                    <p><span class="blue">generateKey</span>() → Convierte la <strong>clave secreta</strong> en una representación Base64 a bytes y luego se utiliza para crear una SecretKey utilizando el algoritmo HMAC-SHA.</p>
+                </div>
+                <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="purple">private</span> <span class="yellow">Claimns</span> <span class="blue">extractAllClaims</span>(<span class="yellow">String</span> <span class="brown">jwt</span>) {{"{"}}</span>
+                                <span>  <span class="purple">return</span> <span class="yellow">Jwts</span>.<span class="blue">parser</span>().<span class="blue">verifyWith</span>( <span class="blue">generateKey</span>() ).<span class="blue">build</span>().<span class="blue">parseSignedClaims</span>(<span class="brown">jwt</span>).<span class="blue">getPayload</span>();</span>
+                                <span>{{"}"}}</span>
+                            </code>
+                        </pre>
+                    </div>
+                    <p><span class="blue">extractAllClaims</span>() → Obtiene todos los <strong>claims</strong> del payload de un JWT.</p>
+                </div>
+                <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="purple">private</span> <span class="yellow">String</span> <span class="blue">extractUsername</span>(<span class="yellow">String</span> <span class="brown">jwt</span>) {{"{"}}</span>
+                                <span>  <span class="purple">return</span> <span class="blue">extractAllClaims</span>(<span class="brown">jwt</span>).<span class="blue">getSubject</span>();</span>
+                                <span>{{"}"}}</span>
+                            </code>
+                        </pre>
+                    </div>
+                    <p><span class="blue">extractUsername</span>() → Obtiene el username de las claims de un JWT usando el método extractAllClaims() que hemos creado justo antes.</p>
+                </div>
+
+                <h3>4. Crear la clase AuthService</h3>
+                <p>Ahora debemos crear un <span class="yellow">Service</span> que implemente la lógica de crear el usuario con el <span class="red">atributo del jwt</span> del dto <span class="yellow">RegisteredUser</span>, generandolo usando el <span class="yellow">JwtService</span> que acabamos de crear.</p>
+                <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="yellow">&#64;Service</span></span>
+                                <span><span class="purple">public class</span> <span class="yellow">AuthService</span> {{"{"}}</span>
+                                
+                                <br><span>  <span class="yellow">&#64;Autowired</span></span>
+                                <span>  <span class="purple">private</span> <span class="yellow">UserService</span> <span class="red">userService</span>;</span>
+
+                                <br><span>  <span class="yellow">&#64;Autowired</span></span>
+                                <span>  <span class="purple">private</span> <span class="yellow">JwtService</span> <span class="red">jwtService</span>;</span>
+
+                                <br><span>  <span class="yellow">&#64;Autowired</span></span>
+                                <span>  <span class="purple">private</span> <span class="yellow">AuthenticationManager</span> <span class="red">authenticationManager</span>;</span>
+
+                                <br><span>  <span class="purple">public</span> <span class="yellow">RegisteredUser</span> <span class="blue">registerOneCustomer</span>(<span class="yellow">SaveUser</span> <span class="brown">newUser</span>) {{"{"}}</span>
+                                <span>    <span class="yellow">User</span> user = <span class="red">userService</span>.<span class="blue">registerOneCustomer</span>(<span class="brown">newUser</span>);</span>
+                                
+                                <br><span>    <span class="yellow">RegisteredUser</span> userDto = <span class="purple">new</span> <span class="yellow">RegisteredUser</span>();</span>
+                                <span>      userDto.<span class="blue">setId</span>(user.<span class="blue">getId</span>());</span>
+                                <span>      userDto.<span class="blue">setName</span>(user.<span class="blue">getName</span>());</span>
+                                <span>      userDto.<span class="blue">setUsername</span>(user.<span class="blue">getUsername</span>());</span>
+                                <span>      userDto.<span class="blue">setRole</span>(user.<span class="blue">getRole</span>().<span class="blue">name</span>());</span>
+                                
+                                <br><span>    <span class="yellow">String</span> jwt = <span class="red">jwtService</span>.<span class="blue">generateToken</span>(user, <span class="blue">generateExtraClaims</span>(user));</span>
+                                <span>      userDto.<span class="blue">setJwt</span>(jwt);</span>
+
+                                <br><span>    <span class="purple">return</span> userDto;</span>
+                                <span>  {{"}"}}</span>
+
+                                <br><span>  <span class="purple">private</span> <span class="yellow">Map</span>{{"<"}}<span class="yellow">String</span>, <span class="yellow">Object</span>{{">"}} <span class="blue">generateExtraClaims</span>(<span class="yellow">User</span> <span class="brown">user</span>) {{"{"}}</span>
+                                <span>    <span class="yellow">Map</span>{{"<"}}<span class="yellow">String</span>, <span class="yellow">Object</span>{{">"}} extraClaims = <span class="purple">new</span> <span class="yellow">HashMap</span>{{"<"}}{{">"}}();</span>
+                                <span>      extraClaims.<span class="blue">put</span>(<span class="green">"name"</span>, <span class="brown">user</span>.<span class="blue">getName</span>());</span>
+                                <span>      extraClaims.<span class="blue">put</span>(<span class="green">"role"</span>, <span class="brown">user</span>.<span class="blue">getRole</span>().<span class="blue">name</span>());</span>
+                                <span>      extraClaims.<span class="blue">put</span>(<span class="green">"authorities"</span>, <span class="brown">user</span>.<span class="blue">getAuthorities</span>());</span>
+
+                                <br><span>    <span class="purple">return</span> extraClaims;</span>
+                                <span>  {{"}"}}</span>
+                                <span>{{"}"}}</span>
+                            </code>
+                        </pre>
+                    </div>
+                    <ul>
+                        <li><strong>- </strong><span class="blue">RegisterOneCustomer</span>() → Este método <strong>registra un nuevo usuario</strong> en la aplicación tomando como argumento un objeto SaveUser con los detalles de registro. Llama al método registerOneCustomer del UserService para realizar el registro y obtiene un objeto User. Luego, crea un objeto RegisteredUser con los datos del usuario registrado, <strong>genera un token JWT</strong> usando el <span class="yellow">JwtService</span> y el método <span class="blue">generateExtraClaims</span>, y lo añade al RegisteredUser. Finalmente, devuelve el RegisteredUser con el token JWT</li>
+                        <li><strong>- </strong><span class="blue">generateExtraClaims</span>() → Este método <strong>genera claims adicionales</strong> para el token JWT. Añade al mapa de claims el <strong>nombre del usuario</strong>, el<strong>rol</strong> y los <strong>permisos (authorities)</strong>. Estos claims se incluyen en el token JWT para proporcionar información adicional sobre el usuario y sus permisos. Finalmente, devuelve el mapa con los claims adicionales.</li>
+                    </ul>
+                </div>
+
+                <button (click)="toggleInfo()" class="btn-página1">Página siguiente</button>
+            </div>
+            <div *ngIf="currentInfo === 'info2'">
+                <h3>5. Registro de clientes y config de Seguridad:</h3>
+                <p class="texto">Finalmente ya podemos crear el <span class="yellow">CustomerController</span> con su endpoint de registro: </p>
+                <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="yellow">&#64;RestController</span></span>
+                                <span><span class="yellow">&#64;RequestMapping</span>(<span class="green">"/api/customers"</span>)</span>
+                                <span><span class="purple">public class</span> <span class="yellow">CustomerController</span> {{"{"}}</span>
+
+                                <br><span>  <span class="yellow">&#64;Autowired</span></span>
+                                <span>  <span class="purple">private</span> <span class="yellow">AuthService</span> <span class="red">authService</span>;</span>
+
+                                <br><span>  <span class="yellow">&#64;PostMapping</span></span>
+                                <span>  <span class="purple">public</span> <span class="yellow">ResponseEntity</span>{{"<"}}<span class="yellow">RegisteredUser</span>{{">"}} <span class="blue">registerOne</span> (<span class="yellow">&#64;RequestBody</span> <span class="yellow">&#64;Valid</span> <span class="yellow">SaveUser</span> <span class="brown">newUser</span>) {{"{"}}</span>
+                                <span>    <span class="yellow">RegisteredUser</span> registeredUser = <span class="red">authService</span>.<span class="blue">registerOneCustomer</span>(<span class="brown">newUser</span>);</span>
+                                <span>    <span class="purple">return</span> <span class="yellow">ResponseEntity</span>.<span class="blue">status</span>(<span class="yellow">HttpStatus</span>.<span class="brown">CREATED</span>).<span class="blue">body</span>(registeredUser);</span>
+                                <span>  {{"}"}}</span>
+                                <span>{{"}"}}</span>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <p class="texto">Antes de probar este registro debemos crear la <strong>clase de configuración de nuestra aplicación web</strong>, la crearemos en el <strong>package config.security</strong> → <span class="yellow">HttpSecurityConfig</span></p>
+                <div class="explicacion-codigo1 codigo-doble">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="yellow">&#64;Configuration</span></span>
+                                <span><span class="yellow">&#64;EnableWebSecurity</span></span>
+                                <span><span class="purple">public class</span> <span class="yellow">HttpSecurityConfig</span> {{"{"}}</span>
+
+                                <br><span>  <span class="yellow">&#64;Autowired</span></span>
+                                <span>  <span class="purple">private</span> <span class="yellow">AuthenticationProvider</span> <span class="red">daoAuthProvider</span>;</span>
+
+                                <br><span>  <span class="yellow">&#64;Bean</span></span>
+                                <span>  <span class="purple">public</span> <span class="yellow">SecurityFilterChain</span> <span class="blue">securityFilterChain</span>(HttpSecurity <span class="brown">http</span>) <span class="purple">throws</span> <span class="yellow">Exception</span> {{"{"}}</span>
+                                
+                                <br><span>    <span class="yellow">SecurityFilterChain</span> filterChain = <span class="brown">http</span></span>
+                                <span>      .<span class="blue">csrf</span>(<span class="brown">csrfConfig</span> -> <span class="brown">csrfConfig</span>.<span class="blue">disable</span>())</span>
+                                <span>      .<span class="blue">sessionManagement</span>( <span class="brown">sessionManConfig</span> -> </span>
+                                <span>        <span class="brown">sessionManConfig</span>.<span class="blue">sessionCreationPolicy</span>(<span class="yellow">SessionCreationPolicy</span>.<span class="brown">STATELESS</span>))</span>
+                                <span>      .<span class="blue">authenticationProvider</span>(<span class="red">daoAuthProvider</span>)</span>
+                                <span>      .<span class="blue">authorizeHttpRequests</span>( <span class="brown">authRequestConfig</span> -> {{"{"}}</span>
+                                <span>        <span class="comment">// Rutas públicas</span></span>
+                                <span>        <span class="brown">authRequestConfig</span>.<span class="blue">requestMatchers</span>(<span class="yellow">HttpMethod</span>.<span class="brown">POST</span>,<span class="green">"/customers"</span>).<span class="blue">permitAll</span>();</span>
+                                <span>        <span class="brown">authRequestConfig</span>.<span class="blue">requestMatchers</span>(<span class="yellow">HttpMethod</span>.<span class="brown">POST</span>,<span class="green">"/auth/authenticate"</span>).<span class="blue">permitAll</span>();</span>
+                                <span>        <span class="brown">authRequestConfig</span>.<span class="blue">requestMatchers</span>(<span class="yellow">HttpMethod</span>.<span class="brown">GET</span>,<span class="green">"/auth/validate-token"</span>).<span class="blue">permitAll</span>();</span>
+
+                                <br><span>        <span class="comment">// El resto de rutas son protegidas</span></span>
+                                <span>        <span class="brown">authRequestConfig</span>.<span class="blue">anyRequest</span>().<span class="blue">authenticated</span>();</span>
+                                <span>      {{"}"}})</span>
+                                <span>      .<span class="blue">build</span>();</span>
+                                
+                                <br><span>    <span class="purple">return</span> filterChain;</span>                          
+                                <span>  {{"}"}}</span>
+                                <span>{{"}"}}</span>
+                            </code>
+                        </pre>
+                    </div>
+                    <ul>
+                        <li><strong>- </strong><span class="yellow">&#64;Configuration</span> y <span class="yellow">&#64;EnableWebSecurity</span> → Indican que esta clase es una configuración de Spring y que habilita la seguridad web en la aplicación</li>
+                        <li><strong>- </strong><span class="blue">.csrf</span>() → Deshabilita la protección contra ataques CSRF (Cross-Site Request Forgery) ya que usamos JWT.</li>
+                        <li><strong>- </strong><span class="blue">sessionManagement</span>() → Configura la gestión de sesiones para que sea sin estado (stateless), lo que significa que las solicitudes no dependerán de una sesión HTTP.</li>
+                        <li><strong>- </strong><span class="blue">authenticationProvider</span>() → Configura el proveedor de autenticación que se inyectó anteriormente para que Spring Security lo utilice en la autenticación de los usuarios.</li>
+                        <li><strong>- </strong>.(<span class="yellow">authRequestConfig</span> -> {{"{"}} ... {{"}"}})() → Configura las reglas de autorización. <strong>(Las rutas <span class="green">"/auth/authenticate"</span> y <span class="green">"/auth/validate-token"</span> las crearemos posteriormente en otro controlador)</strong></li>
+                    
+                    </ul>
+                </div>
+
+                <h3>6. Probar registro en Postman </h3>
+                <p>En este punto, <strong>los clientes ya podrían registrarse y crear un usuario. ¡Probemoslo!</strong> Ejecutamos la aplicación Spring y en mi caso voy a usar <a href="https://www.postman.com/" target="_blank" class="enlace-apartado">Postman</a> :
+                    Ponemos la url del método <span class="destacado">htttp://localhost:8080/api/customers</span>, el tipo de método (<span class="yellow">POST</span>), elegimos <strong>“raw”</strong> y <strong>mandamos el json</strong> que se pide en el <strong>&#64;RequestBody</strong> y le damos a <strong>“Send”</strong>
+                    La respuesta es un <span class="green">Status 200 Created</span>, qué significa que la petición ha ido correctamente y nos devuelve un json con los datos del cliente creado y entre ellos su JWT
+                    </p>
+                <div class="explicacion-codigo1 code-container-postman">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span>{{"{"}}</span>
+                                <span>  <span class="red">"name"</span>: <span class="green">"Sergio Rivas"</span>,</span>
+                                <span>  <span class="red">"username"</span>: <span class="green">"Sergio01"</span>,</span>
+                                <span>  <span class="red">"password"</span>: <span class="green">"12345678"</span></span>
+                                <span>{{"}"}}</span>
+                            </code>
+                        </pre>
+                    </div>
+                    <img src="./assets/tecns/spring/spring-security/respuesta-json-registro.png" alt="postman-img">
+                </div>
+                <p>Además si vemos la BBDD, la contraseña está encriptada correctamente por el PasswordEncoder</p>
+                <div class="image-container">
+                    <img src="./assets/tecns/spring/spring-security/BBDD-registro.png" alt="registro-bbdd">
+                </div>
+
+                <h3>7. Creamos el login de clientes y un validador de tokens</h3>
+                <p>Para poder crear el login de los clientes crearemos un nuevo <strong>controlador</strong>, el <span class="yellow">AuthenticationController</span>. Pero antes tenemos que realizar unos pasos:</p>
+                <ul class="list">
+                    <li><strong>- Crear 2 dto (Data Transfer Object):</strong> Creamos un package dentro de dto que se llama auth</li>
+                    <li>AuthenticationRequest → Representa los datos enviados en la petición de login</li>
+                    <li>AuthenticationResponse → Representa el usuario ya logueado con su jwt</li>
+                </ul>
+                <div class="explicacion-codigo1 codigo-doble">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="yellow">&#64;Data</span></span>
+                                <span><span class="purple">public class</span> <span class="yellow">AuthenticationRequest</span> <span class="purple">implements</span> <span class="yellow">Serializable</span> {{"{"}}</span>
+
+                                <br><span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">username</span>;</span>
+
+                                <br><span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">password</span>;</span>
+                                <span>{{"}"}}</span>
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="yellow">&#64;Data</span></span>
+                                <span><span class="purple">public class</span> <span class="yellow">AuthenticationResponse</span> <span class="purple">implements</span> <span class="yellow">Serializable</span> {{"{"}}</span>
+
+                                <br><span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">jwt</span>;</span>
+
+                                <span>{{"}"}}</span>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <p class="texto"><strong>- Añadimos un método para buscar por nombre de usuario</strong> al <span class="yellow">UserService</span>:</p>
+                <div class="explicacion-codigo1 codigo-doble">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="purple">public interface</span> <span class="yellow">UserService</span> {{"{"}}</span>
+                                <span>  <span class="yellow">User</span> <span class="blue">registerOneCustomer</span>(<span class="yellow">SaveUser</span>, <span class="brown">newUser</span>);</span>
+
+                                <br><span>  <span class="yellow">Optional</span>{{"<"}}<span class="yellow">User</span>{{">"}} <span class="blue">findOneByUsername</span>(<span class="yellow">String</span>, <span class="brown">username</span>);</span>
+                                <span>{{"}"}}</span>
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="yellow">&#64;Override</span></span>
+                                <span><span class="purple">public </span> <span class="yellow">Optional</span>{{"<"}}<span class="yellow">User</span>{{">"}} <span class="blue">findOneByUsername</span>(<span class="yellow">String</span>, <span class="brown">username</span>) {{"{"}}</span>
+                                <span>  <span class="purple">return</span> <span class="red">userRepository</span> <span class="blue">findByUsername</span>(<span class="brown">username</span>);</span>
+                                
+
+                                <span>{{"}"}}</span>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <p class="texto"><strong>Añadimos un método para el login en el <span class="yellow">AuthService</span> y otro para validar los JWT:</strong></p>
+                <div class="explicacion-codigo1 codigo-doble">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="purple">public </span> <span class="yellow">AuthenticationResponse</span> <span class="blue">login</span> (<span class="yellow">AuthenticationRequest</span>, <span class="brown">authRequest</span>) {{"{"}}</span>
+                                
+                                <br><span>  <span class="yellow">Authentication</span> authentication = <span class="purple">new</span> <span class="yellow">UsernamePasswordAuthenticationToken</span>(</span>
+                                <span>    <span class="brown">authRequest</span>.<span class="blue">getUsername</span>(),</span>
+                                <span>    <span class="brown">authRequest</span>.<span class="blue">getPassword</span>()</span>
+                                <span>  );</span>
+
+                                <br><span>  <span class="red">authenticationManager</span>.<span class="blue">authenticate</span>(authentication);</span>
+
+                                <br><span>  <span class="yellow">UserDetails</span> user = <span class="red">userService</span>.<span class="blue">findOneByUsername</span>(<span class="brown">authRequest</span>.<span class="blue">getUsername</span>()).<span class="blue">get</span>();</span>
+                                <span>  <span class="yellow">String</span> jwt = <span class="red">jwtService</span>.<span class="blue">generateToken</span>(user, <span class="blue">generateExtraClaims</span>((<span class="yellow">User</span>) user));</span>
+
+                                <br><span>  <span class="yellow">AuthenticationResponse</span> authResponse = <span class="purple">new</span> <span class="yellow">AuthenticationResponse</span>();</span>
+                                <span>  authResponse.<span class="blue">setJwt</span>(jwt);</span>
+
+                                <br><span>  <span class="purple">return</span> authResponse;</span>
+
+                                <span>{{"}"}}</span>
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="purple">public boolean </span> <span class="blue">validateToken</span> (<span class="yellow">String</span>, <span class="brown">jwt</span>) {{"{"}}</span>
+                                
+                                <br><span>  <span class="purple">try</span> {{"{"}}</span>
+                                <span>    <span class="red">jwtService</span>.<span class="blue">extractUsername</span>(<span class="brown">jwt</span>);</span>
+                                <span>    <span class="purple">return true;</span></span>
+                                <span>  {{"}"}}</span>
+                                <span>  <span class="purple">catch</span> (<span class="yellow">Exception</span> <span class="brown">e</span>) {{"{"}}</span>
+                                <span>    <span class="yellow">System</span>.<span class="brown">out</span>.<span class="blue">println</span>(<span class="brown">e</span>.<span class="blue">getMessage</span>());</span>
+                                <span>    <span class="purple">return false;</span></span>
+                                <span>  {{"}"}}</span>
+                                <span>{{"}"}}</span>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <p class="texto">Ahora ya que podemos crear el <strong>controlador</strong> con los endpoints para el <strong>login</strong> y <strong>validar los tokens</strong>, el <span class="yellow">AuthenticationController</span>:  </p>
+                <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="yellow">&#64;RestController</span></span>
+                                <span><span class="yellow">&#64;RequestMapping</span>(<span class="green">"/auth"</span>)</span>
+                                <span><span class="purple">public class</span> <span class="yellow">AuthenticationController</span> {{"{"}}</span>
+
+                                <br><span>  <span class="yellow">&#64;Autowired</span></span>
+                                <span>  <span class="purple">private</span> <span class="yellow">AuthService</span> <span class="red">authService</span>;</span>
+
+                                <br><span>  <span class="yellow">&#64;GetMapping</span>(<span class="green">"/validate-token"</span>)</span>
+                                <span>  <span class="purple">public</span> <span class="yellow">ResponseEntity</span>{{"<"}}<span class="yellow">Boolean</span>{{">"}} <span class="blue">validate</span> (<span class="yellow">&#64;RequestParam</span> <span class="yellow">String</span> <span class="brown">jwt</span>) {{"{"}}</span>
+                                <span>    <span class="purple">boolean</span> isTokenValid = <span class="red">authService</span>.<span class="blue">validateToken</span>(<span class="brown">jwt</span>);</span>
+                                <span>    <span class="purple">return</span> <span class="yellow">ResponseEntity</span>.<span class="blue">ok</span>(isTokenValid);</span>
+                                <span>  {{"}"}}</span>
+
+                                <br><span>  <span class="yellow">&#64;PostMapping</span>(<span class="green">"/authenticate"</span>)</span>
+                                <span>  <span class="purple">public</span> <span class="yellow">ResponseEntity</span>{{"<"}}<span class="yellow">AuthenticationResponse</span>{{">"}} <span class="blue">authenticate</span> (</span>
+                                <span>              <span class="yellow">&#64;RequestBody</span> <span class="yellow">&#64;Valid</span> <span class="yellow">AuthenticationRequest</span> <span class="brown">authRequest</span>) {{"{"}}</span>
+
+                                <br><span>    <span class="yellow">AuthenticationResponse</span> authResponse = <span class="red">authService</span>.<span class="blue">login</span>(<span class="brown">authRequest</span>);</span>
+                                <span>    <span class="purple">return</span> <span class="yellow">ResponseEntity</span>.<span class="blue">ok</span>(authResponse);</span>
+                                <span>  {{"}"}}</span>
+                                <span>{{"}"}}</span>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+
+                <h3>8. Probamos el logging y el validador de tokens en Postman</h3>
+                <p class="texto"><span class="yellow">POST </span><span class="destacado">htttp://localhost:8080/api/auth/authenticate</span></p>
+                <p class="texto">Probamos el login en <a href="https://www.postman.com/" target="_blank" class="enlace-apartado">Postman</a>, poniendo la url del método . Ponemos el <strong>usuario</strong> y <strong>contraseña</strong> de un usuario registrado y <strong>nos devuelve un jwt</strong> de autenticación con la info de él en los <strong>claims</strong>.</p>
+                <div class="image-container img-small-container">
+                    <img src="./assets/tecns/spring/spring-security/respuesta-json-login.png" alt="login">
+                </div>
+
+                <p class="texto"><span class="green">GET </span><span class="destacado">htttp://localhost:8080/api/auth/validate-token</span></p>
+                <p class="texto">Probamos el validador de tokens en <a href="https://www.postman.com/" target="_blank" class="enlace-apartado">Postman</a>, en <strong>“Params”</strong> ponemos <strong>jwt</strong> en <strong>“Key”</strong> y pegamos el jwt generado antes en el <strong>“Value”</strong> y nos <strong>devuelve si es válido o no el token</strong>.</p>
+                <div class="image-container img-small-container">
+                    <img src="./assets/tecns/spring/spring-security/respuesta-json-validar-token.png" alt="validar-token">
+                </div>
+
+                <button (click)="toggleInfo()" class="btn-página2">Página anterior</button>
+            </div>
+        </div>
+    </div>
+</div>

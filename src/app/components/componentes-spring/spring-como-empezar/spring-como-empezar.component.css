@@ -1,0 +1,23 @@
+.title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.title img {
+    width: 50px;
+    margin-left: 10px;
+}
+
+.list-benefits ul {
+    margin-left: 10px;
+}
+
+.image-container img{
+    width: 60%;
+    margin: 20px 0px;
+}
+
+.list-benefits li{
+    margin: 10px 0;
+}

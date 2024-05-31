@@ -1,0 +1,109 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/spring/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li class="active">
+                    <a routerLink="/spring/spring-web" routerLinkActive="active">Spring Web</a>
+                    <div class="submenu-container">
+                        <hr>
+                        <ul class="submenu">
+                            <li><a routerLink="/spring/spring-web/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                            <li><a routerLink="/spring/spring-web/api-rest-básica" routerLinkActive="active">API REST Básica</a></li>
+                            <li class="active"><a routerLink="/spring/spring-web/validación-java-bean-validation" routerLinkActive="active">Validación usando Java Bean Validation</a></li>
+                            <li><a routerLink="/spring/spring-web/mensajes-validación-personalizados" routerLinkActive="active">Mensajes de validaciones personalizados</a></li>
+                            <li><a routerLink="/spring/spring-web/validación-personalizada" routerLinkActive="active">Validación personalizada</a></li>
+                            <li><a routerLink="/spring/spring-web/anotaciones-personalizadas" routerLinkActive="active">Anotaciones personalizadas</a></li>
+                        </ul>    
+                    </div>
+                </li>
+                <li><a routerLink="/spring/spring-security/como-empezar" routerLinkActive="active">Spring Security</a></li>
+            </ul>
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Validación Java Bean Validation</h1>
+            </div>
+            <p class="texto">En nuestro Model Person añadiremos las validaciones que queramos, en este caso: </p>
+            <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="yellow">&#64;Entity</span></span>
+                                <span class="yellow">&#64;Data</span>
+                                <span class="yellow">&#64;NoArgsConstructor</span>
+                                <span class="yellow">&#64;AllArgsConstructor</span>
+                                <span><span class="purple">public class</span> <span class="yellow">Person</span> {{"{"}}</span>
+                            
+                                <br><span>  <span class="yellow">&#64;Id</span></span>
+                                <span>  <span class="yellow">&#64;GeneratedValue</span>(<span class="brown">strategy</span> = <span class="yellow">GenerationType</span>.<span class="brown">IDENTITY)</span></span>
+                                <span>  <span class="purple">private</span> <span class="yellow"> Long</span><span class="red"> id;</span></span>
+                            
+                                <br><span>  <span class="yellow">&#64;NotEmpty</span></span>
+                                <span>  <span class="yellow">&#64;Size</span>(<span class="brown">min</span> = <span class="brown">3</span>, <span class="brown">max</span> = <span class="brown">10</span>)</span>
+                                <span>  <span class="yellow">&#64;Column</span>(<span class="brown">name</span> = <span class="green">"first_name"</span>)</span>
+                                <span>  <span class="purple">private</span><span class="yellow"> String</span><span class="red"> firstName;</span></span>
+                            
+                                <br><span>  <span class="yellow">&#64;NotEmpty</span></span>
+                                <span>  <span class="yellow">&#64;Column</span>(<span class="brown">name</span> = <span class="green">"last_name"</span>)</span>
+                                <span>  <span class="purple">private</span><span class="yellow"> String</span><span class="red"> lastName;</span></span>
+                                
+                                <br><span>  <span class="yellow">&#64;NotEmpty</span></span>
+                                <span>  <span class="yellow">&#64;Email</span></span>
+                                <span>  <span class="purple">private</span><span class="yellow"> String</span><span class="red"> email;</span></span>{{"}"}}</code>
+                        </pre>
+                    </div>
+                    <ul class="list">
+                        <li>
+                            <p><strong>-</strong><span></span><span class="yellow"> &#64;NotEmpty</span> → Valida que un campo no esté vacío</p>
+                        </li>
+                        <li>
+                            <p><strong>-</strong><span class="yellow"> &#64;Size(<span class="brown">min</span> = <span class="brown">3</span>, <span class="brown">max</span> = <span class="brown">10</span>)</span> → Valida el tamaño de caracteres pudiendo poner min, max o ambos. En este caso entre 3 y 10 caracteres</p>
+                        </li>
+                        <li>
+                            <p><strong>-</strong><span class="yellow"> &#64;Email</span> → Valida si tiene formato de correo electrónico</p>
+                        </li>
+                    </ul>
+            </div>
+            <p class="texto">Creamos el método <span class="blue">validation</span>(<span class="brown">result</span>) en el <span class="yellow">&#64;RestController</span> para que devuelva los errores de validación en formato ResponseEntity y devolviendo un error 400 Bad Request:</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="purple">private</span> <span class="yellow">ResponseEntity</span><?> <span class="blue">validation</span>(<span class="yellow">BindingResult</span> <span class="brown">result</span>) {{"{"}}</span>
+                            <span>  <span class="yellow">Map</span>{{"<"}}<span class="yellow">String</span>, <span class="yellow">String</span>{{">"}} errors = <span class="purple">new</span> <span class="yellow">HashMap</span>{{"<"}}{{">"}}();</span>
+                            <br><span>  result.<span class="blue">getFiledErrors</span>().<span class="blue">forEach</span>(<span class="brown">err</span> -> {{"{"}}</span>
+                            <span>      errors.<span class="blue">put</span>(<span class="brown">err</span>.<span class="blue">getField</span>(), <span class="green">"El campo "</span>+<span class="brown">err</span>.<span class="blue">getField</span>() + <span class="green">" "</span> + <span class="brown">err</span>.<span class="blue">getDefaultMessage</span>());</span>
+                            <span>  {{"}"}});</span>
+                            <span>  <span class="purple">return</span> <span class="yellow">ResponseEntity</span>.<span class="blue">badRequest</span>().<span class="blue">body</span>(errors);</span>
+                            <span>{{"}"}}</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p class="texto">Tras esto debemos añadir en el <span class="yellow">&#64;RestController</span> la anotación <span class="yellow">&#64;Valid</span> delante del objeto a validar, en este caso el model <span class="yellow">Person</span> que hay en los métodos <span class="blue">createPerson</span>() y <span class="blue">updatePerson</span>(). Además de añadir en <span class="blue">ambos métodos</span> que reciban un objeto <span class="yellow">BindingResult</span> que contiene los resultados de la validación de los datos enviados en la solicitud, para comprobar si este contiene o no errores tras la validación utilizamos el método <span class="blue">hasFieldErrors</span>().</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;PostMapping</span>(<span class="green">"/create"</span>)</span>
+                            <span><span class="purple">public</span> <span class="yellow">ResponseEntity</span> <span class="blue">createPerson</span>(<span class="yellow">&#64;Valid &#64;RequestBody Person</span> <span class="brown">person</span>,</span>
+                                <span>                                                                          <span class="yellow">BindingResult</span> <span class="brown">result</span>) {{"{"}}</span>
+                                <span>    <span class="purple">if</span> (<span class="brown">result</span>.<span class="blue">hasFieldErrors</span>()) {{"{"}}</span>
+                                <span>        <span class="purple">return</span> <span class="blue">validation</span>(<span class="brown">result</span>);</span>    {{"}"}}<span>    <span class="red">personService</span>.<span class="blue">createPerson</span>(<span class="brown">person</span>);</span>
+                                <span>    <span class="purple">return</span> <span class="yellow">ResponseEntity</span>.<span class="blue">status</span>(<span class="yellow">HttpStatus</span>.<span class="brown">CREATED</span>).<span class="blue">build</span>();</span>{{"}"}}
+                            
+                                <span><span class="yellow">&#64;PutMapping</span>(<span class="green">"/update/{{"{"}}id{{"}"}}"</span>)</span>
+                                <span><span class="purple">public</span> <span class="yellow">ResponseEntity</span> <span class="blue">updatePerson</span>(<span class="yellow">&#64;Valid &#64;RequestBody Person</span><span class="brown"> updatedPerson</span>,</span>
+                                <span>                                                                          <span class="yellow">BindingResult</span> <span class="brown">result</span>,<span class="yellow"> &#64;PathVariable Long</span> <span class="brown">id</span>) {{"{"}}</span>
+                                
+                                <span>    <span class="purple">if</span> (<span class="brown">result</span>.<span class="blue">hasFieldErrors</span>()) {{"{"}}</span>
+                                <span>        <span class="purple">return</span> <span class="blue">validation</span>(<span class="brown">result</span>);</span>    {{"}"}}<span>    <span class="red">personService</span>.<span class="purple">updatePerson</span>(<span class="brown">id</span>, <span class="brown">updatedPerson</span>);</span>
+                                <span>    <span class="purple">return</span> <span class="yellow">ResponseEntity</span>.<span class="blue">ok</span>().<span class="blue">build</span>();</span>{{"}"}}
+                            </code>
+                    </pre>
+                </div>
+            </div>            
+        </div>
+    </div>
+</div>

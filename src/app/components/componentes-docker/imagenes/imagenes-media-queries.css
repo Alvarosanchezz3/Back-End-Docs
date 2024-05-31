@@ -1,0 +1,28 @@
+@media (max-width: 900px) {
+    .code-container pre code {
+        font-size: 13px;
+    }
+
+    .image-container img {
+        width: 100%;
+    }
+}
+
+@media (max-width: 650px) {
+    .code-container pre code {
+        font-size: 12px;
+    }
+}
+
+
+@media (max-width: 580px) {
+    .code-container pre code {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 540px) {
+    .code-container pre code {
+        font-size: 10px;
+    }
+}

@@ -1,0 +1,21 @@
+@media (max-width: 900px) {
+    .image-container img {
+        width: 80%;
+        margin: 10px;
+    }
+
+    .other-img img{
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .other-img1 img{
+        width: 100%;
+        margin: 10px 0;
+    }
+    
+    .other-img2 img{
+        width: 70%;
+        margin: 10px 0 60px 0;
+    }
+}

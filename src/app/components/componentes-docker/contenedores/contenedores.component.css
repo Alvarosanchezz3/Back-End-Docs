@@ -1,0 +1,17 @@
+.image-container img {
+    width: 40%;
+}
+
+.other-img img {
+    width: 80%; 
+}
+
+.other-img1 img{
+    width: 80%;
+    margin: 10px 0;
+}
+
+.other-img2 img{
+    width: 40%;
+    margin: 0 0 60px 0;
+}

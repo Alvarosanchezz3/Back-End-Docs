@@ -1,0 +1,102 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/spring/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li><a routerLink="/spring/spring-web/como-empezar" routerLinkActive="active">Spring Web</a></li>
+                <li class="active">
+                    <a routerLink="/spring/spring-security" routerLinkActive="active">Spring Security</a>
+                    <div class="submenu-container">
+                        <hr>
+                        <ul class="submenu">
+                            <li class="active"><a routerLink="/spring/spring-security/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                            <li><a routerLink="/spring/spring-security/proyecto-base" routerLinkActive="active">Proyecto base a darle seguridad</a></li>
+                            <li><a routerLink="/spring/spring-security/componentes-clave" routerLinkActive="active">Componentes clave de Spring Security</a></li>
+                            <li><a routerLink="/spring/spring-security/autenticación" routerLinkActive="active">Creando arquitectura de autenticación con JWT</a></li>
+                            <li><a routerLink="/spring/spring-security/filtros-de-seguridad" routerLinkActive="active">Filtros de seguridad: JwtAuthenticationFilter</a></li>
+                            <li><a routerLink="/spring/spring-security/autorización" routerLinkActive="active">Creando arquitectura de autorización</a></li>
+                            <li><a routerLink="/spring/spring-security/cors" routerLinkActive="active">Cross-Origin Resource Sharing (CORS)</a></li>
+                        </ul>    
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Spring Security</h1>
+            </div>
+            <p class="texto"><span class="green">Spring Security</span> es un módulo del ecosistema de Spring para <span class="green">implementar seguridad en aplicaciones Java</span> proporcionando mecanismos robustos.</p>
+            <h3>1. Características</h3>
+            <ul class="list-benefits">
+                <li><strong>a) Autenticación:</strong>
+                    <ul>
+                        <li>Verificar la identidad de los usuarios, confirmando que son quienes dicen ser. Esto se logra mediante mecanismos como el uso de nombre de usuario y contraseña, tokens JWT, autenticación basada en redes sociales, entre otros.</li>
+                    </ul>
+                </li>
+                <li><strong>b) Autorización:</strong>
+                    <ul>
+                        <li>Controlar el acceso a recursos y funcionalidades de la aplicación en función de los permisos y roles de cada usuario. Spring Security permite definir reglas granulares de autorización, permitiendo un control preciso sobre quién puede hacer qué dentro de la aplicación.</li>
+                    </ul>
+                </li>
+                <li><strong>c) Protección contra ataques:</strong>
+                    <ul>
+                        <li>Spring Security incorpora medidas de seguridad para proteger las aplicaciones contra una amplia gama de amenazas, como ataques de inyección de código, ataques de fuerza bruta, falsificación de solicitudes entre sitios (XSS), entre otros.</li>
+                    </ul>
+                </li>
+                <li><strong>d) Integración con Spring:</strong>
+                    <ul>
+                        <li>Al estar diseñado específicamente para el ecosistema Spring, Spring Security se integra a la perfección con otros frameworks y componentes de Spring, simplificando la implementación de seguridad en las aplicaciones.</li>
+                    </ul>
+                </li>
+                <li><strong>e) Flexibilidad y personalización:</strong>
+                    <ul>
+                        <li>Spring Security es altamente flexible y personalizable, permitiendo adaptarlo a las necesidades específicas de cada proyecto. Ofrece una amplia gama de opciones de configuración y extensiones para cubrir diversos escenarios de seguridad.</li>
+                    </ul>
+                </li>
+            </ul>
+            <h3>2. Arquitectura Spring Security</h3>
+            <div class="list-img">
+                <ul class="list-benefits">
+                    <li><strong>- DelegatingFilterProxy:</strong>
+                        <ul>
+                            <li>Es un filtro de Jakarta Servlet que permite unir el ciclo de vida del contenedor de Servlet y el de Spring ApplicationContext dentro del FilterChain.</li>
+                        </ul>
+                    </li>
+                    <li><strong>- FilterChainProxy:</strong>
+                        <ul>
+                            <li>Componente central de Spring Security que maneja la coordinación de las cadenas de filtros de seguridad.</li>
+                        </ul>
+                    </li>
+                    <li><strong>- SecurityFilterChain:</strong>
+                        <ul>
+                            <li>Interfaz que representa una cadena de filtros de seguridad que se aplican a las solicitudes HTTP en una aplicación web.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <img src="./assets/tecns/spring/spring-security/securityfilterchain.png" alt="filters">    
+            </div>
+            <h3>3. Qué es JWT y cómo funciona</h3>
+            <p class="texto">JSON Web Token (JWT), es un estándar abierto (RFC 7519) que define un formato compacto y autónomo para la transmisión segura de información. Consta de 3 partes: </p>
+            <div class="list-img list-img2">
+                <img src="./assets/tecns/spring/spring-security/jwt.png" alt="filters">
+                <ul class="list-benefits">
+                    <li><strong>- Header (Encabezado):</strong>
+                        <ul>
+                            <li>Tipo de token y algoritmo de firma.</li>
+                        </ul>
+                    </li>
+                    <li><strong>- Payload (Carga útil):</strong>
+                        <ul>
+                            <li>Información deseada, como la identidad del usuario, a estos datos se le suelen llamar <strong>Claims</strong></li>
+                        </ul>
+                    </li>
+                    <li><strong>- Signature (Firma):</strong>
+                        <ul>
+                            <li>Verifica la integridad del token.</li>
+                        </ul>
+                    </li>
+                </ul>    
+            </div>
+        </div>
+    </div>
+</div>

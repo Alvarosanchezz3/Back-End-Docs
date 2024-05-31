@@ -1,0 +1,106 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/spring/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li class="active">
+                    <a routerLink="/spring/spring-web" routerLinkActive="active">Spring Web</a>
+                    <div class="submenu-container">
+                        <hr>
+                        <ul class="submenu">
+                            <li><a routerLink="/spring/spring-web/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                            <li><a routerLink="/spring/spring-web/api-rest-básica" routerLinkActive="active">API REST Básica</a></li>
+                            <li><a routerLink="/spring/spring-web/validación-java-bean-validation" routerLinkActive="active">Validación usando Java Bean Validation</a></li>
+                            <li><a routerLink="/spring/spring-web/mensajes-validación-personalizados" routerLinkActive="active">Mensajes de validaciones personalizados</a></li>
+                            <li class="active"><a routerLink="/spring/spring-web/validación-personalizada" routerLinkActive="active">Validación personalizada</a></li>
+                            <li><a routerLink="/spring/spring-web/anotaciones-personalizadas" routerLinkActive="active">Anotaciones personalizadas</a></li>
+                        </ul>    
+                    </div>
+                </li>
+                <li><a routerLink="/spring/spring-security/como-empezar" routerLinkActive="active">Spring Security</a></li>
+            </ul>
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Validación personalizada</h1>
+            </div>
+            <p class="texto">Creamos una <span class="purple">clase</span> para las validaciones (recomendable crearlo en un paquete aparte), en mi caso <span class="yellow">ProductValidation</span> que debe usar <span class="purple">implements</span> de la interfaz <span class="yellow">Validator</span> de Spring. Y estar anotada con <span class="yellow">&#64;Component</span> para ser inyectada posteriormente.</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;Component</span></span>
+                            <span><span class="purple">public class</span> ProductValidation <span class="purple">implements</span> <span class="yellow">Validator</span> {{"{"}}</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p class="texto">Una vez esto implementas los métodos de la interfaz Validator, que son <span class="blue">supports</span>() y <span class="blue">validate</span>().</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;Overrride</span></span>
+                            <span><span class="purple">public boolean</span> <span class="blue">supports</span>(<span class="yellow">Class</span><?> <span class="brown">clazz</span>) {{"{"}}</span>
+                            <span>  <span class="purple">return</span> <span class="yellow">Product</span>.<span class="purple">class</span>.<span class="blue">isAssignableFrom</span>(<span class="brown">clazz</span>);</span>
+                            <span>{{"}"}}</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;Overrride</span></span>
+                            <span><span class="purple">public void</span>  validate(<span class="yellow">Object</span> <span class="brown">target</span>, <span class="yellow">Errors</span> <span class="brown">errors</span>) {{"{"}}</span>
+                            <span>  <span class="yellow">Person</span> person = (<span class="yellow">Person</span>) target;</span>
+                            <br><span>  <span class="yellow">ValidationUtils</span>.<span class="blue">rejectIfEmptyOrWhitespace</span>(<span class="brown">errors</span>, <span class="green">"firstName"</span>, <span class="purple">null</span>, <span class="green">"es requerido (PersonValidator)")</span>;</span>
+                            <span>  <span class="purple">if</span> (person.<span class="blue">getFirstName</span>() != <span class="purple">null</span>) {{"{"}}</span>
+                            <span>      <span class="purple">if</span> (person.<span class="blue">getFirstName</span>().<span class="blue">length</span>() < <span class="brown">3</span> || person.<span class="blue">getFirstName</span>().<span class="blue">length</span>() > <span class="brown">10</span>) {{"{"}}</span>
+                            <span>          <span class="brown">errors</span>.<span class="blue">rejectValue</span>(<span class="green">"firstName"</span>, <span class="purple">null</span>,
+                                                <span class="green">"debe tener entre 3 y 10 caracteres (PersonValidator)"</span>);</span>
+                            <span>      {{"}"}}</span>
+                            <span>  {{"}"}}</span>
+
+                            <br><span>  <span class="yellow">ValidationUtils</span>.<span class="blue">rejectIfEmptyOrWhitespace</span>(<span class="brown">errors</span>, <span class="green">"lastName"</span>, <span class="purple">null</span>, <span class="green">"es requerido (PersonValidator)"</span>);</span>
+
+                            <br><span>  <span class="yellow">ValidationUtils</span>.<span class="blue">rejectIfEmptyOrWhitespace</span>(<span class="brown">errors</span>, "email", <span class="purple">null</span>, <span class="green">"es requerido (PersonValidator)"</span>);</span>
+                            <span>  <span class="purple">if</span> (person.<span class="blue">getEmail</span>() != <span class="purple">null</span> && !person.<span class="blue">getEmail</span>()
+                                                                            .<span class="blue">matches</span>(<span class="green">"^[\\w-\\.]+&#64;([\\w-]+\\.)+[\\w-]{{"{"}}2,4{{"}"}}$</span><span class="green">"</span>)) {{"{"}}</span>
+                            <span>      <span class="brown">errors</span>.<span class="blue">rejectValue</span>(<span class="green">"email"</span>,<span class="purple">null</span>,
+                                            <span class="green">"debe ser una dirección de correo válida (PersonValidator)"</span>);</span>
+                            <span>  {{"}"}}</span>
+                            <span>{{"}"}}</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p class="texto">Ahora vamos a nuestro <span class="yellow">Controller</span> y inyectamos el componente <span class="yellow">ProductValidation</span> que hemos creado usando <span class="yellow">&#64;Autowired</span>
+            </p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;Autowired</span></span>
+                            <span><span class="purple">private</span> <span class="yellow">ProductValidation</span> <span class="red">productValidation</span>;</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p class="texto">Ahora buscamos los métodos a los que se le pasan por parámetro el objeto <span class="yellow">Person</span>, que son <span class="blue">createPerson</span>() y <span class="blue">updatePerson</span>() y añadimos la validación llamando al método de la clase <span class="red">productValidation</span> que hemos inyectado</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="red">productValidation</span> <span class="blue">validate</span>(<span class="brown">person</span>,<span class="brown">result</span>);</span>
+                            <span><span class="purple">if</span> (<span class="brown">result</span>.<span class="blue">hasFieldErrors</span>) {{"{"}}</span>
+                            <span>  <span class="purple">return</span> <span class="blue">validation</span>(<span class="brown">result</span>)</span>
+                            <span>{{"}"}}</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

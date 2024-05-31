@@ -1,0 +1,23 @@
+.title {
+    display: flex;
+    align-items: center;
+}
+
+.title img {
+    width: 80px;
+    margin-left: 10px;
+}
+
+.title-aws {
+    color: #ff9900;
+}
+
+.text-aws {
+    color: #252f3e;
+    font-weight: bolder;
+}
+
+.doc hr{
+    position: relative;
+    margin-left: 250px;
+}

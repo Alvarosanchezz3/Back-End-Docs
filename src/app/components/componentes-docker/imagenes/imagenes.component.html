@@ -1,0 +1,131 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/docker/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li class="active"><a routerLink="/docker/imágenes" routerLinkActive="active">Imágenes</a></li>
+                <li><a routerLink="/docker/contenedores" routerLinkActive="active">Contenedores</a></li>
+                <li><a routerLink="/docker/redes" routerLinkActive="active">Redes</a></li>
+                <li><a routerLink="/docker/comandos-más-importantes" routerLinkActive="active">Comandos más
+                        importantes</a></li>
+                <li><a routerLink="/docker/docker-compose" routerLinkActive="active">Docker compose</a></li>
+            </ul>
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Imágenes en docker</h1>
+            </div>
+            <p>
+                Las imágenes son paquetes que contienen todo lo necesario para ejecutar
+                una aplicación;<strong>
+                    código, bibliotecas, dependencias, configuraciones…</strong>
+                Estas se construyen a través de un archivo llamado
+                <strong>Dockerfile</strong>, que especifica las instrucciones para crear
+                la imagen.
+            </p>
+            <h3>Dockerfile</h3>
+            <p class="texto">
+                Es un archivo que contiene instrucciones detalladas para construir una
+                imagen de Docker. Algunas de las instrucciones más comunes de un
+                Dockerfile son:
+            </p>
+            <ul class="list">
+                <li>
+                    <strong>● FROM:</strong> Especifica la imagen base a partir de la cual
+                    se construirá la nueva imagen.
+                </li>
+                <li>
+                    <strong>● RUN:</strong> Ejecuta comandos dentro del contenedor durante
+                    el proceso de construcción de la imagen.
+                </li>
+                <li>
+                    <strong>● COPY o ADD:</strong> Copia archivos y directorios desde el
+                    sistema de archivos del host al sistema de archivos del contenedor.
+                </li>
+                <li>
+                    <strong>● WORKDIR:</strong> Establece el directorio de trabajo dentro
+                    del contenedor para los comandos siguientes.
+                </li>
+                <li>
+                    <strong>● EXPOSE:</strong> Expone puertos del contenedor para que
+                    puedan ser accesibles desde fuera del contenedor.
+                </li>
+                <li>
+                    <strong>● CMD o ENTRYPOINT:</strong> Define el comando que se
+                    ejecutará cuando el contenedor se inicie.
+                </li>
+            </ul>
+            <h3>Creación de imagen con Dockerfile</h3>
+            <p>Lo primero que debemos hacer es conseguir el archivo .jar de nuestro proyecto, para ello ejecutaremos en
+                la terminal de nuestro IDE o en el CMD en la ruta de nuestro proyecto el comando <strong>"mvn clean
+                    package -DskipTests".</strong></p>
+            <ul class="list">
+                <li>
+                    ●<strong> IMPORTANTE:</strong> Cada vez que cambiemos el código debemos utilizar este comando para actualizar el .jar y crear la imagen de nuestro código actualizado
+                </li>
+            </ul>
+            <br>
+            <p>Luego crearemos un archivo llamado <strong>"Dockerfile"</strong> en la raíz de nuestro proyecto y
+                especificaremos el <span class="purple">FROM</span>, <span class="purple">COPY</span> y <span
+                    class="purple">ENTRYPOINT</span>.</p>
+            <ul class="list">
+                <li>
+                    ●<span class="purple"> FROM:</span> Especificamos una imagen del jdk del que sea nuestra app, en
+                    este caso es de Java 21
+                </li>
+                <li>
+                    ●<span class="purple"> COPY:</span> Especificamos donde se encuentra el archivo.jar en nuestro
+                    proyecto y le damos otro nombre
+                </li>
+                <li>
+                    ●<span class="purple"> ENTRYPOINT:</span> Indicamos que es una app en Java, que el archivo termina
+                    en jar y ponemos el nombre del jar renombrado en el COPY
+                </li>
+            </ul>
+            <div class="code-container">
+                <pre>
+                    <code>
+                        <span><span class="purple">FROM</span> amazoncorretto:21</span>
+                        <span><span class="purple">COPY</span> /target/servicio-productos-0.0.1-SNAPSHOT.jar (nombre-del-servicio).jar</span>
+                        <span><span class="purple">ENTRYPOINT</span> [<span class="green">"java"</span>, <span class="green">"-jar"</span>, <span class="green">"(nombre-del-servicio).jar"</span>]</span>
+                    </code>
+                </pre>
+            </div>
+            <p>Una vez hemos creado el Dockerfile vamos al CMD o a un terminal en la ruta raíz del proyecto y ejecutamos el comando <strong>"docker build -t (nombre_que_queramos):(version) ."</strong></p>
+            <ul class="list">
+                <li>
+                    ●<strong> IMPORTANTE:</strong> No olvidar el espacio y el punto del final
+                </li>
+                <li>
+                    ●<strong> RECOMENDADO:</strong> Especificar versión de la imágen, aun que <strong>NO ES OBLIGATORIO</strong>
+                </li>
+            </ul>
+            <h3>Descargar imagen de DockerHub</h3>
+            <p class="texto">Iremos a <a href="https://hub.docker.com/" target="_blank"
+                    class="enlace-apartado">https://hub.docker.com/</a> y buscaremos la imagen de lo que queramos, por
+                ejemplo MySQL. Esta imagen nos servirá para crear un contenedor y tener una sintancia de MySQL en el
+                puerto que queramos.</p>
+            <div class="image-container">
+                <img src="/assets/tecns/docker/mysql-img.png" alt="docker-desktop" />
+            </div>
+            <p class="texto">Una vez estamos aquí, ya vemos el comando que necesitamos para descargar la imagen. Solo
+                tenemos que abrir nuestro CMD o cualquier terminar y ejecutar el comando: <strong>"docker pull
+                (nombre_imagen),</strong> en este caso <strong>"docker pull mysql"</strong> y se nos descargará la imagen de DockerHub</p>
+            
+            <p class="texto">Tras esto, si vamos al <strong>apartado "Images" del Docker Desktop</strong> nos saldrá la imagen en la lista de nuestras imágenes.</p>
+                <div class="image-container">
+                <img src="/assets/tecns/docker/mysql-img-docker-desktop.png" alt="docker-desktop" />
+            </div>
+            <p class="texto">En nuestro caso <strong>como no hemos especificado version de la imagen, nos pone "latest",</strong> que es significa que es la última version, pero <strong>si queremos descargar cualquier otra</strong> solo tenemos que poner <strong>docker pull (nombre_imagen:version),</strong> por ejemplo <strong>"docker pull mysql:8.4"</strong></p>
+            <p class="texto">
+                Para poder ejecutar nuestras aplicaciones en docker necesitamos crear
+                <a routerLink="/docker/contenedores" class="enlace-apartado">contenedores</a> de nuestras
+                applicaciones. Cada contenedor va asociado a una imagen creada
+                anteriormente al contenedor
+            </p>
+            <div class="image-container">
+                <img src="/assets/tecns/docker/img-to-container.webp" alt="docker-desktop" />
+            </div>
+        </div>
+    </div>
+</div>

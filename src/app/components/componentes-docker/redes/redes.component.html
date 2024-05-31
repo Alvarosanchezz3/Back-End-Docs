@@ -1,0 +1,58 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/docker/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li><a routerLink="/docker/imágenes" routerLinkActive="active">Imágenes</a></li>
+                <li><a routerLink="/docker/contenedores" routerLinkActive="active">Contenedores</a></li>
+                <li class="active"><a routerLink="/docker/redes" routerLinkActive="active">Redes</a></li>
+                <li><a routerLink="/docker/comandos-más-importantes" routerLinkActive="active">Comandos más
+                        importantes</a></li>
+                <li><a routerLink="/docker/docker-compose" routerLinkActive="active">Docker compose</a></li>
+            </ul>
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Redes en docker</h1>
+            </div>
+            <p>En Docker, una red o "network" es un <strong>conjunto de contenedores Docker que se comunican entre
+                    sí,</strong> permitiendo que las aplicaciones distribuidas se ejecuten de manera eficiente y segura.
+                Las redes en Docker <strong>facilitan la conexión y la comunicación entre contenedores,</strong> lo que
+                es fundamental para crear aplicaciones complejas que constan de múltiples servicios.</p>
+            <h3>Comandos de redes</h3>
+            <ul class="list">
+                <li>
+                    <p>●<strong> Crear una red --></strong><span class="docker-color"><strong> docker network (nombre_network)</strong></span></p>
+                </li>
+                <li>
+                    <p>●<strong> Listar las redes que tenemos --></strong><span class="docker-color"><strong> docker network ls</strong></span></p>
+                </li>
+                <li>
+                    <p>●<strong> Ver la info de una red --></strong><span class="docker-color"><strong> docker network inspect (nombre_network)</strong></span></p>
+                </li>
+                <li>
+                    <p>●<strong> Eliminar una red --></strong><span class="docker-color"><strong> docker network rm (nombre_network)</strong></span></p>
+                </li>
+                <li>
+                    <p>●<strong> Eliminar todas las redes no utilizada --></strong><span class="docker-color"><strong> docker network prune</strong></span></p>
+                </li>
+            </ul>
+            <h3>Conectar/desconectar contenedores a redes</h3>
+            <ul class="list">
+                <li>
+                    <p>●<strong> Conectar contenedor a una red --></strong><span class="docker-color"><strong> docker network connect (nombre_network)
+                        (nombre_contenedor)</strong></span></p>
+                </li>
+                <li>
+                    <p>●<strong> Desconectar contenedor a una red --></strong><span class="docker-color"><strong> docker network disconnect (nombre_network)
+                        (nombre_contenedor)</strong></span></p>
+                </li>
+            </ul>
+            <h3>Crear entorno de aplicaciones en docker</h3>
+            <p>La mejor forma de ejecutar contenedores en una misma red sin el uso de comandos es a través de <a class="enlace-apartado" routerLink="/docker/docker-compose">Docker compose</a></p>
+            <div class="image-container">
+                <img src="/assets/tecns/docker/network.jpg" alt="docker-desktop" />
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,113 @@
+.banner {
+    position: absolute;
+    top: 90px;
+    right: 0px;
+    width: 100%;
+    height: 380px;
+    display: flex;
+    justify-content: center;
+    background-color: #ebf2f2;
+    overflow: hidden;
+    border: 1px solid rgb(230, 230, 230);
+}
+
+.banner-title {
+  display: flex;
+  align-items: center;
+}
+
+.banner-title h1 {
+  font-size: 42px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #1e1e1e;
+  z-index: 1000;
+}
+
+.extra-container {
+  height: 400px;
+  position: absolute;
+  width: 100%;
+}
+
+.extra-left, .extra-right {
+  position: absolute;
+  height: 600px;
+  width: 600px;
+  top: -110px;
+}
+
+.extra-left {
+  border-radius: 50%;
+  left: -100px;
+}
+
+.extra-right {
+  right: -100px;
+}
+
+.extra-left .quarter-circle1,
+.extra-left .quarter-circle2 {
+  animation: fadeIn .4s ease-out .2s forwards;
+  transform: rotate(-140deg);
+  height: 300px;
+  position: absolute;
+  top: 0;
+  width: 300px;
+}
+
+.extra-left .quarter-circle1 {
+  background-color: #7b4c22;
+  transform-origin: bottom right;
+}
+
+.extra-left .quarter-circle2 {
+  right: 0;
+  border-radius: 0 100% 0 0;
+  background-color: #ddb691;
+  transform-origin: bottom left;
+}
+
+.extra-left .semicircle,
+.extra-right .square {
+  animation: fadeIn .3s ease-out .6s forwards;
+  position: absolute;
+  top: 300px;
+  height: 300px;
+  background-color: #fff;
+}
+
+.extra-left .semicircle {
+  width: 600px;
+  left: 0;
+  transform: rotate(-140deg);
+  transform-origin: top center;
+  border-radius: 0 0 300px 300px;
+}
+
+.extra-right .square {
+  width: 300px;
+  right: 0px;
+}
+
+.extra-right .quarter-circle1 {
+  border-radius: 100% 0 0 0;
+  background-color: #7b4c22;
+}
+
+.extra-right .quarter-circle2,
+.extra-right .quarter-circle1 {
+  animation: fadeIn .4s ease-out .2s forwards;
+  height: 300px;
+  position: absolute;
+  top: 0;
+  width: 300px;
+}
+
+.extra-right .quarter-circle2 {
+  right: 0;
+  border-radius: 0 100% 0 0;
+  background-color: #ddb691;
+  transform-origin: bottom left;
+}

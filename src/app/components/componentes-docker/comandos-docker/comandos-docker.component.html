@@ -1,0 +1,68 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/docker/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li><a routerLink="/docker/imágenes" routerLinkActive="active">Imágenes</a></li>
+                <li><a routerLink="/docker/contenedores" routerLinkActive="active">Contenedores</a></li>
+                <li><a routerLink="/docker/redes" routerLinkActive="active">Redes</a></li>
+                <li class="active"><a routerLink="/docker/comandos-más-importantes" routerLinkActive="active">Comandos más
+                        importantes</a></li>
+                <li><a routerLink="/docker/docker-compose" routerLinkActive="active">Docker compose</a></li>
+            </ul>
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Comandos más importantes</h1>
+            </div>
+            <h3>Gestión de imágenes</h3>
+            <ul class="list">
+                <li>
+                    <p>●<strong> Descargar imagen de DockerHub --></strong><span class="docker-color"><strong> docker pull (nombre de imagen)</strong></span></p>
+                </li>
+                <li>
+                    <p>●<strong> Muestra las imágenes de Docker en local --></strong><span class="docker-color"><strong> docker images</strong></span></p>
+                </li>
+                <li>
+                    <p>●<strong> Elimina una imagen local--></strong><span class="docker-color"><strong> docker rmi (nombre de imagen)</strong></span></p>
+                </li>
+            </ul>
+            <h3>Gestión de contenedores</h3>
+            <ul class="list">
+                <li>
+                    <p>●<strong> Crea y ejecuta un contenedor --></strong><span class="docker-color"><strong> docker run --name (nombre_del_contenedor) (nombre_de_la_imagen)</strong></span></p>
+                </li>
+                <li>
+                    <p>●<strong> Muestra solo los contenedores en ejecución --></strong><span class="docker-color"><strong> docker ps</strong></span></p>
+                </li>
+                <li>
+                    <p>●<strong> Muestra todos los contenedores --></strong><span class="docker-color"><strong> docker ps -a</strong></span></p>
+                </li>
+                <li>
+                    <p>●<strong> Detiene un contenedor en ejecución por su ID. --></strong><span class="docker-color"><strong> docker ps -a</strong></span></p>
+                </li>
+                <li>
+                    <p>●<strong> Elimina un contenedor por su ID --></strong><span class="docker-color"><strong> docker rm (ID_del_contenedor)</strong></span></p>
+                </li>
+                <li>
+                    <p>●<strong> Ejecuta un comando en un contenedor en ejecución --></strong><span class="docker-color"><strong> docker exec -it (ID_del_contenedor) (comando)</strong></span></p>
+                </li>
+                <li>
+                    <p>●<strong> Muestra los registros de un contenedor --></strong><span class="docker-color"><strong> docker logs (ID_del_contenedor)</strong></span></p>
+                </li>
+            </ul>
+            <h3>Gestión de volúmenes</h3>
+            <ul class="list">
+                <li>
+                    <p>●<strong> Lista los volúmenes Docker disponibles --></strong><span class="docker-color"><strong> docker volume ls</strong></span></p>
+                </li>
+                <li>
+                    <p>●<strong> Crea un nuevo volumen --></strong><span class="docker-color"><strong> docker volume create (nombre_volumen)</strong></span></p>
+                </li>
+                <li>
+                    <p>●<strong> Muestra detalles sobre un volumen específico --></strong><span class="docker-color"><strong> docker volume inspect (nombre_volumen)</strong></span></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

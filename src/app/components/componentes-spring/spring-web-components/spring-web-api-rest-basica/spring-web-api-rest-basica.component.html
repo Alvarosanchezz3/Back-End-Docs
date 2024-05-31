@@ -1,0 +1,290 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/spring/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li class="active">
+                    <a routerLink="/spring/spring-web" routerLinkActive="active">Spring Web</a>
+                    <div class="submenu-container">
+                        <hr>
+                        <ul class="submenu">
+                            <li><a routerLink="/spring/spring-web/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                            <li class="active"><a routerLink="/spring/spring-web/api-rest-básica" routerLinkActive="active">API REST Básica</a></li>
+                            <li><a routerLink="/spring/spring-web/validación-java-bean-validation" routerLinkActive="active">Validación usando Java Bean Validation</a></li>
+                            <li><a routerLink="/spring/spring-web/mensajes-validación-personalizados" routerLinkActive="active">Mensajes de validaciones personalizados</a></li>
+                            <li><a routerLink="/spring/spring-web/validación-personalizada" routerLinkActive="active">Validación personalizada</a></li>
+                            <li><a routerLink="/spring/spring-web/anotaciones-personalizadas" routerLinkActive="active">Anotaciones personalizadas</a></li>
+                        </ul>   
+                    </div>
+                </li>
+                <li><a routerLink="/spring/spring-security/como-empezar" routerLinkActive="active">Spring Security</a></li>
+            </ul>
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Api Rest Básica</h1>
+            </div>
+            <div class="title">
+                <h3>1. Entity → </h3>
+                <p> Package: com.example.demo.entity</p>
+            </div>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;Entity</span></span>
+                            <span class="yellow">&#64;Data</span>
+                            <span class="yellow">&#64;NoArgsConstructor</span>
+                            <span class="yellow">&#64;AllArgsConstructor</span>
+                            <span><span class="purple">public class</span> <span class="yellow">Person</span> {{"{"}}</span>
+                        
+                            <br><span>  <span class="yellow">&#64;Id</span></span>
+                            <span>  <span class="yellow">&#64;GeneratedValue</span>(<span class="brown">strategy</span> = <span class="yellow">GenerationType</span>.<span class="brown">IDENTITY)</span></span>
+                            <span>  <span class="purple">private</span> <span class="yellow"> Long</span><span class="red"> id;</span></span>
+                        
+                            <br><span>  <span class="yellow">&#64;Column</span>(<span class="brown">name</span> = <span class="green">"first_name"</span>)</span>
+                            <span>  <span class="purple">private</span><span class="yellow"> String</span><span class="red"> firstName;</span></span>
+                        
+                            <br><span>  <span class="yellow">&#64;Column</span>(<span class="brown">name</span> = <span class="green">"last_name"</span>)</span>
+                            <span>  <span class="purple">private</span><span class="yellow"> String</span><span class="red"> lastName;</span></span>
+                        
+                            <br><span>  <span class="purple">private</span><span class="yellow"> String</span><span class="red"> email;</span></span>{{"}"}}</code>
+                    </pre>
+                </div>
+                <ul class="list">
+                    <li>
+                        <p><strong>-</strong><span></span><span class="yellow"> &#64;Entity</span> → Marca la clase como una entidad JPA</p>
+                    </li>
+                    <li>
+                        <p><strong>-</strong><span class="yellow"> &#64;Data</span> → Anotación de <strong>Lombok</strong> (Librería Java) que genera automáticamente todos los métodos <span class="blue">toString</span>(), <span class="blue">equals</span>(), <span class="blue">hashCode</span>(), <span class="blue">Getters</span> y <span class="blue">Setters</span></p>
+                    </li>
+                    <li>
+                        <p><strong>-</strong><span class="yellow"> &#64;NoArgsConstructor</span> → Anotación de <strong>Lombok</strong> (Librería Java)  que genera un constructor vacío</p>
+                    </li>
+                    <li>
+                        <p><strong>-</strong><span class="yellow"> &#64;AllArgsConstructor</span> → Anotación de <strong>Lombok</strong> (Librería Java)  que genera un
+                            constructor que incluye todos los campos de la clase como argumentos</p>
+                    </li>
+                    <li>
+                        <p><strong>-</strong><span class="yellow"> &#64;Id</span> → Indica que es la clave primaria de la entidad</p>
+                    </li>
+                    <li>
+                        <p><strong>-</strong><span class="yellow"> &#64;GeneratedValue</span>(<span class="brown">strategy</span> = <span class="yellow">GenerationType</span>.<span class="brown">IDENTITY</span>) →
+                            Establece el atributo id como autoincremental</p>
+                    </li>
+                    <li>
+                        <p><strong>-</strong><span class="yellow"> &#64;Column</span>(<span class="brown">name</span> = <span class="green">"first_name"</span>) → Cambia el nombre del atributo
+                            en la tabla de la base de datos. En java se usa la <strong>nomenclatura camelCase</strong> y en cambio en
+                            las bases de datos normalmente <strong>se separan usando “_”.</strong></p>
+                    </li>
+                </ul>
+            </div>
+            <div class="title">
+                <h3>2. Repository → </h3>
+                <p> Package: com.example.demo.repository</p>
+            </div>
+            <div class="explicacion-codigo2">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span class="yellow">&#64;Repository</span>
+                            <span><span class="purple">public interface</span><span class="yellow"> PersonRepository</span><span class="purple"> extends</span> <span class="yellow">JpaRepository</span>{{"<"}}<span class="yellow">Person</span>, <span class="yellow">Long</span>{{">"}} {{"{"}}</span>{{"}"}}</code>
+                    </pre>
+                </div>
+                <ul class="list">
+                    <li>
+                        <p><strong>- </strong><span class="yellow">JpaRepository</span> es una <span class="purple">interfaz</span>
+                            proporcionada por <a href="https://spring.io/projects/spring-data-jpa" target="_blank"
+                                class="enlace-apartado">Spring Data JPA</a> que incluye métodos CRUD (Create, Read,
+                            Update, Delete) básicos para operaciones de base de datos.</p>
+                    </li>
+                    <li>
+                        <p><strong>- </strong><span class="yellow">&#64;Repository</span> → Componente de acceso a datos</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="title">
+                <h3>3. Service → </h3>
+                <p> Package: com.example.demo.service</p>
+            </div>
+            <p class="texto">Configuración
+                para la conexión a la base de datos, en este caso MySQL</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span class="yellow">&#64;Service</span>
+                            <span><span class="purple">public class</span> <span class="yellow">PersonService</span> {{"{"}}</span>
+                
+                            <br><span>    <span class="yellow">&#64;Autowired</span></span>
+                            <span>    <span class="purple">private</span> <span class="yellow">PersonRepository</span> <span class="red">personRepository;</span></span>
+                
+                            <br><span>    <span class="purple">public</span> <span class="yellow">Person</span> <span class="blue">getPersonById</span>(<span class="yellow">Long</span> <span class="brown">id</span>) {{"{"}}</span>
+                                <span>        <span class="purple">return</span> <span class="red">personRepository</span>.<span class="blue">findById</span>(<span class="brown">id</span>).<span class="blue">orElse</span>(<span class="purple">null</span>);</span>
+                            <span>    {{"}"}}</span>
+                            
+                            <br><span>    <span class="purple">public</span> <span class="yellow">List{{"<"}}Person{{">"}}</span> <span class="blue">getAllPersons</span>() {{"{"}}</span>
+                            <span>        <span class="purple">return</span> <span class="red">personRepository</span>.<span class="blue">findAll</span>();</span>
+                            <span>    {{"}"}}</span>
+                
+                            <br><span>    <span class="purple">public void</span> <span class="blue">updatePerson</span>(<span class="yellow">Long</span> <span class="brown">id</span>, <span class="yellow">Person</span> <span class="brown">updatedPerson</span>) {{"{"}}</span>
+                            <span>        <span class="yellow">Person</span> existingPerson = <span class="red">personRepository</span>.<span class="blue">findById</span>(<span class="brown">id</span>).<span class="blue">orElse</span>(<span class="purple">null</span>);</span>
+                            <span>        <span class="purple">if</span> (existingPerson != <span class="purple">null</span>) {{"{"}}</span>
+                            <span>            existingPerson.<span class="blue">setFirstName</span>(<span class="brown">updatedPerson</span>.<span class="blue">getFirstName</span>());</span>
+                            <span>            existingPerson.<span class="blue">setLastName</span>(<span class="brown">updatedPerson</span>.<span class="blue">getLastName</span>());</span>
+                            <span>            existingPerson.<span class="blue">setEmail</span>(<span class="brown">updatedPerson</span>.<span class="blue">getEmail</span>());</span>
+                            <span>            <span class="red">personRepository</span>.<span class="blue">save</span>(existingPerson);</span>
+                            <span>        {{"}"}}</span>
+                            <span>    {{"}"}}</span>
+                            
+                            <br><span>    <span class="purple">public void</span> <span class="blue">createPerson</span>(<span class="yellow">Person</span> <span class="brown">person</span>) {{"{"}}</span>
+                                <span>        <span class="red">personRepository</span>.<span class="blue">save</span>(<span class="brown">person</span>);</span>
+                            <span>    {{"}"}}</span>
+                            
+                            <br><span>    <span class="purple">public void</span> <span class="blue">deletePerson</span>(<span class="yellow">Long</span> <span class="brown">id</span>) {{"{"}}</span>
+                                <span>        <span class="red">personRepository</span>.<span class="blue">deleteById</span>(<span class="brown">id</span>);</span>
+                            <span>    {{"}"}}</span>
+                        <span>{{"}"}}</span>
+                        </code>
+                    </pre>
+                </div>
+                <ul class="list">
+                    <li>
+                        <p><strong>-</strong><span class="yellow"> &#64;Service</span> → Componente de lógica de negocio y operaciones relacionadas con personas</p>
+                    </li>
+                    <li>
+                        <p><strong>-</strong><span class="blue"> getPersonById</span>(<span class="yellow">Long</span><span class="brown"> id</span>) → Método que busca una persona en base de datos por su Id</p>
+                    </li>
+                    <li>
+                        <p><strong>-</strong><span class="blue"> getAllPersons</span>() → Método que devuelve todos las personas que hay en base de datos</p>
+                    </li>
+                    <li>
+                        <p><strong>-</strong><span class="blue"> updatePerson</span>(<span class="yellow">Long</span> <span class="brown"> id</span>, <span class="yellow">Person</span> <span class="brown"> updatePerson</span>) → Método para actualizar personas en el que se pasa un id y una Persona. El id se usa para buscar la persona por su id y si existe se cambian los valores de la persona por los que se pasan en la llamada al método</p>
+                    </li>
+                    <li>
+                        <p><strong>-</strong><span class="blue"> createPerson</span>(<span class="yellow">Person</span><span class="brown"> person</span>)→ Se pasan los valores de una Persona en la llamada y se guarda una con esos valores en base de datos</p>
+                    </li>
+                    <li>
+                        <p><strong>-</strong><span class="blue"> deletePerson</span>(<span class="yellow">Long</span><span class="brown"> id</span>) → Se busca la persona por su id y se borra de base de datos usando su id</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="title">
+                <h3>4. Controller → </h3>
+                <p> Package: com.example.demo.controller</p>
+            </div>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;RestController</span></span>
+                            <span><span class="yellow">&#64;RequestMapping</span>(<span class="green">"/api/persons"</span>)</span>
+                            <span><span class="purple">public class</span> <span class="yellow">PersonController</span> {{"{"}}</span>
+                            
+                            <br><span>    <span class="yellow">&#64;Autowired</span></span>
+                            <span>    <span class="purple">private</span> <span class="yellow">PersonService</span> <span class="red">personService</span>;</span>
+                            
+                            <br><span>    <span class="yellow">&#64;GetMapping</span>(<span class="green">"/search/{{"{"}}id{{"}"}}"</span>)</span>
+                            <span>        <span class="purple">public</span> <span class="yellow">ResponseEntity</span>{{"<"}}<span class="yellow">Person</span>{{">"}} <span class="blue">getPersonById</span>(<span class="yellow">&#64;PathVariable Long</span><span class="brown"> id)</span> {{"{"}}</span>
+                            <span>        <span class="yellow">Person</span> person = <span class="red">personService</span>.<span class="blue">getPersonById</span>(<span class="brown">id</span>);</span>
+                            <span>        <span class="purple">if</span> (person != null) {{"{"}}</span>
+                            <span>            <span class="purple">return</span> <span class="yellow">ResponseEntity</span>.<span class="blue">ok</span>(person);</span>
+                            <span>        {{"}"}} <span class="purple">else</span> {{"{"}}</span>
+                            <span>            <span class="purple">return</span> <span class="yellow">ResponseEntity</span>.<span class="blue">notFound</span>().<span class="blue">build</span>();</span>        {{"}"}}<br>    {{"}"}}
+                            
+                            <span>    <span class="yellow">&#64;GetMapping</span>(<span class="green">"/search/all"</span>)</span>
+                            <span>    <span class="purple">public</span> <span class="yellow">ResponseEntity</span> {{"<"}}<span class="yellow">List</span>{{"<"}}<span class="yellow">Person</span>{{">"}}{{">"}} <span class="blue">getAllPersons</span>() {{"{"}}</span>
+                            <span>        <span class="yellow">List</span>{{"<"}}<span class="yellow">Person</span>{{">"}} persons = <span class="red">personService</span>.<span class="blue">getAllPersons</span>();</span>
+                            <span>        <span class="purple">return</span> <span class="yellow">ResponseEntity</span>.<span class="blue">ok</span>(persons);</span>    {{"}"}}
+                            
+                            <span>    <span class="yellow">&#64;PostMapping</span>(<span class="green">"/create"</span>)</span>
+                            <span>    <span class="purple">public</span> <span class="yellow">ResponseEntity</span> <span class="blue">createPerson</span>(<span class="yellow">&#64;RequestBody Person</span> <span class="brown">person</span>) {{"{"}}</span>
+                            <span>        <span class="red">personService</span>.<span class="blue">createPerson</span>(<span class="brown">person</span>);</span>
+                            <span>        <span class="purple">return</span> <span class="yellow">ResponseEntity</span>.<span class="blue">status</span>(<span class="yellow">HttpStatus</span>.<span class="brown">CREATED</span>).<span class="blue">build</span>();</span>    {{"}"}}
+                            
+                            <span>    <span class="yellow">&#64;PutMapping</span>(<span class="green">"/update/{{"{"}}id{{"}"}}"</span>)</span>
+                            <span>    <span class="purple">public</span> <span class="yellow">ResponseEntity</span> <span class="blue">updatePerson</span>(<span class="yellow">&#64;RequestBody Person</span><span class="brown"> updatedPerson</span>,</span>
+                            <span>                                                                            <span class="yellow"> &#64;PathVariable Long</span> <span class="brown">id</span>) {{"{"}}</span>
+                            
+                            <br><span>        <span class="red">personService</span>.<span class="purple">updatePerson</span>(<span class="brown">id</span>, <span class="brown">updatedPerson</span>);</span>
+                            <span>        <span class="purple">return</span> <span class="yellow">ResponseEntity</span>.<span class="blue">ok</span>().<span class="blue">build</span>();</span>    {{"}"}}
+                            
+                            <span>    <span class="yellow">&#64;DeleteMapping</span>(<span class="green">"/delete/{{"{"}}id{{"}"}}"</span>)</span>
+                            <span>    <span class="purple">public</span> <span class="yellow">ResponseEntity</span> <span class="blue">deletePerson</span>(<span class="yellow">&#64;PathVariable Long</span> <span class="brown">id</span>) {{"{"}}</span>
+                            <span>        <span class="red">personService</span>.<span class="blue">deletePerson</span>(<span class="brown">id</span>);</span>
+                            <span>        <span class="purple">return</span> <span class="yellow">ResponseEntity</span>.<span class="blue">ok</span>().<span class="blue">build</span>();</span>    {{"}"}}<br>{{"}"}}</code>
+                    </pre>
+                </div>
+                <ul class="list">
+                    <li>
+                        <p><strong>-</strong><span class="yellow"> &#64;RestController</span> → Indica que es un controlador Rest, lo que significa que responderá a las solicitudes HTTP con datos JSON</p>
+                    </li>
+                    <li>
+                        <p><strong>-</strong><span class="yellow"> &#64;RequestMapping</span>(<span class="green">"/api/persons"</span>) → Esta anotación mapea todas las solicitudes que comienzan con /api/persons a este controlador</p>
+                    </li>
+                    <li>
+                        <p><strong>-</strong><span class="yellow"> &#64;RequestMapping</span> (<span class="green">"/api/persons"</span>)→ Esta anotación inyecta el PersonService para permitir interactuar con los datos de las personas en los métodos del controlador</p>
+                    </li>
+                    <p><strong>Métodos del controlador</strong></p>
+                    <li>
+                        <p><strong>-</strong><span class="yellow"> &#64;GetMapping</span>(<span class="green">/search/{{"{"}}id{{"}"}}"</span>) → Método para obtener la persona con el id sacado de la url de la solicitud "/api/persons/search/{{"}"}}id{{"}"}}" usando &#64;PathVariable</p>
+                    </li>
+                    <li>
+                        <p><strong>-</strong><span class="yellow"> &#64;GetMapping</span>(<span class="green">"/search/all"</span>) → Llama al método getAllPersons de personService para obtener todas las personas y las devuelve en la respuesta</p>
+                    </li>
+                    <li>
+                        <p><strong>-</strong><span class="yellow"> &#64;PostMapping</span>(<span class="green">"/create"</span>) → Utiliza &#64;RequestBody para deserializar el objeto Person de la solicitud y luego llama al método createPerson de personService para crear una nueva persona</p>
+                    </li>
+                    <li>
+                        <p><strong>-</strong><span class="yellow"> &#64;PutMapping</span>(<span class="green">"/update/{{"{"}}id{{"}"}}"</span>) → El ID se extrae de la URL utilizando &#64;PathVariable, y el objeto Person actualizado se deserializa del cuerpo de la solicitud utilizando &#64;RequestBody. Llama al método updatePerson de personService para actualizar la persona con el ID dado</p>
+                    </li>
+                    <li>
+                        <p>-<span class="yellow"> &#64;DeleteMapping</span>(<span class="green">"/delete/{{"{"}}id{{"}"}}"</span>) → El ID se extrae de la URL utilizando &#64;PathVariable. Llama al método deletePerson de personService para eliminar la persona con el ID dado.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="title">
+                <h3>5. application.properties → </h3>
+                <p> Path: /src/main/resources</p>
+            </div>
+            <p class="texto">Configuración
+                para la conexión a la base de datos, en este caso MySQL</p>
+            <div class="explicacion-codigo2">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">spring.datasource.url</span>=<span class="green">jdbc:mysql://localhost:3306/ApiRestBasica</span></span>
+                            <span><span class="yellow">spring.datasource.username</span>=<span class="green">root</span></span>
+                            <span><span class="yellow">spring.datasource.password</span>=<span class="green">root</span></span>
+                            <span><span class="yellow">spring.jpa.hibernate.ddl-auto</span>=<span class="green">update</span></span>
+                        </code>
+                    </pre>
+                </div>
+                <ul class="list">
+                    <li>
+                        <p><span class="yellow">spring.datasource.url</span> → URL de la base de datos</p>
+                    </li>
+                    <li>
+                        <p><span class="yellow">spring.datasource.username</span> → Usuario de la base de datos</p>
+                    </li>
+                    <li>
+                        <p><span class="yellow">spring.datasource.password</span> → Contraseña del usuario de la base de
+                            datos</p>
+                    </li>
+                    <li>
+                        <p><span class="yellow">spring.jpa.hibernate.ddl-auto</span> → Indica que Hibernate creará
+                            nuevas tablas si no existen, y actualizará las existentes según los cambios en las entidades
+                            y las llamadas a los end-points</p>
+                    </li>
+                </ul>
+            </div>
+            <p class="texto"><strong>IMPORTANTE: </strong>Antes de ejecutar nuestra applicación <strong>debemos tener creada la base de datos "ApiRestBasica"</strong> que hemos especificado en la ruta.</p>
+            <p class="texto">Una vez ya está creada, la api ya esta lista para usar y probar. Algunas estrategias para probar tu API es usando aplicaciones como <a href="https://www.postman.com/" target="_blank" class="enlace-apartado">Postman</a> o <a href="https://hoppscotch.io/" target="_blank" class="enlace-apartado">Hoppscotch</a>, que nos serán de utilidad antes de subirlas a producción.</p>
+            <div class="img-container">
+                <img src="./assets/tecns/spring/como-empezar/Postman.png" alt="Hoppscotch">
+                <img src="./assets/tecns/spring/como-empezar/Hoppscotch.png" alt="Hoppscotch">
+            </div>
+        </div>
+    </div>
+</div>
+

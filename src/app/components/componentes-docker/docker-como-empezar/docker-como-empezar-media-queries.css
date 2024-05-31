@@ -1,0 +1,5 @@
+@media (max-width: 1070px) {
+    .info .image-container img {
+        width: 100%;
+    }
+}

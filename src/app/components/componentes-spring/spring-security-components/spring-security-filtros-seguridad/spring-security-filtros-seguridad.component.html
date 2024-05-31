@@ -1,0 +1,177 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/spring/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li><a routerLink="/spring/spring-web/como-empezar" routerLinkActive="active">Spring Web</a></li>
+                <li class="active">
+                    <a routerLink="/spring/spring-security" routerLinkActive="active">Spring Security</a>
+                    <div class="submenu-container">
+                        <hr>
+                        <ul class="submenu">
+                            <li><a routerLink="/spring/spring-security/como-empezar" routerLinkActive="active">Como
+                                    empezar</a></li>
+                            <li><a routerLink="/spring/spring-security/proyecto-base" routerLinkActive="active">Proyecto
+                                    base a darle seguridad</a></li>
+                            <li><a routerLink="/spring/spring-security/componentes-clave"
+                                    routerLinkActive="active">Componentes clave de
+                                    Spring Security</a></li>
+                            <li><a routerLink="/spring/spring-security/autenticación"
+                                    routerLinkActive="active">Creando arquitectura
+                                    de autenticación con JWT</a></li>
+                            <li class="active"><a routerLink="/spring/spring-security/filtros-de-seguridad" routerLinkActive="active">Filtros de seguridad:
+                                    JwtAuthenticationFilter</a></li>
+                            <li><a routerLink="/spring/spring-security/autorización" routerLinkActive="active">Creando arquitectura
+                                    de autorización</a></li>
+                            <li><a routerLink="/spring/spring-security/cors" routerLinkActive="active">Cross-Origin Resource
+                                    Sharing (CORS)</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="info">
+                <div class="title">
+                        <h1>Filtros de seguridad: JwtAuthenticationFilter</h1>
+                        <div class="icons-container">
+                                <a href="https://github.com/Alvarosanchezz3/Spring-Security" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 24 24">
+                                                <path fill="#ffffff" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2" />
+                                        </svg>
+                                </a>
+                        </div>
+                </div>
+                <p class="texto">El <span class="yellow">JwtAuthenticationFilter</span> es una clase que se encarga de <strong>interceptar las solicitudes HTTP y validar el JWT</strong> de su encabezado de autorización. <span class="yellow">OncePerRequestFilter</span> es una clase proporcionada por Spring Security que garantiza que el filtro se ejecute solo <strong>una vez por cada solicitud HTTP</strong>, evitando así problemas de procesamiento duplicado o innecesario</p>
+                <div class="explicacion-codigo1">
+                        <div class="code-container">
+                                <pre>
+                                        <code>
+                                                <span><span class="yellow">&#64;Component</span></span>
+                                                <span><span class="purple">public class</span> <span class="yellow">JwtAuthenticationFilter</span> <span class="purple">extends</span> <span class="yellow">OncePerRequestFilter</span> {{"{"}}</span>
+                                                
+                                                <br><span>  <span class="yellow">&#64;Autowired</span></span>
+                                                <span>  <span class="purple">private</span> <span class="yellow">JwtService</span> <span class="red">jwtService</span>;</span>
+
+                                                <br><span>  <span class="yellow">&#64;Autowired</span></span>
+                                                <span>  <span class="purple">private</span> <span class="yellow">UserService</span> <span class="red">userService</span>;</span>
+
+                                                <br><span>  <span class="yellow">&#64;Override</span></span>
+                                                <span>  <span class="purple">protected void </span><span class="blue">doFilterInternal</span>(<span class="yellow">HttpServletRequest</span> <span class="brown">request</span>,</span>
+                                                <span>               <span class="yellow">HttpServletResponse</span> <span class="brown">response</span>, <span class="yellow">FilterChain</span> <span class="brown">filterChain</span>) <span class="purple">throws</span> <span class="yellow">ServletException</span>, <span class="yellow">IOException</span> {{"{"}}</span>
+                                                
+                                                <br><span>    <span class="comment">// 1. Obtener encabezado llamado Authorization</span></span>
+                                                <span>    <span class="yellow">String</span> authorizationHeader = <span class="brown">request</span>.<span class="blue">getHeader</span>(<span class="green">"Authorization"</span>);</span>
+                                                <span>    <span class="comment">// Si viene vacío o no empieza por "Bearer "</span></span>
+                                                <span>    <span class="purple">if</span> (!<span class="yellow">StringUtils</span>.<span class="blue">hasText</span>(authorizationHeader) || !authorizationHeader.<span class="blue">startsWith</span>(<span class="green">"Bearer "</span>)) {{"{"}}</span>
+                                                <span>      <span class="brown">filterChain</span>.<span class="blue">doFilter</span>(<span class="brown">request</span>, <span class="brown">response</span>); <span class="comment">// Que el filterchain siga con los otros filtros</span></span>
+                                                <span>      <span class="purple">return</span>;</span>
+                                                <span>    {{"}"}}</span>
+
+                                                <br><span>    <span class="comment">// 2. Obtener JWT desde el encabezado -→ Formato: "Bearer jwt"</span></span>
+                                                <span>    <span class="comment">// Divide el encabezado entre el [0] = "Bearer" y [1] = jwt</span></span>
+                                                <span>    <span class="yellow">String</span> jwt = authorizationHeader.<span class="blue">split</span>(<span class="green">" "</span>)[<span class="brown">1</span>];</span>
+
+                                                <br><span>    <span class="comment">// 3. Obtener el username desde el token, esto además valida el token, su formato, la firma y</span></span>
+                                                <span>    <span class="comment">// la fecha de expiración</span></span>
+                                                <span>    <span class="yellow">String</span> username = <span class="red">jwtService</span>.<span class="blue">extractUsername</span>(jwt);</span>
+
+                                                <br><span>    <span class="comment">// 4. Settear objeto autenticación dentro de security context holder</span></span>
+                                                <span>    <span class="yellow">User</span> user = <span class="red">userService</span>.<span class="blue">findOneByUsername</span>(username)</span>
+                                                <span>      .<span class="blue">orElseThrow</span>(() -> <span class="purple">new</span> <span class="yellow">ObjectNotFoundException</span>(<span class="green">"User not found. Username "</span> + username));</span>
+
+                                                <br><span>    <span class="yellow">UsernamePasswordAuthenticationToken</span> authToken = <span class="purple">new</span> <span class="yellow">UsernamePasswordAuthenticationToken</span>(</span>
+                                                <span>      username, <span class="purple">null</span>, user.<span class="blue">getAuthorities</span>()</span>
+                                                <span>    );</span>
+                                                <span>    <span class="comment">// Añadimos info del request a la autenticación del context</span></span>
+                                                <span>    authToken.<span class="blue">setDetails</span>(<span class="purple">new</span> <span class="yellow">WebAuthenticationDetails</span>(<span class="brown">request</span>));</span>
+
+                                                <br><span>    <span class="yellow">SecurityContextHolder</span>.<span class="blue">getContext</span>().<span class="blue">setAuthentication</span>(authToken);</span>
+
+                                                <br><span>    <span class="comment">// 5. Ejecutar el registro de filtros</span></span>
+                                                <span>    <span class="brown">filterChain</span>.<span class="blue">doFilter</span>(<span class="brown">request</span>, <span class="brown">response</span>);</span>
+                                                <span>  {{"}"}}</span>
+                                                <span>{{"}"}}</span>
+                                        </code>
+                                </pre>
+                        </div>
+                </div>
+                <ul class="list">
+                        <li>Ahora debemos añadir este filtro en la <strong>configuración de seguridad</strong> que creamos anteriormente en la clase <span class="yellow">HttpSecurityConfig</span>:</li>
+                        <li><span class="blue">addFilterBefore</span>() → Permite ejecutar el <span class="red">jwtAuthenticationFilter</span> antes que el <span class="yellow">UsernamePasswordAuthenticationFilter</span></li>
+                </ul>
+                <div class="explicacion-codigo1">
+                        <div class="code-container">
+                                <pre>
+                                        <code>
+                                                <span><span class="yellow">SecurityFilterChain</span> filterChain = <span class="brown">http</span></span>
+                                                <span>  .<span class="blue">csrf</span>(<span class="yellow">Customizer</span>, <span class="blue">withDefaults</span>())</span>
+                                                <span>  .<span class="blue">sessionManagement</span>(<span class="brown">sessionManConfig</span> -> <span class="brown">sessionManConfig</span>.<span class="blue">sessionCreationPolicy</span>(</span>
+                                                <span>      <span class="yellow">SessionCreationPolicy</span>.<span class="brown">STATELESS</span>))</span>
+                                                <span>  .<span class="blue">authenticationProvider</span>(<span class="red">daoAuthProvider</span>)</span>
+                                                <span>  .<span class="blue">addFilterBefore</span>(<span class="red">jwtAuthenticationFilter</span>, <span class="yellow">UsernamePasswordAuthenticationFilter</span>.<span class="purple">class</span>)</span>
+                                                <span>  .<span class="blue">build</span>();</span>
+                                        </code>
+                                </pre>
+                        </div>
+                </div>
+                <p>Con esto, ahora vamos a crear un método en el <span class="yellow">authService </span><strong>para encontrar un usuario en BBDD por el usuario del contexto de seguridad</strong> que se añade tras pasar el <span class="yellow">JwtAuthenticationFilter</span>.</p>
+                <div class="explicacion-codigo1">
+                        <div class="code-container">
+                                <pre>
+                                        <code>
+                                                <span><span class="purple">public</span> <span class="yellow">User</span> <span class="blue">findLoggedInUser</span>() {{"{"}}</span>
+                                                <span>  <span class="yellow">Authentication</span> auth = (<span class="yellow">UsernamePasswordAuthenticationToken</span>)</span>
+                                                <span>    <span class="yellow">SecurityContextHolder</span>.<span class="blue">getContext</span>().<span class="blue">getAuthentication</span>();</span>
+                                                
+                                                <br><span>  <span class="yellow">String</span> username = auth.<span class="blue">getPrincipal</span>().<span class="blue">toString</span>();</span>
+                                                
+                                                <br><span>  <span class="purple">return</span> <span class="red">userService</span>.<span class="blue">findOneByUsername</span>(username)</span>
+                                                <span>    .<span class="blue">orElseThrow</span>(() -> <span class="purple">new</span> <span class="yellow">ObjectNotFoundException</span>(<span class="green">"User not found. Username "</span> + username));</span>
+                                                <span>{{"}"}}</span>
+                                        </code>
+                                </pre>
+                        </div>
+                </div>
+                <p>Creamos un endpoint en el <span class="yellow">AuthenticationController</span> que pasando un jwt nos <strong>devuelve la información y permisos del usuario de ese jwt</strong>. La información que queremos recibir la <strong>personalizamos con un dto</strong> llamado <span class="yellow">UserProfile</span>.</p>
+                <div class="explicacion-codigo1">
+                        <div class="code-container">
+                                <pre>
+                                    <code>
+                                            <span><span class="yellow">&#64;Data</span></span>
+                                            <span><span class="purple">public</span> <span class="yellow">UserProfile</span> <span class="purple">implements</span> <span class="yellow">Serializable</span> {{"{"}}</span>
+                                            
+                                            <br><span>  <span class="purple">private</span> <span class="yellow">Long</span> <span class="red">id</span>;</span>
+                                            <span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">name</span>;</span>
+                                            <span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">username</span>;</span>
+                                            <span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">password</span>;</span>
+                                            <span>  <span class="purple">private boolean</span> <span class="red">enabled</span>;</span>
+                                            <span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">role</span>;</span>
+                                            <span>  <span class="purple">private</span> <span class="yellow">Collection</span><?> <span class="red">authorities</span>;</span>
+                                            
+                                            <span>{{"}"}}</span>
+                                    </code>
+                                </pre>
+                        </div>
+                        <div class="code-container">
+                            <pre>
+                                <code>
+                                        <span><span class="yellow">&#64;GetMapping</span>(<span class="green">"/profile"</span>)</span>
+                                        <span><span class="purple">public</span> <span class="yellow">ResponseEntity</span>{{"<"}}<span class="yellow">UserProfile</span>{{">"}} <span class="blue">findMyProfile</span> () {{"{"}}</span>
+                                        <span>  <span class="yellow">User</span> user = <span class="red">authService</span>.<span class="blue">findLoggedInUser</span>();</span>
+                                        
+                                        <br><span>  <span class="yellow">UserProfile</span> userProfile = <span class="purple">new</span> <span class="yellow">UserProfile</span>();</span>
+                                        <span>    userProfile.<span class="blue">setId</span>(user.<span class="blue">getId</span>());</span>
+                                        <span>    userProfile.<span class="blue">setName</span>(user.<span class="blue">getName</span>());</span>
+                                        <span>    userProfile.<span class="blue">setUsername</span>(user.<span class="blue">getUsername</span>());</span>
+                                        <span>    userProfile.<span class="blue">setPassword</span>(user.<span class="blue">getPassword</span>());</span>
+                                        <span>    userProfile.<span class="blue">setRole</span>(user.<span class="blue">getRole</span>.<span class="blue">toString</span>());</span>
+                                        <span>    userProfile.<span class="blue">setEnabled</span>(user.<span class="blue">isEnabled</span>());</span>
+                                        <span>    userProfile.<span class="blue">setAuthorities</span>(user.<span class="blue">getAuthorities</span>());</span>
+
+                                        <br><span>  <span class="purple">return</span> <span class="blue">ResponseEntity</span>.<span class="blue">ok</span>(userProfile);</span>
+                                        <span>{{"}"}}</span>
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+        </div>

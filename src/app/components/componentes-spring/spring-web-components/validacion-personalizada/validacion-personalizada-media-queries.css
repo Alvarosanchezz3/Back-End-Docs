@@ -1,0 +1,36 @@
+@media (max-width: 1200px) {
+    .code-container pre {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 800px) {
+    .code-container pre {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 740px) {
+    .code-container pre {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 680px) {
+    .code-container pre {
+        font-size: 9px;
+    }
+}
+
+
+@media (max-width: 625px) {
+    .code-container pre {
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 570px) {
+    .code-container pre {
+        font-size: 7px;
+    }
+}

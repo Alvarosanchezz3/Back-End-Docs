@@ -1,0 +1,87 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/spring/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li class="active">
+                    <a routerLink="/spring/spring-web" routerLinkActive="active">Spring Web</a>
+                    <div class="submenu-container">
+                        <hr>
+                        <ul class="submenu">
+                            <li class="active"><a routerLink="/spring/spring-web/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                            <li><a routerLink="/spring/spring-web/api-rest-básica" routerLinkActive="active">API REST Básica</a></li>
+                            <li><a routerLink="/spring/spring-web/validación-java-bean-validation" routerLinkActive="active">Validación usando Java Bean Validation</a></li>
+                            <li><a routerLink="/spring/spring-web/mensajes-validación-personalizados" routerLinkActive="active">Mensajes de validaciones personalizadas</a></li>
+                            <li><a routerLink="/spring/spring-web/validación-personalizada" routerLinkActive="active">Validación personalizada</a></li>
+                            <li><a routerLink="/spring/spring-web/anotaciones-personalizadas" routerLinkActive="active">Anotaciones personalizados</a></li>
+                        </ul>    
+                    </div>
+                </li>
+                <li><a routerLink="/spring/spring-security/como-empezar" routerLinkActive="active">Spring Security</a></li>
+            </ul>
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Spring Web</h1>
+            </div>
+            <p class="texto">
+                <span class="text-spring">Spring Web</span> es un módulo del marco de trabajo Spring que <span class="text-spring">facilita el desarrollo de aplicaciones web en Java</span>. Es un componente esencial del ecosistema Spring y proporciona <span class="text-spring">herramientas y características clave</span> para construir aplicaciones web robustas y escalables Aquí están algunas de sus <span class="text-spring">características y componentes principales</span>:</p>
+            <h3>1. Características Principales de Spring Web </h3>
+            <ul class="list-benefits">
+                <li><strong>a) Arquitectura MVC (Model-View-Controller):</strong>
+                    <ul>
+                        <li><strong>-</strong><span class="text-spring"> Model:</span> Representa los datos y la lógica de negocio de la aplicación.</li>
+                        <li><strong>-</strong><span class="text-spring"> View:</span> Presenta los datos al usuario. Spring Web soporta varias tecnologías de vista como JSP, Thymeleaf, y FreeMarker.</li>
+                        <li><strong>-</strong><span class="text-spring"> Controller:</span> Maneja las solicitudes del usuario, interactúa con el modelo y selecciona una vista para mostrar la respuesta.</li>
+                    </ul>
+                </li>
+                <li><strong>b) Controladores (Controllers):</strong>
+                    <ul>
+                        <li><strong>-</strong><span class="text-spring"> </span> Utiliza anotaciones como <span class="yellow">&#64;Controller</span> y <span class="yellow">&#64;RequestMapping</span> para definir controladores y mapear solicitudes HTTP a métodos específicos.</li>
+                        <li><strong>-</strong><span class="text-spring"> </span> Facilita la creación de endpoints RESTful usando <span class="yellow">&#64;RestController</span> y otras anotaciones.</li>
+                    </ul>
+                </li>
+                <li><strong>c) Inyección de Dependencias:</strong>
+                    <ul>
+                        <li><strong>-</strong> Integra el contenedor de inversión de control (IoC) de Spring, permitiendo la gestión eficiente de componentes y sus dependencias.</li>
+                    </ul>
+                </li>
+                <li><strong>d) Validación y Binding:</strong>
+                    <ul>
+                        <li><strong>-</strong> Proporciona mecanismos para validar datos de entrada y mapear datos de formularios a objetos de dominio utilizando anotaciones como <span class="yellow">&#64;Valid</span> y <span class="yellow">&#64;Validated</span>.</li>
+                    </ul>
+                </li>
+                <li><strong>e) RESTful Web Services:</strong>
+                    <ul>
+                        <li><strong>-</strong> Facilita la creación de servicios web RESTful utilizando anotaciones específicas y soportando la serialización/deserialización de JSON y XML.</li>
+                    </ul>
+                </li>
+            </ul>
+            <h3>2. Ejemplo de uso </h3>
+            <p class="texto">Aquí hay un breve ejemplo de cómo se podría definir un controlador REST en Spring Web:</p>
+            <div class="code-container">
+                <pre>
+                    <code>
+                        <span><span class="purple">import</span><span class="yellow"> org.springframework.web.bind.annotation.GetMapping;</span></span>
+                        <span><span class="purple">import</span><span class="yellow"> org.springframework.web.bind.annotation.RequestMapping;</span></span>
+                        <span><span class="purple">import</span><span class="yellow"> org.springframework.web.bind.annotation.RestController;</span></span>
+
+                        <br><span><span class="yellow">&#64;RestController</span></span>
+                        <span><span class="yellow">&#64;RequestMapping</span>(<span class="green">"/api"</span>)</span>
+                        <span><span class="purple">public class</span> <span class="yellow">MyController</span> {{"{"}}</span>
+                        
+                        <br><span>    <span class="yellow">&#64;GetMapping</span>(<span class="green">"/hello"</span>)</span>
+                        <span>    <span class="yellow">public String</span> <span class="blue">hello</span>() {{"{"}}</span>
+                        <span>        <span class="purple">return</span> <span class="green">"Hello, World!"</span>;</span>    {{"}"}}<br>{{"}"}}
+                    </code>
+                </pre>
+            </div>
+            <h3>3. Integración con Otros Módulos de Spring </h3>
+            <ul class="list-benefits">
+                <li>● <span class="text-spring">Spring Boot:</span> Facilita la configuración y despliegue de aplicaciones Spring, incluyendo aplicaciones web con Spring Web.</li>
+                <li>● <span class="text-spring">Spring Data JPA:</span>  Proporciona una abstracción para el acceso a datos, comúnmente utilizado junto con Spring Web para manejar la persistencia de datos.</li>
+                <li>● <span class="text-spring">Spring Security:</span> Integra capacidades avanzadas de seguridad para proteger aplicaciones web.</li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+.title {
+    display: flex;
+    align-items: center;
+}
+
+.title h1 {
+    font-size: 40px;
+}
+
+.title img {
+    width: 80px;
+    margin-left: 10px;
+}
+
+.info h3 {
+    font-size: 20px;
+    margin: 10px 0px;
+}
+
+.list-benefits li {
+    margin: 5px 0;
+}
+
+.info .image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.info .image-container img {
+    width: 70%;
+}

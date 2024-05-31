@@ -1,0 +1,31 @@
+@media (max-width: 1500px) {
+    .code-container pre {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 1070px) {
+    .index {
+        display: none;
+    }
+
+    .info {
+        border: none;
+        width: 100%;
+        padding: 0;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .code-container pre {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 550px) {
+
+    .code-container pre {
+        font-size: 10px;
+    }
+}

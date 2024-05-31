@@ -1,0 +1,97 @@
+<header [class.fixed-header]="fixed">
+  <a href="#" class="logo">
+    <img src="/assets/icons/cafe-logo.png">
+    <span>Back-End Docs</span>
+  </a>
+  <div id="menu-icon" (click)="toggleMenu()">
+    &#9776;
+  </div>
+  <ul class="navbar" [class.open]="menuOpen">
+    <li>
+      <a (click)="onLinkClick($event, 'spring', '/spring/como-empezar')">Spring <span class="arrow"
+          [class.open]="subMenuOpen['spring']">&#9654;</span></a>
+      <ul class="submenu" [class.open]="subMenuOpen['spring']">
+        <li>
+          <a (click)="onLinkClick($event, '', '/spring/como-empezar')" routerLinkActive="active">Como empezar</a>
+        </li>
+        <li>
+          <a (click)="onLinkClick($event, 'spring-web', '/spring/spring-web/como-empezar')">Spring Web <span
+              class="arrow" [class.open]="subMenuOpen['spring-web']">&#9654;</span></a>
+          <ul class="submenu submenu2" [class.open]="subMenuOpen['spring-web']">
+            <li><a (click)="onLinkClick($event, '', '/spring/spring-web/como-empezar')" routerLinkActive="active">Como
+                empezar</a></li>
+            <li><a (click)="onLinkClick($event, '', '/spring/spring-web/api-rest-básica')" routerLinkActive="active">API
+                REST Básica</a></li>
+            <li><a (click)="onLinkClick($event, '', '/spring/spring-web/validación-java-bean-validation')"
+                routerLinkActive="active">Validación Java Bean Validation</a></li>
+            <li><a (click)="onLinkClick($event, '', '/spring/spring-web/mensajes-validación-personalizados')"
+                routerLinkActive="active">Mensajes de validaciones personalizados</a></li>
+            <li><a (click)="onLinkClick($event, '', '/spring/spring-web/validación-personalizada')"
+                routerLinkActive="active">Validación personalizada</a></li>
+            <li><a (click)="onLinkClick($event, '', '/spring/spring-web/anotaciones-personalizadas')"
+                routerLinkActive="active">Anotaciones personalizadas</a></li>
+          </ul>
+        </li>
+        <li>
+          <a (click)="onLinkClick($event, 'spring-security', '/spring/spring-security/como-empezar')">Spring Security
+            <span class="arrow" [class.open]="subMenuOpen['spring-security']">&#9654;</span></a>
+          <ul class="submenu submenu2" [class.open]="subMenuOpen['spring-security']">
+            <li><a (click)="onLinkClick($event, '', '/spring/spring-security/como-empezar')"
+                routerLinkActive="active">Como empezar</a></li>
+            <li><a (click)="onLinkClick($event, '', '/spring/spring-security/proyecto-base')"
+                routerLinkActive="active">Proyecto base para dar seguridad</a></li>
+            <li><a (click)="onLinkClick($event, '', '/spring/spring-security/componentes-clave')"
+                routerLinkActive="active">Componentes clave de Spring Security</a></li>
+            <li><a (click)="onLinkClick($event, '', '/spring/spring-security/autenticación')"
+                routerLinkActive="active">Arquitectura de autenticación</a></li>
+            <li><a (click)="onLinkClick($event, '', '/spring/spring-security/filtros-de-seguridad')"
+                routerLinkActive="active">Filtros de seguridad: JwtAuthenticationFilter</a></li>
+            <li><a (click)="onLinkClick($event, '', '/spring/spring-security/autorización')"
+                routerLinkActive="active">Arquitectura de autorización</a></li>
+            <li><a (click)="onLinkClick($event, '', '/spring/spring-security/cors')"
+                routerLinkActive="active">Cross-Origin Resource Sharing (CORS)</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a (click)="onLinkClick($event, 'docker', '/docker/como-empezar')">Docker <span class="arrow"
+          [class.open]="subMenuOpen['docker']">&#9654;</span></a>
+      <ul class="submenu" [class.open]="subMenuOpen['docker']">
+        <li><a (click)="onLinkClick($event, '', '/docker/como-empezar')" routerLinkActive="active">Como empezar</a></li>
+        <li><a (click)="onLinkClick($event, '', '/docker/imágenes')" routerLinkActive="active">Imágenes</a></li>
+        <li><a (click)="onLinkClick($event, '', '/docker/contenedores')" routerLinkActive="active">Contenedores</a></li>
+        <li><a (click)="onLinkClick($event, '', '/docker/redes')" routerLinkActive="active">Redes</a></li>
+        <li><a (click)="onLinkClick($event, '', '/docker/comandos-más-importantes')" routerLinkActive="active">Comandos
+            más importantes</a></li>
+        <li><a (click)="onLinkClick($event, '', '/docker/docker-compose')" routerLinkActive="active">Docker compose</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a (click)="onLinkClick($event, 'aws', '/aws/como-empezar')">AWS <span class="arrow"
+          [class.open]="subMenuOpen['aws']">&#9654;</span></a>
+      <ul class="submenu" [class.open]="subMenuOpen['aws']">
+        <li><a (click)="onLinkClick($event, '', '/aws/como-empezar')" routerLinkActive="active">Como empezar</a></li>
+        <li><a (click)="onLinkClick($event, '', '/aws/crear-cuenta')" routerLinkActive="active">Crear cuenta y capa
+            gratuita</a></li>
+        <li>
+          <a (click)="onLinkClick($event, 'aws-s3', '/aws/servicio-s3/como-empezar')">Amazon S3 (Simple Storage Service)
+            <span class="arrow" [class.open]="subMenuOpen['aws-s3']">&#9654;</span></a>
+          <ul class="submenu submenu2" [class.open]="subMenuOpen['aws-s3']">
+            <li><a (click)="onLinkClick($event, '', '/aws/servicio-s3/como-empezar')" routerLinkActive="active">Como
+                empezar</a></li>
+            <li><a (click)="onLinkClick($event, '', '/aws/servicio-s3/CRUD-usando-S3')" routerLinkActive="active">CRUD
+                usando S3</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a (click)="onLinkClick($event, 'microservices', '')">Microservicios</a>
+    </li>
+    <li>
+      <a (click)="onLinkClick($event, 'kafka', '')">Apache Kafka</a>
+    </li>
+  </ul>
+</header>

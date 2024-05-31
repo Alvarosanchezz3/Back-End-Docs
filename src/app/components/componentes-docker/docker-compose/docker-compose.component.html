@@ -1,0 +1,69 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li>
+                    <a routerLink="/docker/como-empezar" routerLinkActive="active">Como empezar</a>
+                </li>
+                <li>
+                    <a routerLink="/docker/imágenes" routerLinkActive="active">Imágenes</a>
+                </li>
+                <li>
+                    <a routerLink="/docker/contenedores" routerLinkActive="active">Contenedores</a>
+                </li>
+                <li>
+                    <a routerLink="/docker/redes" routerLinkActive="active">Redes</a>
+                </li>
+                <li>
+                    <a routerLink="/docker/comandos-más-importantes" routerLinkActive="active">Comandos más
+                        importantes</a>
+                </li>
+                <li class="active">
+                    <a routerLink="/docker/docker-compose" routerLinkActive="active">Docker compose</a>
+                </li>
+            </ul>
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Docker Compose</h1>
+            </div>
+            <p>
+                Docker Compose es una
+                <strong>herramienta que permite definir y gestionar aplicaciones
+                    multi-contenedor en Docker de forma sencilla.</strong>
+                Permite definir la configuración de una aplicación, incluyendo los
+                servicios, las redes, los volúmenes y otras configuraciones necesarias
+                para ejecutarla, todo en un
+                <strong>único archivo YAML llamado docker-compose.yml</strong>
+            </p>
+            <h3>Ejemplo Aplicación con base de datos</h3>
+            <ul class="list">
+                <li>● <strong>Servicio "db":</strong> Usa la imagen de MySQL, configura una base de datos y establece una contraseña para el usuario root.</li>
+                <li>● <strong>Servicio "my-app":</strong> Construye una imagen desde el directorio actual (.), asigna el puerto interno de docker 9191 al puerto 8585 del host y especifica que dependa del servicio db.</li>
+            </ul>
+            <div class="code-container">
+                <pre>
+                    <code>
+                        <span>&nbsp;<span class="red">version</span>: <span class="green">'3.1'</span></span>
+                        <br><span>&nbsp;<span class="red">services</span>:</span>
+                        <span>&nbsp;&nbsp;&nbsp;<span class="red">db</span>:</span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="red">image</span>: <span class="green">mysql</span></span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="red">restart</span>: <span class="green">always</span></span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="red">environment</span>: </span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="red">MYSQL_DATABASE</span>: <span class="green">usersDB</span></span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="red">MYSQL_ROOT_PASSWORD</span>: <span class="green">root</span></span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="red">container_name</span>: <span class="green">mysql-msvc-users</span></span>
+                        <span>&nbsp;&nbsp;&nbsp;<span class="red">my-app</span>:</span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="red">build</span>: <span class="green"> .</span></span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="red">image</span>: <span class="green">msvc-users-img</span></span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="red">ports</span>: </span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">- "8585:9191"</span></span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="red">container_name</span>: <span class="green">msvc-users</span></span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="red">depends_on</span>: </span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">- db</span></span>
+                    </code>
+                </pre>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+@media (max-width: 1200px) {
+    .code-container pre {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 870px) {
+    .title h1 {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 760px) {
+    .title h1 {
+        font-size: 24px;
+    }
+    
+    .code-container pre {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 670px) {
+    .title h1 {
+        font-size: 22px;
+    }
+    
+    .explicacion-codigo1 {
+        flex-direction: column;
+    }
+
+    .code-container pre {
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 630px) {
+    .title h1 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 580px) {
+    .title h1 {
+        font-size: 18px;
+    }
+    
+    .code-container pre {
+        font-size: 7px;
+    }
+}
+
+@media (max-width: 530px) {
+    .title h1 {
+        font-size: 16px;
+    }
+}

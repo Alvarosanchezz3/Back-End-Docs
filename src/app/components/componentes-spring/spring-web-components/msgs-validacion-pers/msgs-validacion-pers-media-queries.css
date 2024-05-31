@@ -1,0 +1,36 @@
+@media (max-width: 750px) {
+    .title h1 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 650px) {
+    .code-container pre {
+        font-size: 11px;
+    }
+
+    .title h1 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 570px) {
+    .code-container pre {
+        font-size: 10px;
+    }
+
+    .title h1 {
+        font-size: 22px;
+    }
+}
+
+
+@media (max-width: 520px) {
+    .code-container pre {
+        font-size: 9px;
+    }
+
+    .title h1 {
+        font-size: 20px;
+    }
+}

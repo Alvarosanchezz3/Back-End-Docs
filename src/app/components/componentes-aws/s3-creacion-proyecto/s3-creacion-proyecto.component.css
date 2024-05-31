@@ -1,0 +1,147 @@
+.text-blue-aws {
+  color: #252f3e;
+  font-weight: bolder;
+}
+
+.text-yellow-aws {
+  color: #ff9900;
+  font-weight: bolder;
+}
+
+.doc hr {
+  position: relative;
+  margin-left: 270px;
+}
+
+.active-submenu {
+  color: #fff;
+}
+
+.submenu-container hr {
+  border-color: #aaaaaa;
+  margin: 0;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.icons-container {
+  display: flex;
+  gap: 5px;
+}
+
+.title a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title a svg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+}
+
+.title a svg path {
+  fill: #31343a;
+}
+
+.title a svg:hover path {
+  fill: #ff9900;
+  /* Cambia este color al que desees */
+}
+
+.image-container {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin: 20px 0;
+}
+
+.image-container img {
+  width: 25%;
+}
+
+.image-container img:nth-child(2) {
+  width: 38%;
+}
+
+.explicacion-codigo1,
+.explicacion-codigo2 {
+  display: flex;
+  margin: 30px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.code-container {
+  background-color: #31343a;
+  border-radius: 5px;
+}
+
+.code-container pre {
+  font-size: 13px;
+}
+
+.slider-container {
+  width: 100%;
+}
+
+.slider-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 50px;
+}
+
+.slider-info1 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.slider-info2 {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.explicacion-codigo2 .code-container pre code,
+.explicacion-codigo1 .code-container pre code,
+.slider-info1 .code-container pre code,
+.slider-info2 .code-container pre code {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  padding: 0px 20px;
+  color: rgb(224, 224, 224);
+}
+
+.codigo-slider {
+  display: none;
+}
+
+.codigo-slider.active {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+button img {
+  width: 30px;
+}
+
+button img:hover {
+  scale: 1.3;
+}
