@@ -25,6 +25,7 @@ import { SpringSecurityFiltrosSeguridadComponent } from './components/componente
 import { SpringSecurityAutorizacionComponent } from './components/componentes-spring/spring-security-components/spring-security-autorizacion/spring-security-autorizacion.component';
 import { SpringSecurityCorsComponent } from './components/componentes-spring/spring-security-components/spring-security-cors/spring-security-cors.component';
 import { MsvcsComoEmpezarComponent } from './components/componentes-msvcs/msvcs-como-empezar/msvcs-como-empezar.component';
+import { EurekaServerComponent } from './components/componentes-msvcs/eureka-server/eureka-server.component';
 
 export const routes: Routes = [
     {path:"", redirectTo: "home", pathMatch: 'full'},
@@ -60,4 +61,5 @@ export const routes: Routes = [
     {path: "aws/servicio-s3/CRUD-usando-S3", component: S3CreacionProyectoComponent},
 
     {path: "microservicios/como-empezar", component: MsvcsComoEmpezarComponent},
+    {path: "microservicios/eureka-server", component: EurekaServerComponent},
 ];

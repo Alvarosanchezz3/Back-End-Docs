@@ -1,0 +1,22 @@
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.title img {
+    width: 90px;
+    margin-left: 10px;
+}
+
+.image-container {
+    margin: 20px 0;
+}
+
+.image-container1 img{
+    width: 50%;
+}
+
+.image-container2 img{
+    width: 40%;
+}

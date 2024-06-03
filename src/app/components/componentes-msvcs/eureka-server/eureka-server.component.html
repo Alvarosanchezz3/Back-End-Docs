@@ -1,0 +1,47 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/microservicios/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li class="active"><a routerLink="/microservicios/eureka-server" routerLinkActive="active">Eureka Server</a></li>
+                <li><a routerLink="/microservicios/spring-cloud-gateway-reactive" routerLinkActive="active">Spring Cloud Gateway (Reactive)</a></li>
+                <li><a routerLink="/microservicios/config-server-git" routerLinkActive="active">Config Server con git</a></li>
+            </ul> 
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Eureka Server</h1>
+                <img src="./assets/tecns/microservicios/eureka-server/eureka-server.png" alt="msvcs">    
+            </div>
+            <p class="texto">Eureka Server es un entorno que actúa como <strong>servicio de registro</strong>, en este los microservicios <strong>al registrarse dan su nombre y ubicación</strong>. Con esto <strong>permiten la comunicación entre microservicios que estén conectados a Eureka</strong>, únicamente con saber el nombre con el que están registrados.</p>
+            
+            <h3>1. Crear servidor de Eureka</h3>
+            <p class="texto">Para <strong>crear un servidor de Eureka</strong> crearemos un proyecto utilizando la dependencia: </p>
+            <div class="image-container image-container1">
+                <img src="./assets/tecns/microservicios/eureka-server/dependencia-server.png" alt="msvcs"> 
+            </div>
+            <p class="texto">Además, especificaremos en el <strong>application.properties</strong> el <strong>nombre del servicio</strong>, el <strong>puerto</strong> (el puerto por defecto de Eureka es el 8761) y normalmente se especifica que <strong>no se registre él mismo como servicio en Eureka</strong> de esta manera:</p>
+            <div class="image-container image-container2">
+                <img src="./assets/tecns/microservicios/eureka-server/properties-server.png" alt="msvcs"> 
+            </div>
+
+            <h3>2. Crear cliente de Eureka</h3>
+            <p class="texto">En el caso de los <strong>clientes de Eureka</strong> que se registran, necesitan esta dependencia: </p>
+            <div class="image-container image-container1">
+                <img src="./assets/tecns/microservicios/eureka-server/dependencia-cliente.png" alt="msvcs"> 
+            </div>
+            <p class="texto">Deben añadir la anotación <span class="yellow">&#64;EnableDiscoveryClient</span> para poder <strong>registrarse como cliente de Eureka</strong> en la clase main de la aplicación de Spring</p>
+            <div class="image-container">
+                <img src="./assets/tecns/microservicios/eureka-server/anotacion-eureka-client.png" alt="msvcs"> 
+            </div>
+            <p class="texto">Y por último añadir algunas cosas en la configuración del <strong>application.properties</strong> como el <strong>nombre del servicio</strong>, <strong>puerto</strong> y la <strong>url de eureka</strong> de esta forma:</p>
+            <div class="image-container">
+                <img src="./assets/tecns/microservicios/eureka-server/properties-cliente.png" alt="msvcs"> 
+            </div>
+            <p class="texto">Finalmente si ejecutamos Eureka y después los microservicios de registro si vamos a <a href="http://localhost:8761" target="_blank" class="enlace-apartado">http://localhost:8761</a> veremos los servicios. Ejemplo:</p>
+            <div class="image-container">
+                <img src="./assets/tecns/microservicios/eureka-server/instancias-server.png" alt="msvcs"> 
+            </div>
+        </div>
+    </div>
+</div>
