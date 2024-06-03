@@ -6,7 +6,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   standalone: true,
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './spring-cloud-gateway-reactive.component.html',
-  styleUrl: './spring-cloud-gateway-reactive.component.css'
+  styleUrls: ['./spring-cloud-gateway-reactive.component.css', 'spring-cloud-gateway-reactive-media-queries.css']
 })
 export class SpringCloudGatewayReactiveComponent {
 

@@ -1,0 +1,25 @@
+@media (max-width: 800px) {
+    .image-container img{
+        width: 85%;
+    }
+}
+
+@media (max-width: 630px) {
+    .title h1 {
+        font-size: 28px;
+    }
+    
+    .image-container img{
+        width: 100%;
+    }
+
+    .explicacion-codigo1 {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 560px) {
+    .title h1 {
+        font-size: 24px;
+    }
+}
