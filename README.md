@@ -1,27 +1,46 @@
-# DevDocs
+# 📚 Documentación de Back-End con Java
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
+🚀 Bienvenido a la documentación de Back-End con Java. Este proyecto contiene una guía completa que abarca desde la creación de proyectos hasta la implementación de microservicios, utilizando tecnologías como Spring Framework, Docker, AWS, y Apache Kafka.
 
-## Development server
+## Contenido
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### 🌱 Spring Framework
+- **Creación de proyectos**: Aprende a configurar y arrancar tus proyectos Spring.
+- **Arquitectura multicapa**: Diseño de aplicaciones robustas con separación de capas.
+- **Personalización**: Ajustes avanzados para adaptar Spring a tus necesidades.
 
-## Code scaffolding
+### 🌐 Spring Web
+- **API REST**: Construcción de APIs RESTful utilizando Spring MVC.
+- **Validación**: Implementación de validaciones para tus modelos de datos.
+- **Anotaciones personalizadas**: Creación de anotaciones para facilitar el desarrollo.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### 🔒 Spring Security
+- **Autenticación y autorización con JWT**: Protege tu aplicación utilizando JSON Web Tokens.
+- **Configuración de seguridad avanzada**: Personalización de la seguridad en tu aplicación.
 
-## Build
+### 🐳 Docker
+- **Conceptos básicos**: Introducción a Docker y sus conceptos fundamentales.
+- **Creación de contenedores**: Aprende a contenerizar tus aplicaciones.
+- **Docker Compose**: Orquestación de múltiples contenedores.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### ☁️ Amazon Web Services (AWS)
+- **Introducción**: Primeros pasos con AWS.
+- **Creación de cuentas**: Configuración inicial de tu cuenta AWS.
+- **Uso de Amazon S3**: Almacenamiento y gestión de archivos en la nube.
 
-## Running unit tests
+### ⚙️ Microservicios
+- **Eureka Server**: Registro y descubrimiento de servicios.
+- **Spring Cloud Gateway**: Configuración de gateways para microservicios.
+- **ConfigServer con Git**: Centralización de configuraciones utilizando Git.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 🔄 Apache Kafka
+- **Comunicación entre microservicios**: Implementación de mensajería asíncrona con Kafka.
+  
+## 🤝 Cómo Contribuir
 
-## Running end-to-end tests
+¡Las contribuciones son bienvenidas! Si deseas contribuir, por favor sigue estos pasos:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
+2. Realiza tus cambios y haz commit (`git commit -am 'Añadir nueva funcionalidad'`).
+3. Empuja tus cambios a la rama (`git push origin feature/nueva-funcionalidad`).
+4. Abre un pull request.
