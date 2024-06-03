@@ -1,0 +1,83 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/microservicios/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li><a routerLink="/microservicios/eureka-server" routerLinkActive="active">Eureka Server</a></li>
+                <li class="active"><a routerLink="/microservicios/spring-cloud-gateway-reactive" routerLinkActive="active">Spring Cloud Gateway (Reactive)</a></li>
+                <li><a routerLink="/microservicios/config-server-git" routerLinkActive="active">Config Server con git</a></li>
+            </ul> 
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Spring Cloud Gateway (Reactive)</h1>    
+            </div>
+            <p class="texto"><strong>Spring Cloud Gateway</strong> es un proyecto de Spring que proporciona una <strong>solución de enrutamiento y filtrado de solicitudes</strong> para aplicaciones basadas en microservicios, permite realizar las peticiones de los microservicios que definamos en la configuración <strong>en un único puerto</strong>.</p>
+            
+            <h3>1. Crear servidor Gateway</h3>
+            <p class="texto">Para crear una <strong>Api Gateway</strong> crearemos un proyecto utilizando la dependencia (Reactive Gateway):</p>
+            <div class="image-container image-container1">
+                <img src="./assets/tecns/microservicios/gateway-server/dependencia-server.png" alt="msvcs"> 
+            </div>
+            <p class="texto">Antes de realizar la configuración específica de Gateway, deberemos <strong>agregar la dependencia de cliente de eureka</strong> y en la <strong>configuración poner la ruta de Eureka</strong>, (PODÉIS REGISTRAR O NO el Gateway Server en Eureka, en este caso no se registra):</p>
+            <p class="texto">(Además usamos YAML para que la config sea más legible, ya que en properties sería algo más compleja después)</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="red">eureka</span>:</span>
+                            <span>  <span class="red">client</span>:</span>
+                            <span>      <span class="red">service-url</span>:</span>
+                            <span>          <span class="red">defaultZone</span>: <span class="green">http://localhost:8761/eureka</span></span>
+                            <span>      <span class="red">register-with-eureka</span>: <span class="green">false</span></span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <h3>2. Configuración de rutas</h3>
+            <p class="texto">Primero debemos mirar los controladores de los servicios que vamos a enrutar al Gateway, en mi caso son estos (2 servicios diferentes):</p>
+            <div class="image-container">
+                <img src="./assets/tecns/microservicios/gateway-server/controllers.png" alt="msvcs"> 
+            </div>
+            <p class="texto"><strong>Así quedaría la configuración con todo:</strong></p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="red">server</span>:</span>
+                            <span>  <span class="red">port</span>: <span class="green">8090</span></span>
+
+                            <br><span><span class="red">spring</span>:</span>
+                            <span>  <span class="red">application</span>:</span>
+                            <span>      <span class="red">name</span>: <span class="green">gateway-server</span></span>
+                            <span>  <span class="red">cloud</span>:</span>
+                            <span>      <span class="red">gateway</span>:</span>
+                            <span>          <span class="red">routes</span>:</span>
+                            <span>              - <span class="red">id</span>: <span class="green">servicio-users</span></span>
+                            <span>              - <span class="red">uri</span>: <span class="green">lb://MSVC-USERS</span></span>
+                            <span>              - <span class="red">predicates</span>:</span>
+                            <span>                  - <span class="green">Path=/api/users/**</span></span>
+                            <span>              - <span class="red">id</span>: <span class="green">servicio-apartments</span></span>
+                            <span>              - <span class="red">uri</span>: <span class="green">lb://MSVC-APARTMENTS</span></span>
+                            <span>              - <span class="red">predicates</span>:</span>
+                            <span>                  - <span class="green">Path=/api/apartments/**</span></span>
+
+                            <br><span><span class="red">eureka</span>:</span>
+                            <span>  <span class="red">client</span>:</span>
+                            <span>      <span class="red">service-url</span>:</span>
+                            <span>          <span class="red">defaultZone</span>: <span class="green">http://localhost:8761/eureka</span></span>
+                            <span>      <span class="red">register-with-eureka</span>: <span class="green">false</span></span>
+                        </code>
+                    </pre>
+                </div>
+                <ul class="list">
+                    <li><strong>1º </strong>Elegimos un puerto para enrutar las solicitudes, en este caso el 8090</li>
+                    <li><strong>2º </strong>Indicamos las rutas: </li>
+                    <li><strong>&ensp;- id: servicio-users:</strong> Nombre que queramos</li>
+                    <li><strong>&ensp;- uri: lb://servicio:</strong> Se especifica la ruta base del servicio. lb:// indica que se usará un balanceador de carga para dirigir el tráfico hacia el servicio <strong>(nombre del servicio en Eureka, no hace falta mayúsculas)</strong></li>
+                    <li><strong>&ensp;- predicates:</strong> En este caso se establece la condición de que la ruta de la solicitud coincida con el <span class="yellow">&#64;RequestMapping() </span>de cada controlador.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

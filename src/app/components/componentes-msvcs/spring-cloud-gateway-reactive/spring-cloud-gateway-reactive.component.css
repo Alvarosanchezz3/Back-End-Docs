@@ -1,0 +1,43 @@
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.title img {
+    width: 90px;
+    margin-left: 10px;
+}
+
+.image-container {
+    margin: 20px 0;
+}
+
+.image-container img{
+    width: 70%;
+}
+
+.explicacion-codigo1 {
+    display: flex;
+    margin: 15px 0;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+  }
+
+.code-container {
+    background-color: #31343a;
+    border-radius: 5px;
+}
+
+.code-container pre {
+    font-size: 13px;
+}
+  
+.code-container code {
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    color: rgb(224, 224, 224);
+    padding: 0 20px;
+}
