@@ -21,8 +21,18 @@
                 <img src="./assets/tecns/microservicios/eureka-server/dependencia-server.png" alt="msvcs"> 
             </div>
             <p class="texto">Además, especificaremos en el <strong>application.properties</strong> el <strong>nombre del servicio</strong>, el <strong>puerto</strong> (el puerto por defecto de Eureka es el 8761) y normalmente se especifica que <strong>no se registre él mismo como servicio en Eureka</strong> de esta manera:</p>
-            <div class="image-container image-container2">
-                <img src="./assets/tecns/microservicios/eureka-server/properties-server.png" alt="msvcs"> 
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="brown">spring.application.name</span>=<span class="green">eureka-server</span></span>
+                            <span><span class="brown">server.port</span>=<span class="green">8761</span></span>
+
+                            <br><span><span class="brown">eureka.client.register-with-eureka</span>=<span class="green">false</span></span>
+                            <span><span class="brown">eureka.client.fetch-registry</span>=<span class="green">false</span></span>
+                        </code>
+                    </pre>
+                </div>
             </div>
 
             <h3>2. Crear cliente de Eureka</h3>
@@ -35,8 +45,16 @@
                 <img src="./assets/tecns/microservicios/eureka-server/anotacion-eureka-client.png" alt="msvcs"> 
             </div>
             <p class="texto">Y por último añadir algunas cosas en la configuración del <strong>application.properties</strong> como el <strong>nombre del servicio</strong>, <strong>puerto</strong> y la <strong>url de eureka</strong> de esta forma:</p>
-            <div class="image-container">
-                <img src="./assets/tecns/microservicios/eureka-server/properties-cliente.png" alt="msvcs"> 
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="brown">spring.application.name</span>=<span class="green">gateway-server</span></span>
+                            <span><span class="brown">server.port</span>=<span class="green">8080</span></span>
+                            <span><span class="brown">eureka.client.service-url.defaultZone</span>=<span class="green">http://localhost:8761/eureka</span></span>
+                        </code>
+                    </pre>
+                </div>
             </div>
             <p class="texto">Finalmente si ejecutamos Eureka y después los microservicios de registro si vamos a <a href="http://localhost:8761" target="_blank" class="enlace-apartado">http://localhost:8761</a> veremos los servicios. Ejemplo:</p>
             <div class="image-container">
