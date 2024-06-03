@@ -6,7 +6,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   standalone: true,
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './eureka-server.component.html',
-  styleUrl: './eureka-server.component.css'
+  styleUrls: ['./eureka-server.component.css', 'eureka-server-media-queries.css']
 })
 export class EurekaServerComponent {
 

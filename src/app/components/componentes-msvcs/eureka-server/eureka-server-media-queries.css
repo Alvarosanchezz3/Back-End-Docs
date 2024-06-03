@@ -1,0 +1,21 @@
+@media (max-width: 1300px) {
+    .image-container img{
+        width: 85%;
+    }
+    
+    .image-container1 img{
+        width: 60%;
+    }
+}
+
+@media (max-width: 560px) {
+    .image-container img{
+        width: 100%;
+    }
+}
+
+@media (max-width: 560px) {
+    .explicacion-codigo1 pre {
+        font-size: 11px;
+    }
+}
