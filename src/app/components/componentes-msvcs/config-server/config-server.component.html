@@ -1,0 +1,87 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/microservicios/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li><a routerLink="/microservicios/eureka-server" routerLinkActive="active">Eureka Server</a></li>
+                <li><a routerLink="/microservicios/spring-cloud-gateway-reactive" routerLinkActive="active">Spring Cloud Gateway (Reactive)</a></li>
+                <li class="active"><a routerLink="/microservicios/spring-cloud-config" routerLinkActive="active">Spring Cloud Config Server</a></li>
+            </ul> 
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Spring Cloud Config Server</h1>    
+            </div>
+            <p class="texto"><strong>Spring Cloud Config Server</strong> es una herramienta en el ecosistema de Spring que proporciona una solución para <strong>centralizar las configuraciones</strong> en un entorno de microservicios, <strong>almacenandolo en un repositorio externo de git</strong>. Esto facilita la gestión, actualización y distribución de la configuración de las aplicaciones en un entorno distribuido de microservicios.</p>
+            
+            <h3>1. Configuración y dependencias</h3>
+            <p class="texto">Para crear una <strong>Spring Cloud Config Server</strong> crearemos un proyecto utilizando la dependencia:</p>
+            <div class="image-container">
+                <img src="./assets/tecns/microservicios/config-server/dependencia-server.png" alt="msvcs"> 
+            </div>
+            <br>
+            <p class="texto">Los <strong>clientes</strong> deben utilizar esta dependencia:</p>
+            <div class="image-container">
+                <img src="./assets/tecns/microservicios/config-server/dependencia-cliente.png" alt="msvcs"> 
+            </div>
+
+            <h3>2. Crear servidor con repositorio local</h3>
+            <p class="texto">Primero de todo deberemos <strong>copiar las configuraciones de los clientes a una carpeta e iniciar un repositorio de git</strong>, agregar los cambios y hacer los commits (se pueden hacer con el Config Server ya iniciado)</p>
+            <div class="image-container image-container1">
+                <img src="./assets/tecns/microservicios/config-server/configuraciones-git-local.png" alt="msvcs"> 
+            </div>
+            <br>
+            <p class="texto">La <strong>configuración del Config Server</strong> debería verse de esta manera (se usa <strong>“file:///”</strong> en el caso de repositorios locales):</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="brown">spring.application.name</span>=<span class="green">config-server</span></span>
+                            <span><span class="brown">server.port</span>=<span class="green">8888</span></span>
+                            
+                            <br><span><span class="brown">spring.cloud.config.server.git.uri</span>=<span class="green">file:///D:/Proyectos/Java/Config-msvcs/Rosthem</span></span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+
+            <p class="texto">La <strong>configuración del cliente</strong> debería verse así:</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="brown">spring.application.name</span>=<span class="green">gateway-server</span></span>
+                            <span><span class="brown">spring.config.import</span>=<span class="green">optional:configserver:http://localhost:8888</span></span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+
+            <h3>3. Crear servidor con repositorio de Github</h3>
+            <p class="texto">Copiamos las configs en la carpeta y hacemos todo igual pero en este caso deberemos crear antes un repositorio privado de github y subir los cambios ahí.
+                <br><br><strong>IMPORTANTE:</strong> Cada vez que hagamos un cambio en la config deberemos hacer el push al repositorio, no vale con hacer solo el commit como en el repo local
+                <br><br>En este caso la <strong>configuración del Config Server</strong> es algo diferente, ya que tenemos que especificar nuestro <strong>usuario de Github</strong> y la <strong>ruta de nuestro repositorio</strong>. Además, al ser un repositorio privado, es necesario especificar la contraseña.
+                <br><br><strong>IMPORTANTE:</strong> Recomiendo usar un archivo .env para usar datos sensibles de manera más segura. Además, <strong>en vez de utilizar la contraseña, podemos crear un token de acceso al repositorio con un tiempo de expiración y permisos específicos</strong>, para una mayor seguridad de nuestra cuenta de Github
+            </p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="brown">spring.application.name</span>=<span class="green">config-server</span></span>
+                            <span><span class="brown">server.port</span>=<span class="green">8888</span></span>
+                            
+                            <br><span><span class="brown">spring.cloud.config.server.git.username</span>=<span class="green">Alvarosanchezz3</span></span>
+                            <span><span class="brown">spring.cloud.config.server.git.password</span>=<span class="green">${{"{"}}ACCESS_TOKEN{{"}"}}</span></span>
+                            <span><span class="brown">spring.cloud.config.server.git.uri</span>=<span class="green">https://github.com/Alvarosanchezz3/nombre_repositorio.git</span></span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <h4>Creación token del repositorio</h4>
+            <p class="texto">Dentro de Github, hacemos click arriba a la derecha en nuestra foto de perfil → <strong>Settings</strong> → <strong>Developer Settings</strong> → <strong>Fine-grained tokens</strong> → <strong>Generate new token</strong>.
+                Una vez aquí elegimos lo que queramos, tiempo, permisos, nombre del token… 
+                <br><br><strong>Recomendación: </strong>Dar permisos solo de lectura en el token para el repositorio específico que hemos creado.
+            </p>
+        </div>
+    </div>
+</div>
