@@ -8,13 +8,34 @@
     }
 }
 
-@media (max-width: 560px) {
-    .image-container img{
-        width: 100%;
+@media (max-width: 780px) {
+    .title h1 {
+        font-size: 28px;
     }
 }
 
+@media (max-width: 700px) {
+    .title h1 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 620px) {
+    .title h1 {
+        font-size: 21px;
+    }
+}
+
+
 @media (max-width: 560px) {
+    .title h1 {
+        font-size: 17px;
+    }
+
+    .image-container img{
+        width: 100%;
+    }
+
     .explicacion-codigo1 pre {
         font-size: 11px;
     }
