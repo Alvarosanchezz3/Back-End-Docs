@@ -27,6 +27,7 @@ import { SpringSecurityCorsComponent } from './components/componentes-spring/spr
 import { MsvcsComoEmpezarComponent } from './components/componentes-msvcs/msvcs-como-empezar/msvcs-como-empezar.component';
 import { EurekaServerComponent } from './components/componentes-msvcs/eureka-server/eureka-server.component';
 import { SpringCloudGatewayReactiveComponent } from './components/componentes-msvcs/spring-cloud-gateway-reactive/spring-cloud-gateway-reactive.component';
+import { ConfigServerComponent } from './components/componentes-msvcs/config-server/config-server.component';
 
 export const routes: Routes = [
     {path:"", redirectTo: "home", pathMatch: 'full'},
@@ -64,4 +65,5 @@ export const routes: Routes = [
     {path: "microservicios/como-empezar", component: MsvcsComoEmpezarComponent},
     {path: "microservicios/eureka-server", component: EurekaServerComponent},
     {path: "microservicios/spring-cloud-gateway-reactive", component: SpringCloudGatewayReactiveComponent},
+    {path: "microservicios/spring-cloud-config", component: ConfigServerComponent},
 ];
