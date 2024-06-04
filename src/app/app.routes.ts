@@ -63,7 +63,7 @@ export const routes: Routes = [
     {path: "aws/servicio-s3/CRUD-usando-S3", component: S3CreacionProyectoComponent},
 
     {path: "microservicios/como-empezar", component: MsvcsComoEmpezarComponent},
-    {path: "microservicios/eureka-server", component: EurekaServerComponent},
+    {path: "microservicios/spring-cloud-netflix-eureka-server", component: EurekaServerComponent},
     {path: "microservicios/spring-cloud-gateway-reactive", component: SpringCloudGatewayReactiveComponent},
     {path: "microservicios/spring-cloud-config", component: ConfigServerComponent},
 ];
