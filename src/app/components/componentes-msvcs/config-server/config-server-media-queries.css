@@ -1,0 +1,37 @@
+@media (max-width: 900px) {
+    .image-container img {
+        width: 60%;
+    }
+
+    .image-container1 img {
+        width: 80%;
+    }
+}
+
+@media (max-width: 760px) {
+    .title h1 {
+        font-size: 28px;
+    }
+    
+    .image-container img {
+        width: 75%;
+    }
+
+    .image-container1 img {
+        width: 100%;
+    }
+    
+    .explicacion-codigo1 pre {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 650px) {
+    .image-container img {
+        width: 80%;
+    }
+
+    .explicacion-codigo1 pre {
+        font-size: 8px;
+    } 
+}

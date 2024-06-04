@@ -6,7 +6,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   standalone: true,
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './config-server.component.html',
-  styleUrl: './config-server.component.css'
+  styleUrls: ['./config-server.component.css', 'config-server-media-queries.css']
 })
 export class ConfigServerComponent {
 
