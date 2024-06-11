@@ -12,50 +12,50 @@
             </ul>
         </div>
         <div class="info">
-            <div class="title">
-                <h1>Contenedores en docker</h1>
-                <p>Los contenedores son <strong>instancias en ejecución de una imagen.</strong> Estos son entornos
-                    aislados que incluyen una copia del sistema operativo (SO), aunque comparten el kernel del SO del
-                    host, esto permite que las apps se ejecuten sin interferir con otras en el mismo host.</p>
-                <h3>Características</h3>
-                <ul class="list">
-                    <li><strong>● Autónomo:</strong> Cada contenedor tiene todo lo que necesita para funcionar sin
-                        depender de dependencias preinstaladas en la máquina host.</li>
-                    <li><strong>● Aislado:</strong> Dado que los contenedores se ejecutan de forma aislada, tienen una
-                        influencia mínima en el host y otros contenedores, lo que aumenta la seguridad de las
-                        aplicaciones.</li>
-                    <li><strong>● Independiente:</strong> Cada contenedor se gestiona de forma independiente. La
-                        eliminación de un contenedor no afectará a ningún otro.</li>
-                    <li><strong>● Portátil:</strong> El contenedor que se ejecuta en su máquina de desarrollo funcionará
-                        de la misma manera en un centro de datos o en cualquier lugar de la nube.</li>
-                </ul>
-                <div class="image-container">
-                    <img src="/assets/tecns/docker/container.png" alt="docker-desktop">
-                </div>
-                <h3>Creación de contenedores por comandos</h3>
-                <p class="texto">En el apartado de <a routerLink="/docker/imágenes" class="">Imágenes</a> descargamos la
-                    imagen de MySQL de DockerHub, ahora <strong>crearemos el contenedor del servicio de MySQL con esa imagen</strong>
-                    usando este comando:
-                </p>
-                <ul class="list">
-                    <li><strong>● "--name mysql" :</strong>  Especifica el nombre del contenedor que vamos a crear</li>
-                    <li><strong>● "-d":</strong> Esto ejecuta el contenedor en modo “detached”, es decir, en segundo plano y sin bloquear la terminal actual</li>
-                    <li><strong>● "-e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=usuariosDB":</strong> Esto son argumentos para configurar variables de entorno, debes poner “-e” antes de cada variable.</li>
-                    <li><strong>● "mysql":</strong> Esto especifica la imagen Docker que se utilizará para crear el contenedor, en este caso la img mysql que creamos anteriormente. En caso de no tenerla y que exista en DockerHub se descargará automáticamente</li>
-                </ul>
-                <p class="texto">Una vez ejecutamos el comando, se crea el contenedor y nos devuelve su id.</p>
-                <div class="image-container other-img">
-                    <img src="/assets/tecns/docker/crear-contenedor-cmd.png" alt="docker-desktop">
-                </div>
-                <h3>Creación de contenedores por Docker Desktop</h3>
-                <p class="texto">Iremos al apartado "Images" de DockerHub y buscaremos nuestra imagen, una vez la veamos le daremos al icono de la flecha.</p>
-                <div class="image-container other-img1">
-                    <img src="/assets/tecns/docker/crear-contenedor-docker-desktop.png" alt="docker-desktop">
-                </div>
-                <p class="texto">Tras esto, nos saldrá un menú para crear nuestro contenedor. Debemos rellenar los datos como el <strong>nombre, puerto que queramos usar, si usamos volúmenes, variables de entorno...</strong> Una vez hayamos terminado de elegir la configuración le damos en "Run"</p>
-                <div class="image-container other-img2">
-                    <img src="/assets/tecns/docker/contenedor-docker-desktop.png" alt="docker-desktop">
-                </div>
+        <div class="title">
+            <h1>Contenedores en docker</h1>
+        </div>
+            <p>Los contenedores son <strong>instancias en ejecución de una imagen.</strong> Estos son entornos
+                aislados que incluyen una copia del sistema operativo (SO), aunque comparten el kernel del SO del
+                host, esto permite que las apps se ejecuten sin interferir con otras en el mismo host.</p>
+            <h3>Características</h3>
+            <ul class="list">
+                <li><strong>● Autónomo:</strong> Cada contenedor tiene todo lo que necesita para funcionar sin
+                    depender de dependencias preinstaladas en la máquina host.</li>
+                <li><strong>● Aislado:</strong> Dado que los contenedores se ejecutan de forma aislada, tienen una
+                    influencia mínima en el host y otros contenedores, lo que aumenta la seguridad de las
+                    aplicaciones.</li>
+                <li><strong>● Independiente:</strong> Cada contenedor se gestiona de forma independiente. La
+                    eliminación de un contenedor no afectará a ningún otro.</li>
+                <li><strong>● Portátil:</strong> El contenedor que se ejecuta en su máquina de desarrollo funcionará
+                    de la misma manera en un centro de datos o en cualquier lugar de la nube.</li>
+            </ul>
+            <div class="image-container">
+                <img src="/assets/tecns/docker/container.png" alt="docker-desktop">
+            </div>
+            <h3>Creación de contenedores por comandos</h3>
+            <p class="texto">En el apartado de <a routerLink="/docker/imágenes" class="">Imágenes</a> descargamos la
+                imagen de MySQL de DockerHub, ahora <strong>crearemos el contenedor del servicio de MySQL con esa imagen</strong>
+                usando este comando:
+            </p>
+            <ul class="list">
+                <li><strong>● "--name mysql" :</strong>  Especifica el nombre del contenedor que vamos a crear</li>
+                <li><strong>● "-d":</strong> Esto ejecuta el contenedor en modo “detached”, es decir, en segundo plano y sin bloquear la terminal actual</li>
+                <li><strong>● "-e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=usuariosDB":</strong> Esto son argumentos para configurar variables de entorno, debes poner “-e” antes de cada variable.</li>
+                <li><strong>● "mysql":</strong> Esto especifica la imagen Docker que se utilizará para crear el contenedor, en este caso la img mysql que creamos anteriormente. En caso de no tenerla y que exista en DockerHub se descargará automáticamente</li>
+            </ul>
+            <p class="texto">Una vez ejecutamos el comando, se crea el contenedor y nos devuelve su id.</p>
+            <div class="image-container other-img">
+                <img src="/assets/tecns/docker/crear-contenedor-cmd.png" alt="docker-desktop">
+            </div>
+            <h3>Creación de contenedores por Docker Desktop</h3>
+            <p class="texto">Iremos al apartado "Images" de DockerHub y buscaremos nuestra imagen, una vez la veamos le daremos al icono de la flecha.</p>
+            <div class="image-container other-img1">
+                <img src="/assets/tecns/docker/crear-contenedor-docker-desktop.png" alt="docker-desktop">
+            </div>
+            <p class="texto">Tras esto, nos saldrá un menú para crear nuestro contenedor. Debemos rellenar los datos como el <strong>nombre, puerto que queramos usar, si usamos volúmenes, variables de entorno...</strong> Una vez hayamos terminado de elegir la configuración le damos en "Run"</p>
+            <div class="image-container other-img2">
+                <img src="/assets/tecns/docker/contenedor-docker-desktop.png" alt="docker-desktop">
             </div>
         </div>
     </div>
