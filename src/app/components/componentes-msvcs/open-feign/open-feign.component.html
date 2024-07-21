@@ -1,0 +1,159 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li><a routerLink="/microservicios/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li><a routerLink="/microservicios/spring-cloud-netflix-eureka-server" routerLinkActive="active">Spring Cloud Netflix - Eureka Server</a></li>
+                <li><a routerLink="/microservicios/spring-cloud-gateway-reactive" routerLinkActive="active">Spring Cloud Gateway (Reactive)</a></li>
+                <li><a routerLink="/microservicios/spring-cloud-config" routerLinkActive="active">Spring Cloud Config</a></li>
+                <li class="active"><a routerLink="/microservicios/open-feign" routerLinkActive="active">Open Feign</a></li>
+            </ul> 
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>OpenFeign</h1>  
+            </div>
+            <p class="texto">
+                <strong>OpenFeign</strong> es una <strong>biblioteca Java</strong> diseñada para simplificar la <strong>creación de clientes HTTP</strong>. Es particularmente útil en aplicaciones basadas en microservicios, ya que permite la <strong>comunicación entre microservicios</strong> de manera que puedes hacer llamadas a los endpoints de otros servicios y utilizar las respuestas de estos para otras funcionalidades.</p>
+            <h3>Ejemplo de uso:</h3>
+            <p class="texto">Tenemos una arquitectura de microservicios de reserva de hoteles con los <strong>servicios usuario</strong>, <strong>hotel</strong> y <strong>calificaciones</strong>: 
+                <br><br>Cada servicio tiene en su entity su id correspondiente pero el de calificaciones tiene el id del hotel que se califica y el id del usuario que pone esa calificación.
+            </p>
+            <div class="triple-codigo">
+                <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="yellow">&#64;Entity</span></span>
+                                <span><span class="purple">public class</span> <span class="yellow">Calificacion</span> {{"{"}}</span>
+                                
+                                <br><span>  <span class="yellow">&#64;Id</span></span>
+                                <span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">id</span>;</span>
+                            
+                                <br><span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">usuarioId</span>;</span>
+                            
+                                <br><span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">hotelId</span>;</span>
+
+                                <br><span>  <span class="purple">private</span> <span class="purple">int</span> <span class="red">calificacion</span>;</span>
+
+                                <br><span>  <span class="purple">private</span> <span class="yellow">Hotel</span> <span class="red">hotel</span>;</span>
+                            </code>
+                        </pre>
+                    </div>
+                </div> 
+                <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="yellow">&#64;Entity</span></span>
+                                <span><span class="purple">public class</span> <span class="yellow">Usuario</span> {{"{"}}</span>
+                                
+                                <br><span>  <span class="yellow">&#64;Id</span></span>
+                                <span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">id</span>;</span>
+                            
+                                <br><span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">username</span>;</span>
+                            
+                                <br><span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">password</span>;</span>
+
+                                <br><span>  <span class="purple">private</span> <span class="yellow">Calificacion</span>[] <span class="red">calificaciones</span>;</span>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="yellow">&#64;Entity</span></span>
+                                <span><span class="purple">public class</span> <span class="yellow">Hotel</span> {{"{"}}</span>
+                                
+                                <br><span>  <span class="yellow">&#64;Id</span></span>
+                                <span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">id</span>;</span>
+                            
+                                <br><span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">nombre</span>;</span>
+                            
+                                <br><span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">ubicacion</span>;</span>
+
+                                <br><span>  <span class="purple">private</span> <span class="yellow">String</span> <span class="red">info</span>;</span>
+                            </code>
+                        </pre>
+                    </div>
+                </div>  
+            </div>
+            <p class="texto">Para poder hacer llamadas HTPP debemos <strong>crear los clientes</strong>, <strong>inyectarlos en el service</strong> y <strong>hacer la llamada HTTP</strong> para utilizar la información de la respuesta y manejarla como quieras:</p>
+            <div class="doble-codigo">
+                <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="yellow">&#64;FeignClient</span>(<span class="brown">name</span> = <span class="green">"hotel-service"</span>)</span>
+                                <span><span class="purple">public interface</span> <span class="yellow">HotelFeignService</span> {{"{"}}</span>
+                                
+                                <br><span>  <span class="yellow">&#64;GetMapping</span>(<span class="green">"/hoteles/{{"{"}}hotelId{{"}"}}"</span>)</span>
+                                <span>  <span class="yellow">Hotel</span> <span class="blue">obtenerHotel</span>(<span class="yellow">&#64;PathVariable String</span> <span class="brown">hotelId</span>);</span>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="yellow">&#64;FeignClient</span>(<span class="brown">name</span> = <span class="green">"calificacion-service"</span>)</span>
+                                <span><span class="purple">public interface</span> <span class="yellow">CalificacionFeignService</span> {{"{"}}</span>
+                                
+                                <br><span>  <span class="yellow">&#64;GetMapping</span>(<span class="green">"/calificaciones/{{"{"}}usuarioId{{"}"}}"</span>)</span>
+                                <span>  <span class="yellow">Hotel</span> <span class="blue">obtenerCalificacionesUsuario</span>(<span class="yellow">&#64;PathVariable String</span> <span class="brown">usuarioId</span>);</span>
+                            </code>
+                        </pre>
+                    </div>
+                </div>    
+            </div>
+            
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="yellow">&#64;Override</span></span>
+                            <span><span class="purple">private</span> <span class="yellow">CalificacionFeignService </span> <span class="red">calificacionFeignService </span>;</span>
+
+                            <br><span><span class="yellow">&#64;Override</span></span>
+                            <span><span class="purple">private</span> <span class="yellow">HotelFeignService</span> <span class="red">hotelFeignService</span>;</span>
+
+                            <br><span><span class="yellow">&#64;Override</span></span>
+                            <span><span class="purple">public</span> <span class="yellow">List</span> {{"<"}}<span class="yellow">Usuario</span>{{">"}} <span class="blue">getAll</span>() {{"{"}}</span>
+                                        
+                            <span>  <span class="yellow">List</span> {{"<"}}<span class="yellow">Usuario</span>{{">"}} usuarios = <span class="red">usuarioRepository</span>. <span class="blue">findAll</span>();</span>
+
+                            <br><span>    <span class="purple">if</span> (!usuarios.<span class="blue">isEmpty</span>()) {{"{"}}</span>
+                            <span>      <span class="purple">for</span> (<span class="yellow">Usuario</span> usuario : usuarios) {{"{"}}</span>
+                            <span>          <span class="comment">//Obtengo las calificaciones usando RestTemplate</span></span>
+                            <span>          <span class="yellow">Calificacion</span>[] calificacionesUsuario = <span class="red">calificacionFeignService</span><br>               .<span class="blue">obtenerCalificacionesUsuario</span>(usuario.<span class="blue">getId</span>())</span>
+                        
+                            <br><span>          <span class="purple">if</span> (calificacionesUsuario != <span class="purple">null</span> && calificacionesUsuario.<span class="red">length</span> > <span class="brown">0</span>) {{"{"}}</span>
+                            <span>              <span class="red">logger</span>.<span class="blue">info</span>(<span class="green">"El usuario {{"{}"}} tiene las siguientes calificaciones:"</span>, usuario.<span class="blue">getName</span>());</span>
+                            <br><span>              <span class="comment">// Recorro el arreglo de calificaciones y obtengo el hotel correspondiente</span></span>
+                            <span>              <span class="purple">for</span> (<span class="yellow">Calificacion</span> calificacion : calificacionesUsuario) {{"{"}}</span>
+                            <span>                  <span class="yellow">String</span> hotelId = calificacion.<span class="blue">getHotelId</span>();</span>
+                        
+                            <br><span>                  <span class="comment">// Obtengo el hotel usando Feign Client</span></span>
+                            <span>                  <span class="yellow">Hotel</span> hotel = <span class="red">hotelFeignService</span>.<span class="blue">obtenerHotel</span>(hotelId);</span>
+                            <span>                  calificacion. <span class="blue">setHotel</span>(hotel);</span>
+                            <span>              {{"}"}}</span>
+                            <span>          {{"}"}} <span class="purple">else</span> {{"{"}}</span>
+                            <span>              <span class="red">logger</span>.<span class="blue">info</span>(<span class="green">"El usuario {{"{}"}} no tiene calificaciones."</span>, usuario.<span class="blue">getName</span>());</span>
+                            <span>          {{"}"}}</span>
+                            
+                            <br><span>          <span class="comment">// Asigno las calificaciones al usuario</span></span>
+                            <span>          usuario.<span class="blue">setCalificaciones</span>(calificacionesUsuario);</span>
+                            <span>      {{"}"}}</span>
+                            <span>  {{"}"}}</span>
+                            <span>  <span class="purple">return</span> usuarios;</span>
+                            <span>{{"}"}}</span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

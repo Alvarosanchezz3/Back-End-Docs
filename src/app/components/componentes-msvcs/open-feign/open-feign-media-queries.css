@@ -1,0 +1,48 @@
+@media (max-width: 1300px) {
+    .doble-codigo {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+@media (max-width: 900px) {
+    .explicacion-codigo1 pre {
+        font-size: 12px;
+    }
+
+    .triple-codigo {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 770px) {
+    .triple-codigo {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+@media (max-width: 660px) {
+    .explicacion-codigo1 pre {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 630px) {
+    .explicacion-codigo1 pre {
+        font-size: 10px;
+    }
+}
+
+
+@media (max-width: 560px) {
+    .explicacion-codigo1 pre {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 520px) {
+    .explicacion-codigo1 pre {
+        font-size: 8px;
+    }
+}
