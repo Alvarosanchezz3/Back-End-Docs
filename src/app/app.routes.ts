@@ -30,6 +30,7 @@ import { SpringCloudGatewayReactiveComponent } from './components/componentes-ms
 import { ConfigServerComponent } from './components/componentes-msvcs/config-server/config-server.component';
 import { OpenFeignComponent } from './components/componentes-msvcs/open-feign/open-feign.component';
 import { KafkaComoEmpezarComponent } from './components/componentes-kafka/kafka-como-empezar/kafka-como-empezar.component';
+import { KafkaIniciarServidorComponent } from './components/componentes-kafka/kafka-iniciar-servidor/kafka-iniciar-servidor.component';
 
 export const routes: Routes = [
     {path:"", redirectTo: "home", pathMatch: 'full'},
@@ -71,4 +72,5 @@ export const routes: Routes = [
     {path: "microservicios/open-feign", component: OpenFeignComponent},
 
     {path: "apache-kafka/como-empezar", component: KafkaComoEmpezarComponent},
+    {path: "apache-kafka/iniciar-servidor", component: KafkaIniciarServidorComponent},
 ];

@@ -1,0 +1,48 @@
+.explicacion-codigo1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin: 20px 0;
+}
+
+.code-container {
+    background-color: #31343a;
+    border-radius: 5px;
+}
+
+.code-container pre {
+    font-family: MyFont;
+    font-size: 13px;
+}
+
+.code-container code {
+    display: flex;
+    flex-direction: column;
+    color: rgb(224, 224, 224);
+    padding: 0 20px;
+}
+
+.doble-codigo {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.destacado {
+    background-color: #31343a;
+    color: aliceblue;
+    padding: 4px;
+    border-radius: 5px;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    line-height: 30px;
+}
+
+.image-container img {
+    width: 80%;
+}

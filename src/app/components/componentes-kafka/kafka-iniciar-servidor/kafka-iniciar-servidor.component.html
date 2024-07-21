@@ -1,0 +1,119 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li>
+                    <a routerLink="/apache-kafka/como-empezar" routerLinkActive="active">Como empezar</a>
+                </li>
+                <li class="active">
+                    <a routerLink="/apache-kafka/iniciar-servidor" routerLinkActive="active">Iniciar servidor Kafka</a>
+                </li>
+                <li>
+                    <a routerLink="/apache-kafka/spring-boot" routerLinkActive="active">Enviar mensajes con Spring
+                        Boot</a>
+                </li>
+            </ul>
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Iniciar servidor Kafka</h1>
+            </div>
+            <p class="texto">
+                Para iniciar un servidor de Apache Kafka en Windows antes debemos de
+                saber que <strong>Kafka depende de Zookeeper</strong>, un servicio
+                centralizado para mantener información de
+                <strong>configuración</strong>, proporcionar
+                <strong>sincronización</strong> distribuida y
+                <strong>proporcionar servicios de nombrado en clústeres grandes</strong>. <br /><br />
+                Para iniciar un servidor en Kafka debemos tener uno de Zookeeper antes y
+                luego iniciar el de Kafka, hay 2 métodos:
+            </p>
+            <h3>1. Iniciando el servidor en local</h3>
+            <p class="texto">Lo primero es instalar Kafka en <a href="https://kafka.apache.org/downloads" target="_blank" class="enlace-apartado">https://kafka.apache.org/downloads</a> eligiendo una de las binary download:</p>
+            <div class="image-container">
+                <img src="/assets/tecns/kafka/kafka-download.png" alt="docker-desktop">
+            </div>   
+            <p class="texto">Extraemos el zip y dentro de la carpeta tenemos que ir a la carpeta "config" y entrar a los archivos <strong>server.properties</strong> y <strong>zookeeper.properties</strong> y hacer unos cambios:</p>
+            <div class="doble-codigo">
+                <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="comment">(server.properties)</span></span> 
+
+                                <span><span class="comment"># Debemos poner la ruta en windows de Kafka</span></span> 
+                                
+                                <br><span><span class="comment">#Antes</span></span>
+                                <span><span class="red">Logs</span>.<span class="red">dirs</span>=/tmp/Kafka-logs</span>
+                            
+                                <br><span><span class="comment">#Después</span></span>
+                                <span><span class="red">Logs</span>.<span class="red">dirs</span>=C:Kafka/kafka-logs</span>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="explicacion-codigo1">
+                    <div class="code-container">
+                        <pre>
+                            <code>
+                                <span><span class="comment">(zookeeper.properties)</span></span> 
+
+                                <span><span class="comment"># Debemos poner la ruta en windows de Kafka</span></span> 
+                                
+                                <br><span><span class="comment">#Antes</span></span>
+                                <span><span class="red">dataDir</span>=/tmp/zookeeper</span>
+                            
+                                <br><span><span class="comment">#Después</span></span>
+                                <span><span class="red">dataDir</span>=C:Kafka/zookeeper-data</span>
+                            </code>
+                        </pre>
+                    </div>
+                </div>        
+            </div>
+            <p class="texto">Ahora ya podemos iniciar el servidor de Zookeeper y kafka. Entramos en nuestra <strong>terminal o CMD </strong>y nos movemos a la carpeta de Kafka y ejecutamos estos comandos:</p>
+            <ul class="list">
+                <li><strong>▶️ 1º Iniciar Zookeeper --> </strong> <span class="destacado">.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties</span></li>
+                <li><strong>▶️ 2º Iniciar Kafka --> </strong> <span class="destacado">.\bin\windows\kafka-server-start.bat .\config\server.properties</span></li>
+            </ul>
+
+            <h3>2. Iniciando el servidor en docker</h3>
+            <p class="texto">Puedes iniciar un servidor de zookeeper y de Kafka en docker con <strong>docker-compose</strong> de esta manera:</p>
+            <div class="explicacion-codigo1">
+                <div class="code-container">
+                    <pre>
+                        <code>
+                            <span><span class="red">version:</span> <span class="green">'3.9'</span></span>
+                    
+                            <br><span><span class="red">services:</span></span>
+                            <span><span class="red">  zookeeper:</span></span>
+                            <span><span class="red">    image</span>: <span class="green">confluentinc/cp-zookeeper:latest</span></span>
+                            <span><span class="red">    container_name</span>: <span class="green">zookeeper-server</span></span>
+                            <span><span class="red">    environment:</span></span>
+                            <span><span class="red">      ZOOKEEPER_CLIENT_PORT</span>: <span class="green">2181</span></span>
+                            <span><span class="red">      ZOOKEEPER_TICK_TIME</span>: <span class="green">2000</span></span>
+                            <span><span class="red">    ports:</span></span>
+                            <span><span class="red">      -</span> <span class="green">2181:2181</span></span>
+
+                            <br><span><span class="red">  kafka-server:</span></span>
+                            <span><span class="red">    image</span>: <span class="green">confluentinc/cp-kafka:latest</span></span>
+                            <span><span class="red">    container_name</span>: <span class="green">kafka-server</span></span>
+                            <span><span class="red">    depends_on:</span></span>
+                            <span><span class="red">      -</span> <span class="green">zookeeper</span></span>
+                            <span><span class="red">    environment:</span></span>
+                            <span><span class="red">      KAFKA_BROKER_ID</span>: <span class="green">1</span></span>
+                            <span><span class="red">      KAFKA_ZOOKEEPER_CONNECT</span>: <span class="green">'zookeeper:2181'</span></span>
+                            <span><span class="red">      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP</span>: <span class="green">PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT</span></span>
+                            <span><span class="red">      KAFKA_ADVERTISED_LISTENERS</span>: <span class="green">PLAINTEXT://kafka-server:9092,PLAINTEXT_INTERNAL://localhost:29092</span></span>
+                            <span><span class="red">      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR</span>: <span class="green">1</span></span>
+                            <span><span class="red">      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR</span>: <span class="green">1</span></span>
+                            <span><span class="red">      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR</span>: <span class="green">1</span></span>
+                            <span><span class="red">    ports:</span></span>
+                            <span><span class="red">      -</span> <span class="green">9092:9092</span></span>
+                            <span><span class="red">      -</span> <span class="green">29092:29092</span></span>
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

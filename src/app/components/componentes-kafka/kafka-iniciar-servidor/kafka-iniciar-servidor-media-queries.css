@@ -1,0 +1,42 @@
+@media (max-width: 930px) {
+    .list {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 850px) {
+    .doble-codigo {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .explicacion-codigo1 pre {
+        font-size: 11px;
+    }
+
+    .image-container img {
+        width: 100%;
+    }
+
+    .list {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 720px) {
+    .explicacion-codigo1 pre {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 600px) {
+    .explicacion-codigo1 pre {
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 540px) {
+    .explicacion-codigo1 pre {
+        font-size: 7px;
+    }
+}
