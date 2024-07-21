@@ -29,6 +29,7 @@ import { EurekaServerComponent } from './components/componentes-msvcs/eureka-ser
 import { SpringCloudGatewayReactiveComponent } from './components/componentes-msvcs/spring-cloud-gateway-reactive/spring-cloud-gateway-reactive.component';
 import { ConfigServerComponent } from './components/componentes-msvcs/config-server/config-server.component';
 import { OpenFeignComponent } from './components/componentes-msvcs/open-feign/open-feign.component';
+import { KafkaComoEmpezarComponent } from './components/componentes-kafka/kafka-como-empezar/kafka-como-empezar.component';
 
 export const routes: Routes = [
     {path:"", redirectTo: "home", pathMatch: 'full'},
@@ -68,4 +69,6 @@ export const routes: Routes = [
     {path: "microservicios/spring-cloud-gateway-reactive", component: SpringCloudGatewayReactiveComponent},
     {path: "microservicios/spring-cloud-config", component: ConfigServerComponent},
     {path: "microservicios/open-feign", component: OpenFeignComponent},
+
+    {path: "apache-kafka/como-empezar", component: KafkaComoEmpezarComponent},
 ];

@@ -192,9 +192,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .title {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     width: 100%;
-  }
+}
 
 .icons-container {
     display: flex;

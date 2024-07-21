@@ -1,0 +1,49 @@
+<div class="content">
+    <div class="doc">
+        <div class="index">
+            <ul class="index-list">
+                <li class="active"><a routerLink="/apache-kafka/como-empezar" routerLinkActive="active">Como empezar</a></li>
+                <li><a routerLink="/apache-kafka/iniciar-servidor" routerLinkActive="active">Iniciar Servidor Kafka</a></li>
+                <li><a routerLink="/apache-kafka/spring-boot" routerLinkActive="active">Enviar mensajes con Spring Boot</a></li>
+            </ul> 
+        </div>
+        <div class="info">
+            <div class="title">
+                <h1>Apache Kafka</h1>
+                <img src="/assets/tecns/kafka/kafka.png" alt="icon">     
+            </div>
+            <p class="texto">Apache Kafka es una <strong>plataforma de código abierto para el procesamiento de flujos de eventos en tiempo real</strong>. Desarrollada por LinkedIn y donada a la Apache Software Foundation, es conocida por su eficiencia y fiabilidad en la gestión de <strong>grandes volúmenes de datos</strong>. Los componentes principales de Kafka incluyen:</p>
+            <h3>1. Producers (Productores)</h3>
+            <div class="lista-caracts">
+                <ul class="list">
+                    <li><strong>- Función: </strong>Los productores son responsables de publicar datos en uno o más temas (topics) de Kafka.</li>
+                    <li><strong>- Características: </strong>Los productores pueden enviar datos a temas específicos y pueden configurarse para balancear la carga entre particiones de un tema, garantizando así una distribución uniforme de los datos.</li>
+                </ul>
+
+                <h3>2. Consumers (Consumidores)</h3>
+                <ul class="list">
+                    <li><strong>- Función: </strong>Los consumidores leen y procesan datos de uno o más temas de Kafka.</li>
+                    <li><strong>- Características: </strong>Los consumidores pueden pertenecer a grupos de consumidores (consumer groups). Cada grupo de consumidores puede leer de todas las particiones de un tema, pero cada partición es leída por un solo consumidor dentro de un grupo, lo que permite un procesamiento paralelo.</li>
+                </ul>
+
+                <h3>3. Topics (Temas)</h3>
+                <ul class="list">
+                    <li><strong>- Función: </strong>Un tema es un canal de datos o una categoría en la cual los productores publican mensajes y los consumidores los leen.</li>
+                    <li><strong>- Características: </strong>Los temas están particionados, y cada partición puede ser replicada para asegurar la tolerancia a fallos.</li>
+                </ul>
+
+                <h3>4. Partitions (Particiones)</h3>
+                <ul class="list">
+                    <li><strong>- Función: </strong>Cada tema se divide en particiones, lo que permite el escalamiento horizontal.</li>
+                    <li><strong>- Características: </strong>Cada mensaje en una partición tiene un identificador único llamado "offset". Las particiones permiten un procesamiento paralelo y una mayor capacidad de almacenamiento.</li>
+                </ul>
+
+                <h3>5. Brokers</h3>
+                <ul class="list">
+                    <li><strong>- Función: </strong>Un broker es un servidor que forma parte del clúster de Kafka y maneja las solicitudes de productores y consumidores.</li>
+                    <li><strong>- Características: </strong>Los brokers almacenan los datos, sirven las solicitudes y replican las particiones para asegurar la disponibilidad y la durabilidad. Un clúster de Kafka generalmente consta de múltiples brokers.</li>
+                </ul>    
+            </div>
+        </div>
+    </div>
+</div>

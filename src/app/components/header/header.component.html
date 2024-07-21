@@ -99,7 +99,13 @@
       </ul>
     </li>
     <li>
-      <a (click)="onLinkClick($event, 'kafka', '')">Apache Kafka</a>
+      <a (click)="onLinkClick($event, 'kafka', '/apache-kafka/como-empezar')">Apache Kafka <span class="arrow"
+        [class.open]="subMenuOpen['kafka']">&#9654;</span></a>
+        <ul class="submenu" [class.open]="subMenuOpen['kafka']">
+          <li><a (click)="onLinkClick($event, '', '/apache-kafka/como-empezar')" routerLinkActive="active">Como empezar</a></li>
+          <li><a (click)="onLinkClick($event, '', '/apache-kafka/iniciar-servidor')" routerLinkActive="active">Iniciar Servidor Kafka</a></li>
+          <li><a (click)="onLinkClick($event, '', '/apache-kafka/enviar-mensajes-spring-boot')" routerLinkActive="active">Enviar mensajes con Spring Boot</a></li>
+        </ul>
     </li>
   </ul>
 </header>
