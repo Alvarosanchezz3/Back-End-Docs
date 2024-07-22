@@ -1,0 +1,16 @@
+.image-container {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.image-container img{
+    width: 100%;
+}
+
+.title {
+    justify-content: space-between;
+}
+
+.title a svg:hover path {
+    fill: #7c7c7c;
+}

@@ -31,6 +31,7 @@ import { ConfigServerComponent } from './components/componentes-msvcs/config-ser
 import { OpenFeignComponent } from './components/componentes-msvcs/open-feign/open-feign.component';
 import { KafkaComoEmpezarComponent } from './components/componentes-kafka/kafka-como-empezar/kafka-como-empezar.component';
 import { KafkaIniciarServidorComponent } from './components/componentes-kafka/kafka-iniciar-servidor/kafka-iniciar-servidor.component';
+import { KafkaSpringBootComponent } from './components/componentes-kafka/kafka-spring-boot/kafka-spring-boot.component';
 
 export const routes: Routes = [
     {path:"", redirectTo: "home", pathMatch: 'full'},
@@ -73,4 +74,5 @@ export const routes: Routes = [
 
     {path: "apache-kafka/como-empezar", component: KafkaComoEmpezarComponent},
     {path: "apache-kafka/iniciar-servidor", component: KafkaIniciarServidorComponent},
+    {path: "apache-kafka/spring-boot", component: KafkaSpringBootComponent},
 ];
